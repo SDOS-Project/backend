@@ -16,7 +16,10 @@ const auth_middleware_1 = require("./middleware/auth.middleware");
 const auth_module_1 = require("./auth/auth.module");
 let AppModule = exports.AppModule = class AppModule {
     configure(consumer) {
-        consumer.apply(auth_middleware_1.PreAuthMiddleware).exclude('/auth*').forRoutes({
+        consumer
+            .apply(auth_middleware_1.PreAuthMiddleware)
+            .exclude({ path: 'auth/login', method: common_1.RequestMethod.ALL }, { path: 'auth/signup', method: common_1.RequestMethod.ALL })
+            .forRoutes({
             path: '*',
             method: common_1.RequestMethod.ALL,
         });
