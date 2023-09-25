@@ -10,9 +10,10 @@ import { ProjectModule } from './project/project.module';
 import { FirebaseApp } from './firebase/firebase-service';
 import { PreAuthMiddleware } from './middleware/auth.middleware';
 import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 
 @Module({
-  imports: [ProjectModule, AuthModule],
+  imports: [ProjectModule, AuthModule, UserModule],
   controllers: [AppController],
   providers: [AppService, FirebaseApp],
 })

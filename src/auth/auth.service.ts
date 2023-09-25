@@ -11,4 +11,8 @@ export class AuthService {
   async signup(signUpDto: SignUpDto) {
     return 'This action returns a new user';
   }
+
+  async organisationSignup(signUpDto: SignUpDto) {
+    return 'This action returns a new user';
+  }
 }
