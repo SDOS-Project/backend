@@ -23,6 +23,7 @@ model User {
   updatedAt       DateTime     @updatedAt
   projects        Project[]    @relation("ProjectUsers")
   updates         Update[]
+  handle         String       @unique
 }
 
 model Organisation {
