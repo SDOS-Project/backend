@@ -21,6 +21,7 @@ export class AppModule implements NestModule {
     consumer
       .apply(PreAuthMiddleware)
       .exclude(
+        { path: '/', method: RequestMethod.GET },
         { path: 'auth/login', method: RequestMethod.ALL },
         { path: 'auth/signup', method: RequestMethod.ALL },
       )
