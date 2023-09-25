@@ -43,7 +43,7 @@ let PreAuthMiddleware = exports.PreAuthMiddleware = PreAuthMiddleware_1 = class 
             statusCode: 403,
             timestamp: new Date().toISOString(),
             path: url,
-            message: 'access denied',
+            message: 'Access Denied',
         });
     }
 };

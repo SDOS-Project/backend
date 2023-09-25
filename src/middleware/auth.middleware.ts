@@ -36,7 +36,7 @@ export class PreAuthMiddleware implements NestMiddleware {
       statusCode: 403,
       timestamp: new Date().toISOString(),
       path: url,
-      message: 'access denied',
+      message: 'Access Denied',
     });
   }
 }
