@@ -75,5 +75,5 @@ enum OrganisationType {
 enum ProjectStatus {
   ONGOING
   COMPLETED
-  DISABLED
+  CANCELLED
 }
