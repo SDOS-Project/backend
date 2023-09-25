@@ -43,7 +43,7 @@ model Project {
   id            String         @id @default(uuid())
   name          String
   description   String
-  status        ProjectStatus
+  status        ProjectStatus @default(ONGOING)
   organisations Organisation[] @relation("ProjectOrganisations")
   users         User[]         @relation("ProjectUsers")
   updates       Update[]
