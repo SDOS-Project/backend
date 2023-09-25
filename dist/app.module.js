@@ -11,13 +11,22 @@ const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const project_module_1 = require("./project/project.module");
+const firebase_service_1 = require("./firebase/firebase-service");
+const auth_middleware_1 = require("./middleware/auth.middleware");
+const auth_module_1 = require("./auth/auth.module");
 let AppModule = exports.AppModule = class AppModule {
+    configure(consumer) {
+        consumer.apply(auth_middleware_1.PreAuthMiddleware).exclude('/auth*').forRoutes({
+            path: '*',
+            method: common_1.RequestMethod.ALL,
+        });
+    }
 };
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [project_module_1.ProjectModule],
+        imports: [project_module_1.ProjectModule, auth_module_1.AuthModule],
         controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        providers: [app_service_1.AppService, firebase_service_1.FirebaseApp],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map
