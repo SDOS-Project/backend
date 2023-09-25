@@ -20,7 +20,8 @@ model User {
   organisationId  String
   organisation    Organisation @relation(fields: [organisationId], references: [id])
   createdAt       DateTime     @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt       DateTime     @updatedAt
+  projects        Project[]    @relation("ProjectUsers")
 }
 
 model Organisation {
@@ -30,9 +31,21 @@ model Organisation {
   email     String           @unique
   address   String
   logoUrl   String
+  users     User[]
+  projects  Project[]        @relation("ProjectOrganisations")
   createdAt DateTime         @default(now())
   updatedAt DateTime         @updatedAt
-  users      User[]
+}
+
+model Project {
+  id            String         @id @default(uuid())
+  name          String
+  description   String
+  status        ProjectStatus
+  organisations Organisation[] @relation("ProjectOrganisations")
+  users         User[]         @relation("ProjectUsers")
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
 }
 
 enum UserRole {
@@ -43,4 +56,10 @@ enum UserRole {
 enum OrganisationType {
   ACADEMIC
   CORPORATE
+}
+
+enum ProjectStatus {
+  ONGOING
+  COMPLETED
+  DISABLED
 }
