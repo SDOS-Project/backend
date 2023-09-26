@@ -15,20 +15,16 @@ export class UserService {
     return `This action returns all user`;
   }
 
-  async findOne(id: string) {
-    try {
-      const user = await this.prisma.user.findUnique({
-        where: {
-          id,
-        },
-      });
-      if (!user) {
-        throw new HttpException('User not found', HttpStatus.NOT_FOUND);
-      }
-      return user;
-    } catch (error) {
-      throw new Error(error);
+  async findOne(handle: string) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        handle,
+      },
+    });
+    if (!user) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
+    return user;
   }
 
   update(id: string, updateUserDto: UpdateUserDto) {

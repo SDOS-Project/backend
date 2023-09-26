@@ -6,7 +6,7 @@ export declare class UserService {
     constructor(prisma: PrismaService);
     create(createUserDto: CreateUserDto): string;
     findAll(): string;
-    findOne(id: string): Promise<{
+    findOne(handle: string): Promise<{
         id: string;
         firstName: string;
         lastName: string;

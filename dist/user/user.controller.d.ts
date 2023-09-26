@@ -6,7 +6,7 @@ export declare class UserController {
     constructor(userService: UserService);
     create(createUserDto: CreateUserDto): string;
     findAll(): string;
-    findOne(id: string): Promise<{
+    findOne(handle: string): Promise<{
         id: string;
         firstName: string;
         lastName: string;

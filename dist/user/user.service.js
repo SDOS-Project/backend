@@ -22,21 +22,16 @@ let UserService = exports.UserService = class UserService {
     findAll() {
         return `This action returns all user`;
     }
-    async findOne(id) {
-        try {
-            const user = await this.prisma.user.findUnique({
-                where: {
-                    id,
-                },
-            });
-            if (!user) {
-                throw new common_1.HttpException('User not found', common_1.HttpStatus.NOT_FOUND);
-            }
-            return user;
+    async findOne(handle) {
+        const user = await this.prisma.user.findUnique({
+            where: {
+                handle,
+            },
+        });
+        if (!user) {
+            throw new common_1.HttpException('User not found', common_1.HttpStatus.NOT_FOUND);
         }
-        catch (error) {
-            throw new Error(error);
-        }
+        return user;
     }
     update(id, updateUserDto) {
         return `This action updates a #${id} user`;
