@@ -4,7 +4,7 @@ import { SignUpDto } from './dto/signup.dto';
 
 @Injectable()
 export class AuthService {
-  async login(loginDto: LoginDto) {
+  async login(sub: string, loginDto: LoginDto) {
     return 'This action returns a new user';
   }
 

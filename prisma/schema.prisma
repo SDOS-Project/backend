@@ -24,6 +24,7 @@ model User {
   projects        Project[]    @relation("ProjectUsers")
   updates         Update[]
   handle         String       @unique
+  firebaseId     String       @unique
 }
 
 model Organisation {

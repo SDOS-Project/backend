@@ -17,12 +17,13 @@ const common_1 = require("@nestjs/common");
 const auth_service_1 = require("./auth.service");
 const login_dto_1 = require("./dto/login.dto");
 const signup_dto_1 = require("./dto/signup.dto");
+const user_decorator_1 = require("../common/decorators/user.decorator");
 let AuthController = exports.AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
     }
-    async login(loginDto) {
-        return await this.authService.login(loginDto);
+    async login(sub, loginDto) {
+        return await this.authService.login(sub, loginDto);
     }
     async signup(signUpDto) {
         return await this.authService.signup(signUpDto);
@@ -30,9 +31,10 @@ let AuthController = exports.AuthController = class AuthController {
 };
 __decorate([
     (0, common_1.Post)('/login'),
-    __param(0, (0, common_1.Body)()),
+    __param(0, (0, user_decorator_1.User)('sub')),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [login_dto_1.LoginDto]),
+    __metadata("design:paramtypes", [String, login_dto_1.LoginDto]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "login", null);
 __decorate([

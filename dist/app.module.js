@@ -19,7 +19,7 @@ let AppModule = exports.AppModule = class AppModule {
     configure(consumer) {
         consumer
             .apply(auth_middleware_1.PreAuthMiddleware)
-            .exclude({ path: '/', method: common_1.RequestMethod.GET }, { path: 'auth/login', method: common_1.RequestMethod.ALL }, { path: 'auth/signup', method: common_1.RequestMethod.ALL })
+            .exclude({ path: '/', method: common_1.RequestMethod.GET }, { path: 'auth/signup', method: common_1.RequestMethod.ALL })
             .forRoutes({
             path: '*',
             method: common_1.RequestMethod.ALL,
