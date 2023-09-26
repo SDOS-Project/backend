@@ -6,7 +6,19 @@ export declare class UserController {
     constructor(userService: UserService);
     create(createUserDto: CreateUserDto): string;
     findAll(): string;
-    findOne(id: string): string;
+    findOne(id: string): Promise<{
+        id: string;
+        firstName: string;
+        lastName: string;
+        email: string;
+        role: import(".prisma/client").$Enums.UserRole;
+        areasOfInterest: string[];
+        organisationId: string;
+        createdAt: Date;
+        updatedAt: Date;
+        handle: string;
+        firebaseId: string;
+    }>;
     update(id: string, updateUserDto: UpdateUserDto): string;
     remove(id: string): string;
 }
