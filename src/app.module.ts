@@ -11,9 +11,10 @@ import { FirebaseApp } from './firebase/firebase-service';
 import { PreAuthMiddleware } from './middleware/auth.middleware';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { OrganisationModule } from './organisation/organisation.module';
 
 @Module({
-  imports: [ProjectModule, AuthModule, UserModule],
+  imports: [ProjectModule, AuthModule, UserModule, OrganisationModule],
   controllers: [AppController],
   providers: [AppService, FirebaseApp],
 })

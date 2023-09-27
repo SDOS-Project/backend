@@ -15,6 +15,7 @@ const firebase_service_1 = require("./firebase/firebase-service");
 const auth_middleware_1 = require("./middleware/auth.middleware");
 const auth_module_1 = require("./auth/auth.module");
 const user_module_1 = require("./user/user.module");
+const organisation_module_1 = require("./organisation/organisation.module");
 let AppModule = exports.AppModule = class AppModule {
     configure(consumer) {
         consumer
@@ -28,7 +29,7 @@ let AppModule = exports.AppModule = class AppModule {
 };
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [project_module_1.ProjectModule, auth_module_1.AuthModule, user_module_1.UserModule],
+        imports: [project_module_1.ProjectModule, auth_module_1.AuthModule, user_module_1.UserModule, organisation_module_1.OrganisationModule],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService, firebase_service_1.FirebaseApp],
     })
