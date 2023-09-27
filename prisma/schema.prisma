@@ -23,31 +23,34 @@ model User {
   updatedAt       DateTime     @updatedAt
   projects        Project[]    @relation("ProjectUsers")
   updates         Update[]
-  handle         String       @unique
-  firebaseId     String       @unique
+  handle          String       @unique
+  firebaseId      String       @unique
 }
 
 model Organisation {
-  id        String           @id @default(uuid())
-  name      String
-  type      OrganisationType
-  email     String           @unique
-  address   String
-  logoUrl   String
-  users     User[]
-  projects  Project[]        @relation("ProjectOrganisations")
-  createdAt DateTime         @default(now())
-  updatedAt DateTime         @updatedAt
+  id         String           @id @default(uuid())
+  name       String
+  type       OrganisationType
+  email      String           @unique
+  address    String
+  logoUrl    String
+  users      User[]
+  projects   Project[]        @relation("ProjectOrganisations")
+  handle     String           @unique
+  firebaseId String           @unique
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
 }
 
 model Project {
   id            String         @id @default(uuid())
   name          String
   description   String
-  status        ProjectStatus @default(ONGOING)
+  status        ProjectStatus  @default(ONGOING)
   organisations Organisation[] @relation("ProjectOrganisations")
   users         User[]         @relation("ProjectUsers")
   updates       Update[]
+  handle        String         @unique
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
 }

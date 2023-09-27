@@ -10,12 +10,14 @@ exports.OrganisationModule = void 0;
 const common_1 = require("@nestjs/common");
 const organisation_service_1 = require("./organisation.service");
 const organisation_controller_1 = require("./organisation.controller");
+const prisma_module_1 = require("../prisma/prisma.module");
 let OrganisationModule = exports.OrganisationModule = class OrganisationModule {
 };
 exports.OrganisationModule = OrganisationModule = __decorate([
     (0, common_1.Module)({
         controllers: [organisation_controller_1.OrganisationController],
-        providers: [organisation_service_1.OrganisationService]
+        providers: [organisation_service_1.OrganisationService],
+        imports: [prisma_module_1.PrismaModule],
     })
 ], OrganisationModule);
 //# sourceMappingURL=organisation.module.js.map

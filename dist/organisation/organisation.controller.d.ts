@@ -5,7 +5,18 @@ export declare class OrganisationController {
     private readonly organisationService;
     constructor(organisationService: OrganisationService);
     create(createOrganisationDto: CreateOrganisationDto): string;
-    findAll(): string;
+    findAll(): Promise<{
+        id: string;
+        name: string;
+        type: import(".prisma/client").$Enums.OrganisationType;
+        email: string;
+        address: string;
+        logoUrl: string;
+        handle: string;
+        firebaseId: string;
+        createdAt: Date;
+        updatedAt: Date;
+    }[]>;
     findOne(id: string): string;
     update(id: string, updateOrganisationDto: UpdateOrganisationDto): string;
     remove(id: string): string;
