@@ -9,6 +9,7 @@ export declare class AuthService {
         firstName: string;
         lastName: string;
         email: string;
+        password: string;
         role: import(".prisma/client").$Enums.UserRole;
         areasOfInterest: string[];
         organisationId: string;
@@ -17,6 +18,19 @@ export declare class AuthService {
         handle: string;
         firebaseId: string;
     }>;
-    signup(signUpDto: SignUpDto): Promise<string>;
+    signup(signUpDto: SignUpDto): Promise<{
+        id: string;
+        firstName: string;
+        lastName: string;
+        email: string;
+        password: string;
+        role: import(".prisma/client").$Enums.UserRole;
+        areasOfInterest: string[];
+        organisationId: string;
+        createdAt: Date;
+        updatedAt: Date;
+        handle: string;
+        firebaseId: string;
+    }>;
     organisationSignup(signUpDto: SignUpDto): Promise<string>;
 }

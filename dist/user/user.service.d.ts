@@ -11,6 +11,7 @@ export declare class UserService {
         firstName: string;
         lastName: string;
         email: string;
+        password: string;
         role: import(".prisma/client").$Enums.UserRole;
         areasOfInterest: string[];
         organisationId: string;

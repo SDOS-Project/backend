@@ -12,6 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
+const utils_1 = require("./utils");
+const bcrypt = require("bcrypt");
+const saltRounds = 12;
 let AuthService = exports.AuthService = class AuthService {
     constructor(prisma) {
         this.prisma = prisma;
@@ -29,7 +32,34 @@ let AuthService = exports.AuthService = class AuthService {
         return user;
     }
     async signup(signUpDto) {
-        return 'This action returns a new user';
+        try {
+            const hash = await bcrypt.hash(signUpDto.password, saltRounds);
+            const user = await this.prisma.user.create({
+                data: {
+                    firstName: signUpDto.firstName,
+                    lastName: signUpDto.lastName,
+                    email: signUpDto.email,
+                    password: hash,
+                    role: signUpDto.role,
+                    organisation: {
+                        connect: {
+                            id: signUpDto.organisationId,
+                        },
+                    },
+                    areasOfInterest: signUpDto.areasOfInterest,
+                    handle: signUpDto.firstName +
+                        '-' +
+                        signUpDto.lastName +
+                        '-' +
+                        (0, utils_1.default)(5),
+                    firebaseId: signUpDto.firebaseId,
+                },
+            });
+            return user;
+        }
+        catch (error) {
+            throw new Error(error);
+        }
     }
     async organisationSignup(signUpDto) {
         return 'This action returns a new user';
