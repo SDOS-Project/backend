@@ -1,1 +1,1 @@
-export default function generateRandomAlphanumericWithLength(length: any): string;
+export default function generateRandomAlphanumericWithLength(length: number): string;
