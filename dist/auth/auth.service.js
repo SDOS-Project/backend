@@ -47,9 +47,9 @@ let AuthService = exports.AuthService = class AuthService {
                         },
                     },
                     areasOfInterest: signUpDto.areasOfInterest,
-                    handle: signUpDto.firstName +
+                    handle: signUpDto.firstName.toLowerCase() +
                         '-' +
-                        signUpDto.lastName +
+                        signUpDto.lastName.toLowerCase() +
                         '-' +
                         (0, utils_1.default)(5),
                     firebaseId: signUpDto.firebaseId,

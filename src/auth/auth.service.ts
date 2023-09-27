@@ -39,9 +39,9 @@ export class AuthService {
           },
           areasOfInterest: signUpDto.areasOfInterest,
           handle:
-            signUpDto.firstName +
+            signUpDto.firstName.toLowerCase() +
             '-' +
-            signUpDto.lastName +
+            signUpDto.lastName.toLowerCase() +
             '-' +
             generateRandomAlphanumericWithLength(5),
           firebaseId: signUpDto.firebaseId,
