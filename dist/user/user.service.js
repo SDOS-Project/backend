@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
+const client_1 = require("@prisma/client");
 let UserService = exports.UserService = class UserService {
     constructor(prisma) {
         this.prisma = prisma;
@@ -30,7 +31,22 @@ let UserService = exports.UserService = class UserService {
         }
         return user;
     }
-    async getConfig(firebaseId) { }
+    async getConfig(firebaseId) {
+        return 'This action returns user config';
+    }
+    async getFaculty() {
+        try {
+            const faculty = await this.prisma.user.findMany({
+                where: {
+                    role: client_1.UserRole.FACULTY,
+                },
+            });
+            return faculty;
+        }
+        catch (error) {
+            throw new common_1.HttpException(error.message, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     update(id, updateUserDto) {
         return `This action updates a #${id} user`;
     }

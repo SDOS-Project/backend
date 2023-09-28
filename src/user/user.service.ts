@@ -23,7 +23,22 @@ export class UserService {
     return user;
   }
 
-  async getConfig(firebaseId: string) {}
+  async getConfig(firebaseId: string) {
+    return 'This action returns user config';
+  }
+
+  async getFaculty() {
+    try {
+      const faculty = await this.prisma.user.findMany({
+        where: {
+          role: UserRole.FACULTY,
+        },
+      });
+      return faculty;
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
 
   update(id: string, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;

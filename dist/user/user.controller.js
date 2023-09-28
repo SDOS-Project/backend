@@ -30,6 +30,9 @@ let UserController = exports.UserController = class UserController {
     getConfig(firebaseId) {
         return this.userService.getConfig(firebaseId);
     }
+    getFaculty() {
+        return this.userService.getFaculty();
+    }
     update(id, updateUserDto) {
         return this.userService.update(id, updateUserDto);
     }
@@ -57,6 +60,12 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "getConfig", null);
+__decorate([
+    (0, common_1.Get)('/faculty'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "getFaculty", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),
