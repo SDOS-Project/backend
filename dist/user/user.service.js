@@ -16,9 +16,6 @@ let UserService = exports.UserService = class UserService {
     constructor(prisma) {
         this.prisma = prisma;
     }
-    create(createUserDto) {
-        return 'This action adds a new user';
-    }
     findAll() {
         return `This action returns all user`;
     }
