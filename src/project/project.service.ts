@@ -41,10 +41,10 @@ export class ProjectService {
           organisations: {
             connect: [
               {
-                id: partner.organisationId,
+                id: creator.organisationId,
               },
               {
-                id: creator.organisationId,
+                id: partner.organisationId,
               },
             ],
           },
