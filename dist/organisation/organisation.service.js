@@ -16,14 +16,19 @@ let OrganisationService = exports.OrganisationService = class OrganisationServic
     constructor(prisma) {
         this.prisma = prisma;
     }
-    create(createOrganisationDto) {
-        return 'This action adds a new organisation';
-    }
     async findAll() {
         return await this.prisma.organisation.findMany();
     }
-    findOne(id) {
-        return `This action returns a #${id} organisation`;
+    findOne(handle) {
+        const organisation = this.prisma.organisation.findUnique({
+            where: {
+                handle,
+            },
+        });
+        if (!organisation) {
+            throw new common_1.HttpException('Organisation not found', common_1.HttpStatus.NOT_FOUND);
+        }
+        return organisation;
     }
     update(id, updateOrganisationDto) {
         return `This action updates a #${id} organisation`;

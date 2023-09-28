@@ -8,26 +8,20 @@ import {
   Delete,
 } from '@nestjs/common';
 import { OrganisationService } from './organisation.service';
-import { CreateOrganisationDto } from './dto/create-organisation.dto';
 import { UpdateOrganisationDto } from './dto/update-organisation.dto';
 
 @Controller('organisation')
 export class OrganisationController {
   constructor(private readonly organisationService: OrganisationService) {}
 
-  @Post()
-  create(@Body() createOrganisationDto: CreateOrganisationDto) {
-    return this.organisationService.create(createOrganisationDto);
-  }
-
   @Get()
   findAll() {
     return this.organisationService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.organisationService.findOne(+id);
+  @Get(':handle')
+  findOne(@Param('handle') handle: string) {
+    return this.organisationService.findOne(handle);
   }
 
   @Patch(':id')

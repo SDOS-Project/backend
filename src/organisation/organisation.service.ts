@@ -1,21 +1,25 @@
-import { Injectable } from '@nestjs/common';
-import { CreateOrganisationDto } from './dto/create-organisation.dto';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UpdateOrganisationDto } from './dto/update-organisation.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class OrganisationService {
   constructor(private prisma: PrismaService) {}
-  create(createOrganisationDto: CreateOrganisationDto) {
-    return 'This action adds a new organisation';
-  }
 
   async findAll() {
     return await this.prisma.organisation.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} organisation`;
+  findOne(handle: string) {
+    const organisation = this.prisma.organisation.findUnique({
+      where: {
+        handle,
+      },
+    });
+    if (!organisation) {
+      throw new HttpException('Organisation not found', HttpStatus.NOT_FOUND);
+    }
+    return organisation;
   }
 
   update(id: number, updateOrganisationDto: UpdateOrganisationDto) {
