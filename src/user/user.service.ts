@@ -28,13 +28,28 @@ export class UserService {
   }
 
   async getFaculty() {
+    console.log('getFaculty');
     try {
       const faculty = await this.prisma.user.findMany({
         where: {
           role: UserRole.FACULTY,
         },
       });
+      console.log(faculty);
       return faculty;
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  async getEmployees() {
+    try {
+      const employees = await this.prisma.user.findMany({
+        where: {
+          role: UserRole.EMPLOYEE,
+        },
+      });
+      return employees;
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }

@@ -35,13 +35,28 @@ let UserService = exports.UserService = class UserService {
         return 'This action returns user config';
     }
     async getFaculty() {
+        console.log('getFaculty');
         try {
             const faculty = await this.prisma.user.findMany({
                 where: {
                     role: client_1.UserRole.FACULTY,
                 },
             });
+            console.log(faculty);
             return faculty;
+        }
+        catch (error) {
+            throw new common_1.HttpException(error.message, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    async getEmployees() {
+        try {
+            const employees = await this.prisma.user.findMany({
+                where: {
+                    role: client_1.UserRole.EMPLOYEE,
+                },
+            });
+            return employees;
         }
         catch (error) {
             throw new common_1.HttpException(error.message, common_1.HttpStatus.INTERNAL_SERVER_ERROR);

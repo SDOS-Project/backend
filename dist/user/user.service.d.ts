@@ -33,6 +33,20 @@ export declare class UserService {
         handle: string;
         firebaseId: string;
     }[]>;
+    getEmployees(): Promise<{
+        id: string;
+        firstName: string;
+        lastName: string;
+        email: string;
+        password: string;
+        role: import(".prisma/client").$Enums.UserRole;
+        areasOfInterest: string[];
+        organisationId: string;
+        createdAt: Date;
+        updatedAt: Date;
+        handle: string;
+        firebaseId: string;
+    }[]>;
     update(id: string, updateUserDto: UpdateUserDto): string;
     remove(id: number): string;
 }

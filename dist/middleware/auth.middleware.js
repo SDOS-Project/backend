@@ -27,7 +27,6 @@ let PreAuthMiddleware = exports.PreAuthMiddleware = PreAuthMiddleware_1 = class 
                 req['user'] = {
                     ...decodedToken,
                 };
-                console.log('decodedToken', decodedToken);
                 next();
             })
                 .catch(() => {

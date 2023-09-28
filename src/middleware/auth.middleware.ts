@@ -20,7 +20,6 @@ export class PreAuthMiddleware implements NestMiddleware {
           req['user'] = {
             ...decodedToken,
           };
-          console.log('decodedToken', decodedToken);
           next();
         })
         .catch(() => {
