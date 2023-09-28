@@ -34,7 +34,7 @@ export class AuthService {
           role: signUpDto.role,
           organisation: {
             connect: {
-              id: signUpDto.organisationId,
+              handle: signUpDto.organisationHandle,
             },
           },
           areasOfInterest: signUpDto.areasOfInterest,

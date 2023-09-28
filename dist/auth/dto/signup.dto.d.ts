@@ -5,7 +5,7 @@ export declare class SignUpDto {
     email: string;
     password: string;
     role: UserRole;
-    organisationId: string;
+    organisationHandle: string;
     areasOfInterest: string[];
     firebaseId: string;
 }
