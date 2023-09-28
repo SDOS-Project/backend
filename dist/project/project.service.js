@@ -5,11 +5,41 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProjectService = void 0;
 const common_1 = require("@nestjs/common");
+const prisma_service_1 = require("../prisma/prisma.service");
+const utils_1 = require("../auth/utils");
 let ProjectService = exports.ProjectService = class ProjectService {
+    constructor(prisma) {
+        this.prisma = prisma;
+    }
     create(createProjectDto) {
+        try {
+            const project = this.prisma.project.create({
+                data: {
+                    name: createProjectDto.name,
+                    description: createProjectDto.description,
+                    handle: createProjectDto.name.toLowerCase().replace(' ', '-') +
+                        (0, utils_1.default)(5),
+                    users: {
+                        connect: createProjectDto.userHandles.map((userHandle) => ({
+                            handle: userHandle,
+                        })),
+                    },
+                    organisations: {
+                        connect: createProjectDto.organisationHandles.map((organisationHandle) => ({
+                            handle: organisationHandle,
+                        })),
+                    },
+                },
+            });
+            return project;
+        }
+        catch (error) { }
         return 'This action adds a new project';
     }
     findAll() {
@@ -26,6 +56,7 @@ let ProjectService = exports.ProjectService = class ProjectService {
     }
 };
 exports.ProjectService = ProjectService = __decorate([
-    (0, common_1.Injectable)()
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
 ], ProjectService);
 //# sourceMappingURL=project.service.js.map
