@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -7,9 +7,21 @@ import generateRandomAlphanumericWithLength from 'src/auth/utils';
 @Injectable()
 export class ProjectService {
   constructor(private prisma: PrismaService) {}
-  create(createProjectDto: CreateProjectDto) {
+  async create(createProjectDto: CreateProjectDto) {
     try {
-      const project = this.prisma.project.create({
+      const creator = await this.prisma.user.findUnique({
+        where: {
+          handle: createProjectDto.creatorHandle,
+        },
+      });
+      const partner = await this.prisma.user.findUnique({
+        where: {
+          handle: createProjectDto.partnerHandle,
+        },
+      });
+      if (!partner)
+        throw new HttpException('Partner not found', HttpStatus.NOT_FOUND);
+      await this.prisma.project.create({
         data: {
           name: createProjectDto.name,
           description: createProjectDto.description,
@@ -17,20 +29,28 @@ export class ProjectService {
             createProjectDto.name.toLowerCase().replace(' ', '-') +
             generateRandomAlphanumericWithLength(5),
           users: {
-            connect: createProjectDto.userHandles.map((userHandle) => ({
-              handle: userHandle,
-            })),
+            connect: [
+              {
+                id: creator.id,
+              },
+              {
+                id: partner.id,
+              },
+            ],
           },
           organisations: {
-            connect: createProjectDto.organisationHandles.map(
-              (organisationHandle) => ({
-                handle: organisationHandle,
-              }),
-            ),
+            connect: [
+              {
+                id: partner.organisationId,
+              },
+              {
+                id: creator.organisationId,
+              },
+            ],
           },
         },
       });
-      return project;
+      return;
     } catch (error) {}
     return 'This action adds a new project';
   }

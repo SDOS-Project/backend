@@ -17,27 +17,49 @@ let ProjectService = exports.ProjectService = class ProjectService {
     constructor(prisma) {
         this.prisma = prisma;
     }
-    create(createProjectDto) {
+    async create(createProjectDto) {
         try {
-            const project = this.prisma.project.create({
+            const creator = await this.prisma.user.findUnique({
+                where: {
+                    handle: createProjectDto.creatorHandle,
+                },
+            });
+            const partner = await this.prisma.user.findUnique({
+                where: {
+                    handle: createProjectDto.partnerHandle,
+                },
+            });
+            if (!partner)
+                throw new common_1.HttpException('Partner not found', common_1.HttpStatus.NOT_FOUND);
+            await this.prisma.project.create({
                 data: {
                     name: createProjectDto.name,
                     description: createProjectDto.description,
                     handle: createProjectDto.name.toLowerCase().replace(' ', '-') +
                         (0, utils_1.default)(5),
                     users: {
-                        connect: createProjectDto.userHandles.map((userHandle) => ({
-                            handle: userHandle,
-                        })),
+                        connect: [
+                            {
+                                id: creator.id,
+                            },
+                            {
+                                id: partner.id,
+                            },
+                        ],
                     },
                     organisations: {
-                        connect: createProjectDto.organisationHandles.map((organisationHandle) => ({
-                            handle: organisationHandle,
-                        })),
+                        connect: [
+                            {
+                                id: partner.organisationId,
+                            },
+                            {
+                                id: creator.organisationId,
+                            },
+                        ],
                     },
                 },
             });
-            return project;
+            return;
         }
         catch (error) { }
         return 'This action adds a new project';
