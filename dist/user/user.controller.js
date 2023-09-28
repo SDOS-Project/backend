@@ -11,19 +11,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
 const user_service_1 = require("./user.service");
-const create_user_dto_1 = require("./dto/create-user.dto");
 const update_user_dto_1 = require("./dto/update-user.dto");
 let UserController = exports.UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
-    }
-    create(createUserDto) {
-        return this.userService.create(createUserDto);
     }
     findAll() {
         return this.userService.findAll();
@@ -38,13 +33,6 @@ let UserController = exports.UserController = class UserController {
         return this.userService.remove(+id);
     }
 };
-__decorate([
-    (0, common_1.Post)(),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_a = typeof create_user_dto_1.CreateUserDto !== "undefined" && create_user_dto_1.CreateUserDto) === "function" ? _a : Object]),
-    __metadata("design:returntype", void 0)
-], UserController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
