@@ -10,8 +10,10 @@ export declare class OrganisationController {
         name: string;
         type: import(".prisma/client").$Enums.OrganisationType;
         email: string;
+        password: string;
         address: string;
         logoUrl: string;
+        ipPolicy: string;
         handle: string;
         firebaseId: string;
         createdAt: Date;

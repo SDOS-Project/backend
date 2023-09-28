@@ -18,6 +18,7 @@ const auth_service_1 = require("./auth.service");
 const login_dto_1 = require("./dto/login.dto");
 const signup_dto_1 = require("./dto/signup.dto");
 const user_decorator_1 = require("../common/decorators/user.decorator");
+const organisation_signup_dto_1 = require("./dto/organisation-signup.dto");
 let AuthController = exports.AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
@@ -27,6 +28,9 @@ let AuthController = exports.AuthController = class AuthController {
     }
     async signup(signUpDto) {
         return await this.authService.signup(signUpDto);
+    }
+    async organisationSignup(organisationSignUpDto) {
+        return await this.authService.organisationSignup(organisationSignUpDto);
     }
 };
 __decorate([
@@ -44,6 +48,13 @@ __decorate([
     __metadata("design:paramtypes", [signup_dto_1.SignUpDto]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "signup", null);
+__decorate([
+    (0, common_1.Post)('/signup/organisation'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [organisation_signup_dto_1.OrganisationSignUpDto]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "organisationSignup", null);
 exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])

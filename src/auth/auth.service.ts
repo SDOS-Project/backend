@@ -1,3 +1,4 @@
+import { OrganisationSignUpDto } from './dto/organisation-signup.dto';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { LoginDto } from './dto/login.dto';
 import { SignUpDto } from './dto/signup.dto';
@@ -49,11 +50,41 @@ export class AuthService {
       });
       return user;
     } catch (error) {
+      if (error.code === 'P2002') {
+        throw new HttpException(
+          'A user with similar credentials already exists',
+          HttpStatus.CONFLICT,
+        );
+      }
       throw new Error(error);
     }
   }
 
-  async organisationSignup(signUpDto: SignUpDto) {
-    return 'This action returns a new user';
+  async organisationSignup(organisationSignUpDto: OrganisationSignUpDto) {
+    try {
+      const hash = await bcrypt.hash(
+        organisationSignUpDto.password,
+        saltRounds,
+      );
+      const organisation = await this.prisma.organisation.create({
+        data: {
+          name: organisationSignUpDto.name,
+          email: organisationSignUpDto.email,
+          password: hash,
+          type: organisationSignUpDto.type,
+          logoUrl: organisationSignUpDto.logoUrl,
+          address: organisationSignUpDto.address,
+          ipPolicy: organisationSignUpDto.ipPolicy,
+          handle:
+            organisationSignUpDto.name.toLowerCase() +
+            '-' +
+            generateRandomAlphanumericWithLength(5),
+          firebaseId: organisationSignUpDto.firebaseId,
+        },
+      });
+      return organisation;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 }

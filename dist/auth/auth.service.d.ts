@@ -1,3 +1,4 @@
+import { OrganisationSignUpDto } from './dto/organisation-signup.dto';
 import { LoginDto } from './dto/login.dto';
 import { SignUpDto } from './dto/signup.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -32,5 +33,18 @@ export declare class AuthService {
         handle: string;
         firebaseId: string;
     }>;
-    organisationSignup(signUpDto: SignUpDto): Promise<string>;
+    organisationSignup(organisationSignUpDto: OrganisationSignUpDto): Promise<{
+        id: string;
+        name: string;
+        type: import(".prisma/client").$Enums.OrganisationType;
+        email: string;
+        password: string;
+        address: string;
+        logoUrl: string;
+        ipPolicy: string;
+        handle: string;
+        firebaseId: string;
+        createdAt: Date;
+        updatedAt: Date;
+    }>;
 }

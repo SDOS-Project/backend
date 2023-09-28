@@ -1,6 +1,7 @@
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { SignUpDto } from './dto/signup.dto';
+import { OrganisationSignUpDto } from './dto/organisation-signup.dto';
 export declare class AuthController {
     private readonly authService;
     constructor(authService: AuthService);
@@ -31,5 +32,19 @@ export declare class AuthController {
         updatedAt: Date;
         handle: string;
         firebaseId: string;
+    }>;
+    organisationSignup(organisationSignUpDto: OrganisationSignUpDto): Promise<{
+        id: string;
+        name: string;
+        type: import(".prisma/client").$Enums.OrganisationType;
+        email: string;
+        password: string;
+        address: string;
+        logoUrl: string;
+        ipPolicy: string;
+        handle: string;
+        firebaseId: string;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
 }

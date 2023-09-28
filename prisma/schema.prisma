@@ -33,10 +33,12 @@ model Organisation {
   name       String
   type       OrganisationType
   email      String           @unique
+  password   String
   address    String
   logoUrl    String
   users      User[]
   projects   Project[]        @relation("ProjectOrganisations")
+  ipPolicy   String
   handle     String           @unique
   firebaseId String           @unique
   createdAt  DateTime         @default(now())

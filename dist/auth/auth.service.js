@@ -58,11 +58,35 @@ let AuthService = exports.AuthService = class AuthService {
             return user;
         }
         catch (error) {
+            if (error.code === 'P2002') {
+                throw new common_1.HttpException('A user with similar credentials already exists', common_1.HttpStatus.CONFLICT);
+            }
             throw new Error(error);
         }
     }
-    async organisationSignup(signUpDto) {
-        return 'This action returns a new user';
+    async organisationSignup(organisationSignUpDto) {
+        try {
+            const hash = await bcrypt.hash(organisationSignUpDto.password, saltRounds);
+            const organisation = await this.prisma.organisation.create({
+                data: {
+                    name: organisationSignUpDto.name,
+                    email: organisationSignUpDto.email,
+                    password: hash,
+                    type: organisationSignUpDto.type,
+                    logoUrl: organisationSignUpDto.logoUrl,
+                    address: organisationSignUpDto.address,
+                    ipPolicy: organisationSignUpDto.ipPolicy,
+                    handle: organisationSignUpDto.name.toLowerCase() +
+                        '-' +
+                        (0, utils_1.default)(5),
+                    firebaseId: organisationSignUpDto.firebaseId,
+                },
+            });
+            return organisation;
+        }
+        catch (error) {
+            throw new Error(error);
+        }
     }
 };
 exports.AuthService = AuthService = __decorate([
