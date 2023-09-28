@@ -67,6 +67,9 @@ let AuthService = exports.AuthService = class AuthService {
     async organisationSignup(organisationSignUpDto) {
         try {
             const hash = await bcrypt.hash(organisationSignUpDto.password, saltRounds);
+            const handle = organisationSignUpDto.name.split(' ').join('-').toLowerCase() +
+                '-' +
+                (0, utils_1.default)(5);
             const organisation = await this.prisma.organisation.create({
                 data: {
                     name: organisationSignUpDto.name,
@@ -76,9 +79,7 @@ let AuthService = exports.AuthService = class AuthService {
                     logoUrl: organisationSignUpDto.logoUrl,
                     address: organisationSignUpDto.address,
                     ipPolicy: organisationSignUpDto.ipPolicy,
-                    handle: organisationSignUpDto.name.toLowerCase() +
-                        '-' +
-                        (0, utils_1.default)(5),
+                    handle: handle,
                     firebaseId: organisationSignUpDto.firebaseId,
                 },
             });

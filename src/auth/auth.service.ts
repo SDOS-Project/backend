@@ -66,6 +66,12 @@ export class AuthService {
         organisationSignUpDto.password,
         saltRounds,
       );
+
+      const handle =
+        organisationSignUpDto.name.split(' ').join('-').toLowerCase() +
+        '-' +
+        generateRandomAlphanumericWithLength(5);
+
       const organisation = await this.prisma.organisation.create({
         data: {
           name: organisationSignUpDto.name,
@@ -75,10 +81,7 @@ export class AuthService {
           logoUrl: organisationSignUpDto.logoUrl,
           address: organisationSignUpDto.address,
           ipPolicy: organisationSignUpDto.ipPolicy,
-          handle:
-            organisationSignUpDto.name.toLowerCase() +
-            '-' +
-            generateRandomAlphanumericWithLength(5),
+          handle: handle,
           firebaseId: organisationSignUpDto.firebaseId,
         },
       });
