@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { User } from 'src/common/decorators/user.decorator';
 
 @Controller('user')
 export class UserController {
@@ -22,6 +23,11 @@ export class UserController {
   @Get(':handle')
   findOne(@Param('handle') handle: string) {
     return this.userService.findOne(handle);
+  }
+
+  @Get('/config')
+  getConfig(@User('sub') firebaseId: string) {
+    return this.userService.getConfig(firebaseId);
   }
 
   @Patch(':id')

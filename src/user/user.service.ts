@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { UserRole } from '@prisma/client';
 
 @Injectable()
 export class UserService {
@@ -21,6 +22,8 @@ export class UserService {
     }
     return user;
   }
+
+  async getConfig(firebaseId: string) {}
 
   update(id: string, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;

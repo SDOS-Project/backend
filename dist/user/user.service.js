@@ -30,6 +30,7 @@ let UserService = exports.UserService = class UserService {
         }
         return user;
     }
+    async getConfig(firebaseId) { }
     update(id, updateUserDto) {
         return `This action updates a #${id} user`;
     }

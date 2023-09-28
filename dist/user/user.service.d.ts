@@ -18,6 +18,7 @@ export declare class UserService {
         handle: string;
         firebaseId: string;
     }>;
+    getConfig(firebaseId: string): Promise<void>;
     update(id: string, updateUserDto: UpdateUserDto): string;
     remove(id: number): string;
 }

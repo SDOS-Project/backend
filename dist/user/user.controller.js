@@ -16,6 +16,7 @@ exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
 const user_service_1 = require("./user.service");
 const update_user_dto_1 = require("./dto/update-user.dto");
+const user_decorator_1 = require("../common/decorators/user.decorator");
 let UserController = exports.UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
@@ -25,6 +26,9 @@ let UserController = exports.UserController = class UserController {
     }
     findOne(handle) {
         return this.userService.findOne(handle);
+    }
+    getConfig(firebaseId) {
+        return this.userService.getConfig(firebaseId);
     }
     update(id, updateUserDto) {
         return this.userService.update(id, updateUserDto);
@@ -46,6 +50,13 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "findOne", null);
+__decorate([
+    (0, common_1.Get)('/config'),
+    __param(0, (0, user_decorator_1.User)('sub')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "getConfig", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),

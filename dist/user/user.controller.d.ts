@@ -18,6 +18,7 @@ export declare class UserController {
         handle: string;
         firebaseId: string;
     }>;
+    getConfig(firebaseId: string): Promise<void>;
     update(id: string, updateUserDto: UpdateUserDto): string;
     remove(id: string): string;
 }
