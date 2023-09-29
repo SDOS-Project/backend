@@ -32,6 +32,11 @@ export class ProjectController {
     return this.projectService.findOne(handle);
   }
 
+  @Get(':handle/updates')
+  getUpdates(@Param('handle') handle: string) {
+    return this.projectService.getUpdates(handle);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateProjectDto: UpdateProjectDto) {
     return this.projectService.update(+id, updateProjectDto);

@@ -79,6 +79,26 @@ let ProjectService = exports.ProjectService = class ProjectService {
             where: {
                 handle,
             },
+            select: {
+                name: true,
+                description: true,
+                handle: true,
+                users: {
+                    select: {
+                        firstName: true,
+                        lastName: true,
+                        email: true,
+                        handle: true,
+                        role: true,
+                    },
+                },
+                organisations: {
+                    select: {
+                        name: true,
+                        handle: true,
+                    },
+                },
+            },
         });
         if (!project)
             throw new common_1.HttpException('Project not found', common_1.HttpStatus.NOT_FOUND);

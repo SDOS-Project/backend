@@ -31,6 +31,9 @@ let ProjectController = exports.ProjectController = class ProjectController {
     findOne(handle) {
         return this.projectService.findOne(handle);
     }
+    getUpdates(handle) {
+        return this.projectService.getUpdates(handle);
+    }
     update(id, updateProjectDto) {
         return this.projectService.update(+id, updateProjectDto);
     }
@@ -58,6 +61,13 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], ProjectController.prototype, "findOne", null);
+__decorate([
+    (0, common_1.Get)(':handle/updates'),
+    __param(0, (0, common_1.Param)('handle')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], ProjectController.prototype, "getUpdates", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),

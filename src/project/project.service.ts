@@ -70,6 +70,26 @@ export class ProjectService {
       where: {
         handle,
       },
+      select: {
+        name: true,
+        description: true,
+        handle: true,
+        users: {
+          select: {
+            firstName: true,
+            lastName: true,
+            email: true,
+            handle: true,
+            role: true,
+          },
+        },
+        organisations: {
+          select: {
+            name: true,
+            handle: true,
+          },
+        },
+      },
     });
     if (!project)
       throw new HttpException('Project not found', HttpStatus.NOT_FOUND);

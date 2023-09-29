@@ -17,13 +17,20 @@ export declare class ProjectService {
         updatedAt: Date;
     }[]>;
     findOne(handle: string): Promise<{
-        id: string;
+        handle: string;
         name: string;
         description: string;
-        status: import(".prisma/client").$Enums.ProjectStatus;
-        handle: string;
-        createdAt: Date;
-        updatedAt: Date;
+        organisations: {
+            handle: string;
+            name: string;
+        }[];
+        users: {
+            firstName: string;
+            lastName: string;
+            email: string;
+            role: import(".prisma/client").$Enums.UserRole;
+            handle: string;
+        }[];
     }>;
     getUpdates(handle: string): Promise<{
         updates: {
