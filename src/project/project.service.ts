@@ -61,13 +61,12 @@ export class ProjectService {
     return `This action returns all project`;
   }
 
-  findOne(handle: string) {
-    const project = this.prisma.project.findUnique({
+  async findOne(handle: string) {
+    const project = await this.prisma.project.findUnique({
       where: {
         handle,
       },
     });
-
     if (!project)
       throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
     return project;

@@ -31,18 +31,20 @@ let PreAuthMiddleware = exports.PreAuthMiddleware = PreAuthMiddleware_1 = class 
                 next();
             })
                 .catch(() => {
-                PreAuthMiddleware_1.accessDenied();
+                PreAuthMiddleware_1.accessDenied(req.url, res);
             });
         }
         else {
-            PreAuthMiddleware_1.accessDenied();
+            PreAuthMiddleware_1.accessDenied(req.url, res);
         }
     }
-    static accessDenied() {
-        throw new common_1.HttpException({
-            status: common_1.HttpStatus.FORBIDDEN,
-            error: 'Access Denied',
-        }, common_1.HttpStatus.FORBIDDEN);
+    static accessDenied(url, res) {
+        res.status(common_1.HttpStatus.FORBIDDEN).json({
+            statusCode: common_1.HttpStatus.FORBIDDEN,
+            timestamp: new Date().toISOString(),
+            path: url,
+            message: 'Access Denied',
+        });
     }
 };
 exports.PreAuthMiddleware = PreAuthMiddleware = PreAuthMiddleware_1 = __decorate([

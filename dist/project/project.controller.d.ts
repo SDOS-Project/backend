@@ -8,7 +8,7 @@ export declare class ProjectController {
         handle: string;
     }>;
     findAll(): string;
-    findOne(handle: string): import(".prisma/client").Prisma.Prisma__ProjectClient<{
+    findOne(handle: string): Promise<{
         id: string;
         name: string;
         description: string;
@@ -16,7 +16,7 @@ export declare class ProjectController {
         handle: string;
         createdAt: Date;
         updatedAt: Date;
-    }, null, import("@prisma/client/runtime/library").DefaultArgs>;
+    }>;
     update(id: string, updateProjectDto: UpdateProjectDto): string;
     remove(id: string): string;
 }

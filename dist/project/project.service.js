@@ -69,8 +69,8 @@ let ProjectService = exports.ProjectService = class ProjectService {
     findAll() {
         return `This action returns all project`;
     }
-    findOne(handle) {
-        const project = this.prisma.project.findUnique({
+    async findOne(handle) {
+        const project = await this.prisma.project.findUnique({
             where: {
                 handle,
             },
