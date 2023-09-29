@@ -66,8 +66,13 @@ let ProjectService = exports.ProjectService = class ProjectService {
             throw new common_1.HttpException(error, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    findAll() {
-        return `This action returns all project`;
+    async findAll() {
+        try {
+            return await this.prisma.project.findMany();
+        }
+        catch (error) {
+            throw new common_1.HttpException(error, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
     async findOne(handle) {
         const project = await this.prisma.project.findUnique({
@@ -78,6 +83,19 @@ let ProjectService = exports.ProjectService = class ProjectService {
         if (!project)
             throw new common_1.HttpException('Project not found', common_1.HttpStatus.NOT_FOUND);
         return project;
+    }
+    async getUpdates(handle) {
+        const updates = await this.prisma.project.findUnique({
+            where: {
+                handle,
+            },
+            select: {
+                updates: true,
+            },
+        });
+        if (!updates)
+            throw new common_1.HttpException('Updates not found', common_1.HttpStatus.NOT_FOUND);
+        return updates;
     }
     update(id, updateProjectDto) {
         return `This action updates a #${id} project`;

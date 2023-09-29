@@ -7,7 +7,15 @@ export declare class ProjectController {
     create(createProjectDto: CreateProjectDto): Promise<{
         handle: string;
     }>;
-    findAll(): string;
+    findAll(): Promise<{
+        id: string;
+        name: string;
+        description: string;
+        status: import(".prisma/client").$Enums.ProjectStatus;
+        handle: string;
+        createdAt: Date;
+        updatedAt: Date;
+    }[]>;
     findOne(handle: string): Promise<{
         id: string;
         name: string;

@@ -57,8 +57,12 @@ export class ProjectService {
     }
   }
 
-  findAll() {
-    return `This action returns all project`;
+  async findAll() {
+    try {
+      return await this.prisma.project.findMany();
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   async findOne(handle: string) {
@@ -70,6 +74,20 @@ export class ProjectService {
     if (!project)
       throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
     return project;
+  }
+
+  async getUpdates(handle: string) {
+    const updates = await this.prisma.project.findUnique({
+      where: {
+        handle,
+      },
+      select: {
+        updates: true,
+      },
+    });
+    if (!updates)
+      throw new HttpException('Updates not found', HttpStatus.NOT_FOUND);
+    return updates;
   }
 
   update(id: number, updateProjectDto: UpdateProjectDto) {

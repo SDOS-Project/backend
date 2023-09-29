@@ -7,7 +7,15 @@ export declare class ProjectService {
     create(createProjectDto: CreateProjectDto): Promise<{
         handle: string;
     }>;
-    findAll(): string;
+    findAll(): Promise<{
+        id: string;
+        name: string;
+        description: string;
+        status: import(".prisma/client").$Enums.ProjectStatus;
+        handle: string;
+        createdAt: Date;
+        updatedAt: Date;
+    }[]>;
     findOne(handle: string): Promise<{
         id: string;
         name: string;
@@ -16,6 +24,16 @@ export declare class ProjectService {
         handle: string;
         createdAt: Date;
         updatedAt: Date;
+    }>;
+    getUpdates(handle: string): Promise<{
+        updates: {
+            id: string;
+            projectId: string;
+            content: string;
+            userId: string;
+            createdAt: Date;
+            updatedAt: Date;
+        }[];
     }>;
     update(id: number, updateProjectDto: UpdateProjectDto): string;
     remove(id: number): string;
