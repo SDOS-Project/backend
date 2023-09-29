@@ -39,8 +39,8 @@ let PreAuthMiddleware = exports.PreAuthMiddleware = PreAuthMiddleware_1 = class 
         }
     }
     static accessDenied(url, res) {
-        res.status(403).json({
-            statusCode: 403,
+        res.status(common_1.HttpStatus.FORBIDDEN).json({
+            statusCode: common_1.HttpStatus.FORBIDDEN,
             timestamp: new Date().toISOString(),
             path: url,
             message: 'Access Denied',
