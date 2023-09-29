@@ -17,12 +17,12 @@ export declare class ProjectController {
         updatedAt: Date;
     }[]>;
     findOne(handle: string): Promise<{
-        handle: string;
         name: string;
         description: string;
+        handle: string;
         organisations: {
-            handle: string;
             name: string;
+            handle: string;
         }[];
         users: {
             firstName: string;

@@ -12,9 +12,21 @@ import { PreAuthMiddleware } from './middleware/auth.middleware';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { OrganisationModule } from './organisation/organisation.module';
+import { ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
-  imports: [ProjectModule, AuthModule, UserModule, OrganisationModule],
+  imports: [
+    ProjectModule,
+    AuthModule,
+    UserModule,
+    OrganisationModule,
+    ThrottlerModule.forRoot([
+      {
+        ttl: 60000,
+        limit: 20,
+      },
+    ]),
+  ],
   controllers: [AppController],
   providers: [AppService, FirebaseApp],
 })
