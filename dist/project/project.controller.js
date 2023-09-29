@@ -28,8 +28,8 @@ let ProjectController = exports.ProjectController = class ProjectController {
     findAll() {
         return this.projectService.findAll();
     }
-    findOne(id) {
-        return this.projectService.findOne(+id);
+    findOne(handle) {
+        return this.projectService.findOne(handle);
     }
     update(id, updateProjectDto) {
         return this.projectService.update(+id, updateProjectDto);
@@ -52,8 +52,8 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ProjectController.prototype, "findAll", null);
 __decorate([
-    (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Get)(':handle'),
+    __param(0, (0, common_1.Param)('handle')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)

@@ -21,12 +21,13 @@ export class ProjectService {
       });
       if (!partner)
         throw new HttpException('Partner not found', HttpStatus.NOT_FOUND);
-      await this.prisma.project.create({
+      const project = await this.prisma.project.create({
         data: {
           name: createProjectDto.name,
           description: createProjectDto.description,
           handle:
-            createProjectDto.name.toLowerCase().replace(' ', '-') +
+            createProjectDto.name.split(' ').join('-').toLowerCase() +
+            '-' +
             generateRandomAlphanumericWithLength(5),
           users: {
             connect: [
@@ -50,17 +51,26 @@ export class ProjectService {
           },
         },
       });
-      return;
-    } catch (error) {}
-    return 'This action adds a new project';
+      return { handle: project.handle };
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   findAll() {
     return `This action returns all project`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} project`;
+  findOne(handle: string) {
+    const project = this.prisma.project.findUnique({
+      where: {
+        handle,
+      },
+    });
+
+    if (!project)
+      throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
+    return project;
   }
 
   update(id: number, updateProjectDto: UpdateProjectDto) {

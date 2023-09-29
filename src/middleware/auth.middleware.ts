@@ -1,4 +1,9 @@
-import { HttpStatus, Injectable, NestMiddleware } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NestMiddleware,
+} from '@nestjs/common';
 import * as firebase from 'firebase-admin';
 import { Request, Response } from 'express';
 import { FirebaseApp } from 'src/firebase/firebase-service';
@@ -24,19 +29,20 @@ export class PreAuthMiddleware implements NestMiddleware {
           next();
         })
         .catch(() => {
-          PreAuthMiddleware.accessDenied(req.url, res);
+          PreAuthMiddleware.accessDenied();
         });
     } else {
-      PreAuthMiddleware.accessDenied(req.url, res);
+      PreAuthMiddleware.accessDenied();
     }
   }
 
-  private static accessDenied(url: string, res: Response) {
-    res.status(HttpStatus.FORBIDDEN).json({
-      statusCode: HttpStatus.FORBIDDEN,
-      timestamp: new Date().toISOString(),
-      path: url,
-      message: 'Access Denied',
-    });
+  private static accessDenied() {
+    throw new HttpException(
+      {
+        status: HttpStatus.FORBIDDEN,
+        error: 'Access Denied',
+      },
+      HttpStatus.FORBIDDEN,
+    );
   }
 }

@@ -31,11 +31,12 @@ let ProjectService = exports.ProjectService = class ProjectService {
             });
             if (!partner)
                 throw new common_1.HttpException('Partner not found', common_1.HttpStatus.NOT_FOUND);
-            await this.prisma.project.create({
+            const project = await this.prisma.project.create({
                 data: {
                     name: createProjectDto.name,
                     description: createProjectDto.description,
-                    handle: createProjectDto.name.toLowerCase().replace(' ', '-') +
+                    handle: createProjectDto.name.split(' ').join('-').toLowerCase() +
+                        '-' +
                         (0, utils_1.default)(5),
                     users: {
                         connect: [
@@ -59,16 +60,24 @@ let ProjectService = exports.ProjectService = class ProjectService {
                     },
                 },
             });
-            return;
+            return { handle: project.handle };
         }
-        catch (error) { }
-        return 'This action adds a new project';
+        catch (error) {
+            throw new common_1.HttpException(error, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
     findAll() {
         return `This action returns all project`;
     }
-    findOne(id) {
-        return `This action returns a #${id} project`;
+    findOne(handle) {
+        const project = this.prisma.project.findUnique({
+            where: {
+                handle,
+            },
+        });
+        if (!project)
+            throw new common_1.HttpException('Project not found', common_1.HttpStatus.NOT_FOUND);
+        return project;
     }
     update(id, updateProjectDto) {
         return `This action updates a #${id} project`;
