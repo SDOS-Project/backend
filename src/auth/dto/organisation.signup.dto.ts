@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { OrganisationType } from '@prisma/client';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsString, IsUrl } from 'class-validator';
 
 export class OrganisationSignUpDto {
   @ApiProperty()
@@ -36,6 +36,7 @@ export class OrganisationSignUpDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
+  @IsUrl()
   ipPolicy: string;
 
   @IsNotEmpty()
