@@ -25,11 +25,11 @@ export declare class ProjectService {
             handle: string;
         }[];
         users: {
+            handle: string;
             firstName: string;
             lastName: string;
             email: string;
             role: import(".prisma/client").$Enums.UserRole;
-            handle: string;
         }[];
     }>;
     getUpdates(handle: string): Promise<{
