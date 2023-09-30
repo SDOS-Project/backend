@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { UserRole } from '@prisma/client';
 import {
+  ArrayMinSize,
   IsArray,
   IsEmail,
   IsEnum,
@@ -43,6 +44,8 @@ export class SignUpDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsArray()
+  @IsString({ each: true })
+  @ArrayMinSize(1)
   areasOfInterest: string[];
 
   @ApiProperty()
