@@ -1,4 +1,4 @@
-import { OrganisationSignUpDto } from './dto/organisation-signup.dto';
+import { OrganisationSignUpDto } from './dto/organisation.signup.dto';
 import { LoginDto } from './dto/login.dto';
 import { SignUpDto } from './dto/signup.dto';
 import { PrismaService } from 'src/prisma/prisma.service';

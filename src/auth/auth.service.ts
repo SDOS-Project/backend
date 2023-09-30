@@ -1,4 +1,4 @@
-import { OrganisationSignUpDto } from './dto/organisation-signup.dto';
+import { OrganisationSignUpDto } from './dto/organisation.signup.dto';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { LoginDto } from './dto/login.dto';
 import { SignUpDto } from './dto/signup.dto';

@@ -38,7 +38,6 @@ export class OrganisationSignUpDto {
   @IsString()
   ipPolicy: string;
 
-  @ApiProperty()
   @IsNotEmpty()
   @IsString()
   firebaseId: string;

@@ -62,4 +62,4 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], OrganisationSignUpDto.prototype, "firebaseId", void 0);
-//# sourceMappingURL=organisation-signup.dto.js.map
+//# sourceMappingURL=organisation.signup.dto.js.map
