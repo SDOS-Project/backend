@@ -17,19 +17,19 @@ export declare class ProjectService {
         updatedAt: Date;
     }[]>;
     findOne(handle: string): Promise<{
+        handle: string;
         name: string;
         description: string;
-        handle: string;
         organisations: {
-            name: string;
             handle: string;
+            name: string;
         }[];
         users: {
-            handle: string;
             firstName: string;
             lastName: string;
             email: string;
             role: import(".prisma/client").$Enums.UserRole;
+            handle: string;
         }[];
     }>;
     getUpdates(handle: string): Promise<{

@@ -24,6 +24,8 @@ let ProjectService = exports.ProjectService = class ProjectService {
                     handle: createProjectDto.creatorHandle,
                 },
             });
+            if (!creator)
+                throw new common_1.HttpException('Creator not found', common_1.HttpStatus.NOT_FOUND);
             const partner = await this.prisma.user.findUnique({
                 where: {
                     handle: createProjectDto.partnerHandle,
