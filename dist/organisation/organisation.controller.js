@@ -16,6 +16,7 @@ exports.OrganisationController = void 0;
 const common_1 = require("@nestjs/common");
 const organisation_service_1 = require("./organisation.service");
 const update_organisation_dto_1 = require("./dto/update-organisation.dto");
+const swagger_1 = require("@nestjs/swagger");
 let OrganisationController = exports.OrganisationController = class OrganisationController {
     constructor(organisationService) {
         this.organisationService = organisationService;
@@ -62,6 +63,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], OrganisationController.prototype, "remove", null);
 exports.OrganisationController = OrganisationController = __decorate([
+    (0, swagger_1.ApiTags)('Organisation'),
     (0, common_1.Controller)('organisation'),
     __metadata("design:paramtypes", [organisation_service_1.OrganisationService])
 ], OrganisationController);
