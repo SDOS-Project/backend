@@ -26,10 +26,16 @@ let AuthService = exports.AuthService = class AuthService {
                 email: loginDto.email,
             },
         });
-        if (!user) {
+        const organisation = await this.prisma.organisation.findUnique({
+            where: {
+                firebaseId: sub,
+                email: loginDto.email,
+            },
+        });
+        if (!user && !organisation) {
             throw new common_1.HttpException('User not found', common_1.HttpStatus.NOT_FOUND);
         }
-        return user;
+        return !user ? organisation : user;
     }
     async signup(signUpDto) {
         try {

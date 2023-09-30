@@ -18,6 +18,19 @@ export declare class AuthService {
         updatedAt: Date;
         handle: string;
         firebaseId: string;
+    } | {
+        id: string;
+        name: string;
+        type: import(".prisma/client").$Enums.OrganisationType;
+        email: string;
+        password: string;
+        address: string;
+        logoUrl: string;
+        ipPolicy: string;
+        handle: string;
+        firebaseId: string;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     signup(signUpDto: SignUpDto): Promise<{
         id: string;
