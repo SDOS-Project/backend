@@ -25,6 +25,21 @@ let UserService = exports.UserService = class UserService {
             where: {
                 handle,
             },
+            select: {
+                firstName: true,
+                lastName: true,
+                email: true,
+                handle: true,
+                role: true,
+                areasOfInterest: true,
+                organisation: {
+                    select: {
+                        name: true,
+                        handle: true,
+                        type: true,
+                    },
+                },
+            },
         });
         if (!user) {
             throw new common_1.HttpException('User not found', common_1.HttpStatus.NOT_FOUND);

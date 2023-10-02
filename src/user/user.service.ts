@@ -16,6 +16,21 @@ export class UserService {
       where: {
         handle,
       },
+      select: {
+        firstName: true,
+        lastName: true,
+        email: true,
+        handle: true,
+        role: true,
+        areasOfInterest: true,
+        organisation: {
+          select: {
+            name: true,
+            handle: true,
+            type: true,
+          },
+        },
+      },
     });
     if (!user) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
