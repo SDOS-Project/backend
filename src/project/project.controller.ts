@@ -11,6 +11,7 @@ import { ProjectService } from './project.service';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { AddUpdateDto } from './dto/add-update.dto';
 
 @ApiTags('Project')
 @Controller('project')
@@ -35,6 +36,14 @@ export class ProjectController {
   @Get(':handle/updates')
   getUpdates(@Param('handle') handle: string) {
     return this.projectService.getUpdates(handle);
+  }
+
+  @Post(':handle/updates')
+  addUpdates(
+    @Param('handle') handle: string,
+    @Body() addUpdateDto: AddUpdateDto,
+  ) {
+    return this.projectService.addUpdate(handle, addUpdateDto);
   }
 
   @Patch(':id')

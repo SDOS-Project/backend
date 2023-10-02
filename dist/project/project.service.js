@@ -157,7 +157,35 @@ let ProjectService = exports.ProjectService = class ProjectService {
         return project.updates;
     }
     update(handle, updateProjectDto) {
-        return `This action updates a #${handle} project`;
+    }
+    async addUpdate(handle, addUpdateDto) {
+        const project = await this.prisma.project.findUnique({
+            where: {
+                handle,
+            },
+        });
+        if (!project)
+            throw new common_1.HttpException('Project not found', common_1.HttpStatus.NOT_FOUND);
+        try {
+            return await this.prisma.update.create({
+                data: {
+                    content: addUpdateDto.content,
+                    user: {
+                        connect: {
+                            handle: addUpdateDto.userHandle,
+                        },
+                    },
+                    project: {
+                        connect: {
+                            handle,
+                        },
+                    },
+                },
+            });
+        }
+        catch (error) {
+            throw new common_1.HttpException(error, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
     remove(id) {
         return `This action removes a #${id} project`;

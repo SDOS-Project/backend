@@ -1,10 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { ProjectStatus } from '@prisma/client';
 import { Type } from 'class-transformer';
-import { IsEnum, IsString } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
 
 class UpdateDto {
   @ApiProperty()
+  @IsNotEmpty()
   @IsString()
   content: string;
 }

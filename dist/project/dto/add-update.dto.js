@@ -9,41 +9,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateProjectDto = void 0;
+exports.AddUpdateDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
-const client_1 = require("@prisma/client");
-const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
-class UpdateDto {
+class AddUpdateDto {
 }
+exports.AddUpdateDto = AddUpdateDto;
 __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], UpdateDto.prototype, "content", void 0);
-class UpdateProjectDto {
-}
-exports.UpdateProjectDto = UpdateProjectDto;
+], AddUpdateDto.prototype, "userHandle", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], UpdateProjectDto.prototype, "name", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], UpdateProjectDto.prototype, "description", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsEnum)(client_1.ProjectStatus),
-    __metadata("design:type", String)
-], UpdateProjectDto.prototype, "status", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    (0, class_transformer_1.Type)(() => UpdateDto),
-    __metadata("design:type", UpdateDto)
-], UpdateProjectDto.prototype, "update", void 0);
-//# sourceMappingURL=update-project.dto.js.map
+], AddUpdateDto.prototype, "content", void 0);
+//# sourceMappingURL=add-update.dto.js.map

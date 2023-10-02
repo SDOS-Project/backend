@@ -18,6 +18,7 @@ const project_service_1 = require("./project.service");
 const create_project_dto_1 = require("./dto/create-project.dto");
 const update_project_dto_1 = require("./dto/update-project.dto");
 const swagger_1 = require("@nestjs/swagger");
+const add_update_dto_1 = require("./dto/add-update.dto");
 let ProjectController = exports.ProjectController = class ProjectController {
     constructor(projectService) {
         this.projectService = projectService;
@@ -33,6 +34,9 @@ let ProjectController = exports.ProjectController = class ProjectController {
     }
     getUpdates(handle) {
         return this.projectService.getUpdates(handle);
+    }
+    addUpdates(handle, addUpdateDto) {
+        return this.projectService.addUpdate(handle, addUpdateDto);
     }
     update(handle, updateProjectDto) {
         return this.projectService.update(handle, updateProjectDto);
@@ -68,6 +72,14 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], ProjectController.prototype, "getUpdates", null);
+__decorate([
+    (0, common_1.Post)(':handle/updates'),
+    __param(0, (0, common_1.Param)('handle')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, add_update_dto_1.AddUpdateDto]),
+    __metadata("design:returntype", void 0)
+], ProjectController.prototype, "addUpdates", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),

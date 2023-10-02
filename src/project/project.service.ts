@@ -3,6 +3,7 @@ import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import generateRandomAlphanumericWithLength from 'src/auth/utils';
+import { AddUpdateDto } from './dto/add-update.dto';
 
 @Injectable()
 export class ProjectService {
@@ -150,7 +151,36 @@ export class ProjectService {
   }
 
   update(handle: string, updateProjectDto: UpdateProjectDto) {
-    return `This action updates a #${handle} project`;
+    // write a function to update the project
+  }
+
+  async addUpdate(handle: string, addUpdateDto: AddUpdateDto) {
+    const project = await this.prisma.project.findUnique({
+      where: {
+        handle,
+      },
+    });
+    if (!project)
+      throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
+    try {
+      return await this.prisma.update.create({
+        data: {
+          content: addUpdateDto.content,
+          user: {
+            connect: {
+              handle: addUpdateDto.userHandle,
+            },
+          },
+          project: {
+            connect: {
+              handle,
+            },
+          },
+        },
+      });
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   remove(id: number) {
