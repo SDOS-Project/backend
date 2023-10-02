@@ -149,8 +149,8 @@ export class ProjectService {
     return project.updates;
   }
 
-  update(id: number, updateProjectDto: UpdateProjectDto) {
-    return `This action updates a #${id} project`;
+  update(handle: string, updateProjectDto: UpdateProjectDto) {
+    return `This action updates a #${handle} project`;
   }
 
   remove(id: number) {

@@ -156,8 +156,8 @@ let ProjectService = exports.ProjectService = class ProjectService {
             throw new common_1.HttpException('Project not found', common_1.HttpStatus.NOT_FOUND);
         return project.updates;
     }
-    update(id, updateProjectDto) {
-        return `This action updates a #${id} project`;
+    update(handle, updateProjectDto) {
+        return `This action updates a #${handle} project`;
     }
     remove(id) {
         return `This action removes a #${id} project`;

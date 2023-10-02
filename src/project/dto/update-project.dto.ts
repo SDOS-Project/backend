@@ -1,4 +1,29 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateProjectDto } from './create-project.dto';
+import { ApiProperty } from '@nestjs/swagger';
+import { ProjectStatus } from '@prisma/client';
+import { Type } from 'class-transformer';
+import { IsEnum, IsString } from 'class-validator';
 
-export class UpdateProjectDto extends PartialType(CreateProjectDto) {}
+class UpdateDto {
+  @ApiProperty()
+  @IsString()
+  content: string;
+}
+
+export class UpdateProjectDto {
+  @ApiProperty()
+  @IsString()
+  name: string;
+
+  @ApiProperty()
+  @IsString()
+  description: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsEnum(ProjectStatus)
+  status: ProjectStatus;
+
+  @ApiProperty()
+  @Type(() => UpdateDto)
+  update: UpdateDto;
+}

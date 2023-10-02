@@ -34,8 +34,8 @@ let ProjectController = exports.ProjectController = class ProjectController {
     getUpdates(handle) {
         return this.projectService.getUpdates(handle);
     }
-    update(id, updateProjectDto) {
-        return this.projectService.update(+id, updateProjectDto);
+    update(handle, updateProjectDto) {
+        return this.projectService.update(handle, updateProjectDto);
     }
     remove(id) {
         return this.projectService.remove(+id);

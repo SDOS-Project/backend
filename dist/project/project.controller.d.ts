@@ -8,50 +8,50 @@ export declare class ProjectController {
         handle: string;
     }>;
     findAll(): Promise<{
-        handle: string;
         name: string;
         description: string;
         status: import(".prisma/client").$Enums.ProjectStatus;
+        handle: string;
         organisations: {
-            handle: string;
             name: string;
+            handle: string;
             type: import(".prisma/client").$Enums.OrganisationType;
             logoUrl: string;
         }[];
         users: {
+            handle: string;
             firstName: string;
             lastName: string;
             email: string;
             role: import(".prisma/client").$Enums.UserRole;
-            handle: string;
         }[];
     }[]>;
     findOne(handle: string): Promise<{
-        handle: string;
         name: string;
         description: string;
         status: import(".prisma/client").$Enums.ProjectStatus;
+        handle: string;
         organisations: {
-            handle: string;
             name: string;
+            handle: string;
         }[];
         users: {
+            handle: string;
             firstName: string;
             lastName: string;
             email: string;
             role: import(".prisma/client").$Enums.UserRole;
-            handle: string;
         }[];
     }>;
     getUpdates(handle: string): Promise<{
+        content: string;
+        createdAt: Date;
         user: {
+            handle: string;
             firstName: string;
             lastName: string;
-            handle: string;
         };
-        createdAt: Date;
-        content: string;
     }[]>;
-    update(id: string, updateProjectDto: UpdateProjectDto): string;
+    update(handle: string, updateProjectDto: UpdateProjectDto): string;
     remove(id: string): string;
 }

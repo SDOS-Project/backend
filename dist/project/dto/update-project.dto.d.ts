@@ -1,5 +1,11 @@
-import { CreateProjectDto } from './create-project.dto';
-declare const UpdateProjectDto_base: import("@nestjs/mapped-types").MappedType<Partial<CreateProjectDto>>;
-export declare class UpdateProjectDto extends UpdateProjectDto_base {
+import { ProjectStatus } from '@prisma/client';
+declare class UpdateDto {
+    content: string;
+}
+export declare class UpdateProjectDto {
+    name: string;
+    description: string;
+    status: ProjectStatus;
+    update: UpdateDto;
 }
 export {};
