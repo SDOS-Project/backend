@@ -61,7 +61,29 @@ export class ProjectService {
 
   async findAll() {
     try {
-      return await this.prisma.project.findMany();
+      return await this.prisma.project.findMany({
+        select: {
+          name: true,
+          description: true,
+          handle: true,
+          status: true,
+          users: {
+            select: {
+              firstName: true,
+              lastName: true,
+              email: true,
+              handle: true,
+              role: true,
+            },
+          },
+          organisations: {
+            select: {
+              name: true,
+              handle: true,
+            },
+          },
+        },
+      });
     } catch (error) {
       throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
