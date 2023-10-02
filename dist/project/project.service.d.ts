@@ -16,6 +16,7 @@ export declare class ProjectService {
             handle: string;
             name: string;
             type: import(".prisma/client").$Enums.OrganisationType;
+            logoUrl: string;
         }[];
         users: {
             firstName: string;

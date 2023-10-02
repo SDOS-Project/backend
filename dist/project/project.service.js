@@ -90,6 +90,7 @@ let ProjectService = exports.ProjectService = class ProjectService {
                             name: true,
                             handle: true,
                             type: true,
+                            logoUrl: true,
                         },
                     },
                 },
