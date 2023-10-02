@@ -20,7 +20,12 @@ export class OrganisationController {
 
   @Get(':handle/users')
   findUsers(@Param('handle') handle: string) {
-    return this.organisationService.findOne(handle);
+    return this.organisationService.findUsers(handle);
+  }
+
+  @Get(':handle/projects')
+  findProjects(@Param('handle') handle: string) {
+    return this.organisationService.findProjects(handle);
   }
 
   @Patch(':id')

@@ -44,6 +44,45 @@ export class OrganisationService {
     return organisation.users;
   }
 
+  findProjects(handle: string) {
+    const organisation = this.prisma.organisation.findUnique({
+      where: {
+        handle,
+      },
+      select: {
+        projects: {
+          select: {
+            name: true,
+            description: true,
+            handle: true,
+            status: true,
+            users: {
+              select: {
+                firstName: true,
+                lastName: true,
+                email: true,
+                handle: true,
+                role: true,
+              },
+            },
+            organisations: {
+              select: {
+                name: true,
+                handle: true,
+                type: true,
+                logoUrl: true,
+              },
+            },
+          },
+        },
+      },
+    });
+    if (!organisation) {
+      throw new HttpException('Organisation not found', HttpStatus.NOT_FOUND);
+    }
+    return organisation.users;
+  }
+
   update(id: number, updateOrganisationDto: UpdateOrganisationDto) {
     return `This action updates a #${id} organisation`;
   }

@@ -28,7 +28,10 @@ let OrganisationController = exports.OrganisationController = class Organisation
         return this.organisationService.findOne(handle);
     }
     findUsers(handle) {
-        return this.organisationService.findOne(handle);
+        return this.organisationService.findUsers(handle);
+    }
+    findProjects(handle) {
+        return this.organisationService.findProjects(handle);
     }
     update(id, updateOrganisationDto) {
         return this.organisationService.update(+id, updateOrganisationDto);
@@ -57,6 +60,13 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], OrganisationController.prototype, "findUsers", null);
+__decorate([
+    (0, common_1.Get)(':handle/projects'),
+    __param(0, (0, common_1.Param)('handle')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], OrganisationController.prototype, "findProjects", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),
