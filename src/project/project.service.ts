@@ -80,6 +80,7 @@ export class ProjectService {
             select: {
               name: true,
               handle: true,
+              type: true,
             },
           },
         },
