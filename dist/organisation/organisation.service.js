@@ -30,8 +30,8 @@ let OrganisationService = exports.OrganisationService = class OrganisationServic
         }
         return organisation;
     }
-    findUsers(handle) {
-        const organisation = this.prisma.organisation.findUnique({
+    async findUsers(handle) {
+        const organisation = await this.prisma.organisation.findUnique({
             where: {
                 handle,
             },
@@ -51,8 +51,8 @@ let OrganisationService = exports.OrganisationService = class OrganisationServic
         }
         return organisation.users;
     }
-    findProjects(handle) {
-        const organisation = this.prisma.organisation.findUnique({
+    async findProjects(handle) {
+        const organisation = await this.prisma.organisation.findUnique({
             where: {
                 handle,
             },
