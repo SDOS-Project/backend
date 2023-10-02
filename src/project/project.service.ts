@@ -124,7 +124,7 @@ export class ProjectService {
     return project;
   }
 
-  async getUpdates(handle: string) {
+  async findUpdates(handle: string) {
     const project = await this.prisma.project.findUnique({
       where: {
         handle,

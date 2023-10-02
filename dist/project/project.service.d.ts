@@ -44,7 +44,7 @@ export declare class ProjectService {
             handle: string;
         }[];
     }>;
-    getUpdates(handle: string): Promise<{
+    findUpdates(handle: string): Promise<{
         user: {
             firstName: string;
             lastName: string;

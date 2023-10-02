@@ -18,6 +18,11 @@ export class OrganisationController {
     return this.organisationService.findOne(handle);
   }
 
+  @Get(':handle/users')
+  findUsers(@Param('handle') handle: string) {
+    return this.organisationService.findOne(handle);
+  }
+
   @Patch(':id')
   update(
     @Param('id') id: string,

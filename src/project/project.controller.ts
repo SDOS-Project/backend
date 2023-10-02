@@ -34,8 +34,8 @@ export class ProjectController {
   }
 
   @Get(':handle/updates')
-  getUpdates(@Param('handle') handle: string) {
-    return this.projectService.getUpdates(handle);
+  findUpdates(@Param('handle') handle: string) {
+    return this.projectService.findUpdates(handle);
   }
 
   @Post(':handle/updates')

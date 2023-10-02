@@ -131,7 +131,7 @@ let ProjectService = exports.ProjectService = class ProjectService {
             throw new common_1.HttpException('Project not found', common_1.HttpStatus.NOT_FOUND);
         return project;
     }
-    async getUpdates(handle) {
+    async findUpdates(handle) {
         const project = await this.prisma.project.findUnique({
             where: {
                 handle,

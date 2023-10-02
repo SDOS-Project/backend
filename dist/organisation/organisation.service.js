@@ -30,6 +30,27 @@ let OrganisationService = exports.OrganisationService = class OrganisationServic
         }
         return organisation;
     }
+    findUsers(handle) {
+        const organisation = this.prisma.organisation.findUnique({
+            where: {
+                handle,
+            },
+            select: {
+                users: {
+                    select: {
+                        handle: true,
+                        firstName: true,
+                        lastName: true,
+                        email: true,
+                    },
+                },
+            },
+        });
+        if (!organisation) {
+            throw new common_1.HttpException('Organisation not found', common_1.HttpStatus.NOT_FOUND);
+        }
+        return organisation.users;
+    }
     update(id, updateOrganisationDto) {
         return `This action updates a #${id} organisation`;
     }
