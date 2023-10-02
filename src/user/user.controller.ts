@@ -20,18 +20,23 @@ export class UserController {
   }
 
   @Get('/faculty')
-  getFaculty() {
-    return this.userService.getFaculty();
+  findFaculty() {
+    return this.userService.findFaculty();
   }
 
   @Get('/employees')
-  getEmployees() {
-    return this.userService.getEmployees();
+  findEmployees() {
+    return this.userService.findEmployees();
   }
 
   @Get(':handle')
   findOne(@Param('handle') handle: string) {
     return this.userService.findOne(handle);
+  }
+
+  @Get(':handle/projects')
+  findProjects(@Param('handle') handle: string) {
+    return this.userService.findProjects(handle);
   }
 
   @Patch(':id')

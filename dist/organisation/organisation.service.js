@@ -87,7 +87,7 @@ let OrganisationService = exports.OrganisationService = class OrganisationServic
         if (!organisation) {
             throw new common_1.HttpException('Organisation not found', common_1.HttpStatus.NOT_FOUND);
         }
-        return organisation.users;
+        return organisation.projects;
     }
     update(id, updateOrganisationDto) {
         return `This action updates a #${id} organisation`;

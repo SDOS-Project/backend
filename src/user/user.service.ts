@@ -27,7 +27,7 @@ export class UserService {
     return 'This action returns user config';
   }
 
-  async getFaculty() {
+  async findFaculty() {
     console.log('getFaculty');
     try {
       const faculty = await this.prisma.user.findMany({
@@ -42,7 +42,7 @@ export class UserService {
     }
   }
 
-  async getEmployees() {
+  async findEmployees() {
     try {
       const employees = await this.prisma.user.findMany({
         where: {
@@ -53,6 +53,45 @@ export class UserService {
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+  }
+
+  findProjects(handle: string) {
+    const user = this.prisma.user.findUnique({
+      where: {
+        handle,
+      },
+      select: {
+        projects: {
+          select: {
+            name: true,
+            description: true,
+            handle: true,
+            status: true,
+            users: {
+              select: {
+                firstName: true,
+                lastName: true,
+                email: true,
+                handle: true,
+                role: true,
+              },
+            },
+            organisations: {
+              select: {
+                name: true,
+                handle: true,
+                type: true,
+                logoUrl: true,
+              },
+            },
+          },
+        },
+      },
+    });
+    if (!user) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
+    return user.projects;
   }
 
   update(id: string, updateUserDto: UpdateUserDto) {

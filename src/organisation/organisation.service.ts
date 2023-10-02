@@ -80,7 +80,7 @@ export class OrganisationService {
     if (!organisation) {
       throw new HttpException('Organisation not found', HttpStatus.NOT_FOUND);
     }
-    return organisation.users;
+    return organisation.projects;
   }
 
   update(id: number, updateOrganisationDto: UpdateOrganisationDto) {
