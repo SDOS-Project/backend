@@ -47,7 +47,25 @@ export declare class UserController {
         handle: string;
         firebaseId: string;
     }>;
-    findProjects(handle: string): <T extends import(".prisma/client").Prisma.User$projectsArgs<import("@prisma/client/runtime/library").DefaultArgs> = {}>(args?: import(".prisma/client").Prisma.Subset<T, import(".prisma/client").Prisma.User$projectsArgs<import("@prisma/client/runtime/library").DefaultArgs>>) => import(".prisma/client").Prisma.PrismaPromise<import("@prisma/client/runtime/library").GetFindResult<import(".prisma/client").Prisma.$ProjectPayload<import("@prisma/client/runtime/library").DefaultArgs>, T>[]>;
+    findProjects(handle: string): Promise<{
+        handle: string;
+        name: string;
+        description: string;
+        status: import(".prisma/client").$Enums.ProjectStatus;
+        organisations: {
+            handle: string;
+            name: string;
+            type: import(".prisma/client").$Enums.OrganisationType;
+            logoUrl: string;
+        }[];
+        users: {
+            firstName: string;
+            lastName: string;
+            email: string;
+            role: import(".prisma/client").$Enums.UserRole;
+            handle: string;
+        }[];
+    }[]>;
     update(id: string, updateUserDto: UpdateUserDto): string;
     remove(id: string): string;
 }

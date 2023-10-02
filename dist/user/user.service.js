@@ -62,8 +62,8 @@ let UserService = exports.UserService = class UserService {
             throw new common_1.HttpException(error.message, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    findProjects(handle) {
-        const user = this.prisma.user.findUnique({
+    async findProjects(handle) {
+        const user = await this.prisma.user.findUnique({
             where: {
                 handle,
             },

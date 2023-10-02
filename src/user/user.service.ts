@@ -55,8 +55,8 @@ export class UserService {
     }
   }
 
-  findProjects(handle: string) {
-    const user = this.prisma.user.findUnique({
+  async findProjects(handle: string) {
+    const user = await this.prisma.user.findUnique({
       where: {
         handle,
       },
