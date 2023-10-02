@@ -20,6 +20,7 @@ export declare class ProjectService {
         handle: string;
         name: string;
         description: string;
+        status: import(".prisma/client").$Enums.ProjectStatus;
         organisations: {
             handle: string;
             name: string;
@@ -33,15 +34,14 @@ export declare class ProjectService {
         }[];
     }>;
     getUpdates(handle: string): Promise<{
-        updates: {
-            id: string;
-            projectId: string;
-            content: string;
-            userId: string;
-            createdAt: Date;
-            updatedAt: Date;
-        }[];
-    }>;
+        user: {
+            firstName: string;
+            lastName: string;
+            handle: string;
+        };
+        createdAt: Date;
+        content: string;
+    }[]>;
     update(id: number, updateProjectDto: UpdateProjectDto): string;
     remove(id: number): string;
 }

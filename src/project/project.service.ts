@@ -76,6 +76,7 @@ export class ProjectService {
         name: true,
         description: true,
         handle: true,
+        status: true,
         users: {
           select: {
             firstName: true,
@@ -99,17 +100,29 @@ export class ProjectService {
   }
 
   async getUpdates(handle: string) {
-    const updates = await this.prisma.project.findUnique({
+    const project = await this.prisma.project.findUnique({
       where: {
         handle,
       },
       select: {
-        updates: true,
+        updates: {
+          select: {
+            user: {
+              select: {
+                firstName: true,
+                lastName: true,
+                handle: true,
+              },
+            },
+            content: true,
+            createdAt: true,
+          },
+        },
       },
     });
-    if (!updates)
-      throw new HttpException('Updates not found', HttpStatus.NOT_FOUND);
-    return updates;
+    if (!project)
+      throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
+    return project.updates;
   }
 
   update(id: number, updateProjectDto: UpdateProjectDto) {
