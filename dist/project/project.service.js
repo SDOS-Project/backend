@@ -180,14 +180,23 @@ let ProjectService = exports.ProjectService = class ProjectService {
     }
     update(handle, updateProjectDto) {
     }
-    async addUpdate(handle, addUpdateDto) {
+    async addUpdate(handle, addUpdateDto, firebaseId) {
         const project = await this.prisma.project.findUnique({
             where: {
                 handle,
             },
+            select: {
+                users: {
+                    select: {
+                        firebaseId: true,
+                    },
+                },
+            },
         });
         if (!project)
             throw new common_1.HttpException('Project not found', common_1.HttpStatus.NOT_FOUND);
+        if (!project.users.some((user) => user.firebaseId === firebaseId))
+            throw new common_1.HttpException('Unauthorized', common_1.HttpStatus.UNAUTHORIZED);
         try {
             return await this.prisma.update.create({
                 data: {

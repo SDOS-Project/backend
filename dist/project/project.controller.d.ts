@@ -56,7 +56,7 @@ export declare class ProjectController {
     findConfig(firebaseId: string, handle: string): Promise<{
         isAdmin: boolean;
     }>;
-    addUpdates(handle: string, addUpdateDto: AddUpdateDto): Promise<{
+    addUpdates(handle: string, addUpdateDto: AddUpdateDto, firebaseId: string): Promise<{
         id: string;
         projectId: string;
         content: string;

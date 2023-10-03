@@ -57,7 +57,7 @@ export declare class ProjectService {
         isAdmin: boolean;
     }>;
     update(handle: string, updateProjectDto: UpdateProjectDto): void;
-    addUpdate(handle: string, addUpdateDto: AddUpdateDto): Promise<{
+    addUpdate(handle: string, addUpdateDto: AddUpdateDto, firebaseId: string): Promise<{
         id: string;
         projectId: string;
         content: string;
