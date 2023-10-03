@@ -32,27 +32,27 @@ export declare class OrganisationController {
         updatedAt: Date;
     }, null, import("@prisma/client/runtime/library").DefaultArgs>;
     findUsers(handle: string): Promise<{
-        email: string;
-        handle: string;
         firstName: string;
         lastName: string;
+        email: string;
+        handle: string;
     }[]>;
     findProjects(handle: string): Promise<{
         name: string;
-        handle: string;
-        users: {
-            email: string;
-            handle: string;
-            firstName: string;
-            lastName: string;
-            role: import(".prisma/client").$Enums.UserRole;
-        }[];
         description: string;
         status: import(".prisma/client").$Enums.ProjectStatus;
+        handle: string;
         organisations: {
             name: string;
+            handle: string;
             type: import(".prisma/client").$Enums.OrganisationType;
             logoUrl: string;
+        }[];
+        users: {
+            firstName: string;
+            lastName: string;
+            email: string;
+            role: import(".prisma/client").$Enums.UserRole;
             handle: string;
         }[];
     }[]>;

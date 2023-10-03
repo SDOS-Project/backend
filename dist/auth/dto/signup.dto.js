@@ -13,6 +13,7 @@ exports.SignUpDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const client_1 = require("@prisma/client");
 const class_validator_1 = require("class-validator");
+const areasOfInterests_1 = require("../../types/areasOfInterests");
 class SignUpDto {
 }
 exports.SignUpDto = SignUpDto;
@@ -59,6 +60,7 @@ __decorate([
     (0, class_validator_1.IsArray)(),
     (0, class_validator_1.IsString)({ each: true }),
     (0, class_validator_1.ArrayMinSize)(1),
+    (0, class_validator_1.IsIn)(areasOfInterests_1.areasOfInterest),
     __metadata("design:type", Array)
 ], SignUpDto.prototype, "areasOfInterest", void 0);
 __decorate([
