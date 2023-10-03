@@ -4,20 +4,7 @@ export declare class UserService {
     private prisma;
     constructor(prisma: PrismaService);
     findAll(): string;
-    findOne(handle: string): Promise<{
-        organisation: {
-            name: string;
-            handle: string;
-            type: import(".prisma/client").$Enums.OrganisationType;
-        };
-        firstName: string;
-        lastName: string;
-        email: string;
-        role: import(".prisma/client").$Enums.UserRole;
-        areasOfInterest: string[];
-        handle: string;
-    }>;
-    getConfig(firebaseId: string): Promise<string>;
+    findRecommendations(firebaseId: string): void;
     findFaculty(): Promise<{
         id: string;
         firstName: string;
@@ -46,23 +33,37 @@ export declare class UserService {
         handle: string;
         firebaseId: string;
     }[]>;
-    findProjects(handle: string): Promise<{
-        name: string;
-        description: string;
-        status: import(".prisma/client").$Enums.ProjectStatus;
+    findOne(handle: string): Promise<{
+        firstName: string;
+        lastName: string;
+        email: string;
+        role: import(".prisma/client").$Enums.UserRole;
+        areasOfInterest: string[];
         handle: string;
-        organisations: {
-            name: string;
+        organisation: {
             handle: string;
+            name: string;
             type: import(".prisma/client").$Enums.OrganisationType;
-            logoUrl: string;
-        }[];
+        };
+    }>;
+    getConfig(firebaseId: string): Promise<string>;
+    findProjects(handle: string): Promise<{
+        handle: string;
+        name: string;
         users: {
             firstName: string;
             lastName: string;
             email: string;
             role: import(".prisma/client").$Enums.UserRole;
             handle: string;
+        }[];
+        description: string;
+        status: import(".prisma/client").$Enums.ProjectStatus;
+        organisations: {
+            handle: string;
+            name: string;
+            type: import(".prisma/client").$Enums.OrganisationType;
+            logoUrl: string;
         }[];
     }[]>;
     update(id: string, updateUserDto: UpdateUserDto): string;

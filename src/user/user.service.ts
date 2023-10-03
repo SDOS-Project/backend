@@ -11,6 +11,38 @@ export class UserService {
     return `This action returns all user`;
   }
 
+  findRecommendations(firebaseId: string) {
+    //
+  }
+
+  async findFaculty() {
+    console.log('getFaculty');
+    try {
+      const faculty = await this.prisma.user.findMany({
+        where: {
+          role: UserRole.FACULTY,
+        },
+      });
+      console.log(faculty);
+      return faculty;
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  async findEmployees() {
+    try {
+      const employees = await this.prisma.user.findMany({
+        where: {
+          role: UserRole.EMPLOYEE,
+        },
+      });
+      return employees;
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
   async findOne(handle: string) {
     const user = await this.prisma.user.findUnique({
       where: {
@@ -40,34 +72,6 @@ export class UserService {
 
   async getConfig(firebaseId: string) {
     return 'This action returns user config';
-  }
-
-  async findFaculty() {
-    console.log('getFaculty');
-    try {
-      const faculty = await this.prisma.user.findMany({
-        where: {
-          role: UserRole.FACULTY,
-        },
-      });
-      console.log(faculty);
-      return faculty;
-    } catch (error) {
-      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-  }
-
-  async findEmployees() {
-    try {
-      const employees = await this.prisma.user.findMany({
-        where: {
-          role: UserRole.EMPLOYEE,
-        },
-      });
-      return employees;
-    } catch (error) {
-      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
   }
 
   async findProjects(handle: string) {

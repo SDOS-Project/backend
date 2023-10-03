@@ -20,34 +20,7 @@ let UserService = exports.UserService = class UserService {
     findAll() {
         return `This action returns all user`;
     }
-    async findOne(handle) {
-        const user = await this.prisma.user.findUnique({
-            where: {
-                handle,
-            },
-            select: {
-                firstName: true,
-                lastName: true,
-                email: true,
-                handle: true,
-                role: true,
-                areasOfInterest: true,
-                organisation: {
-                    select: {
-                        name: true,
-                        handle: true,
-                        type: true,
-                    },
-                },
-            },
-        });
-        if (!user) {
-            throw new common_1.HttpException('User not found', common_1.HttpStatus.NOT_FOUND);
-        }
-        return user;
-    }
-    async getConfig(firebaseId) {
-        return 'This action returns user config';
+    findRecommendations(firebaseId) {
     }
     async findFaculty() {
         console.log('getFaculty');
@@ -76,6 +49,35 @@ let UserService = exports.UserService = class UserService {
         catch (error) {
             throw new common_1.HttpException(error.message, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+    async findOne(handle) {
+        const user = await this.prisma.user.findUnique({
+            where: {
+                handle,
+            },
+            select: {
+                firstName: true,
+                lastName: true,
+                email: true,
+                handle: true,
+                role: true,
+                areasOfInterest: true,
+                organisation: {
+                    select: {
+                        name: true,
+                        handle: true,
+                        type: true,
+                    },
+                },
+            },
+        });
+        if (!user) {
+            throw new common_1.HttpException('User not found', common_1.HttpStatus.NOT_FOUND);
+        }
+        return user;
+    }
+    async getConfig(firebaseId) {
+        return 'This action returns user config';
     }
     async findProjects(handle) {
         const user = await this.prisma.user.findUnique({

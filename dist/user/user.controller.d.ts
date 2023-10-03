@@ -4,6 +4,7 @@ export declare class UserController {
     private readonly userService;
     constructor(userService: UserService);
     findAll(): string;
+    findRecommendations(firebaseId: string): void;
     findFaculty(): Promise<{
         id: string;
         firstName: string;

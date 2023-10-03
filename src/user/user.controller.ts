@@ -2,6 +2,7 @@ import { Controller, Get, Body, Patch, Param, Delete } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { User } from 'src/common/decorators/user.decorator';
 
 @ApiTags('User')
 @Controller('user')
@@ -11,6 +12,11 @@ export class UserController {
   @Get()
   findAll() {
     return this.userService.findAll();
+  }
+
+  @Get('/recommended')
+  findRecommendations(@User('sub') firebaseId: string) {
+    return this.userService.findRecommendations(firebaseId);
   }
 
   @Get('/faculty')
