@@ -4,7 +4,19 @@ export declare class UserService {
     private prisma;
     constructor(prisma: PrismaService);
     findAll(): string;
-    findRecommendations(firebaseId: string): void;
+    findRecommendations(firebaseId: string): Promise<{
+        firstName: string;
+        lastName: string;
+        email: string;
+        role: import(".prisma/client").$Enums.UserRole;
+        areasOfInterest: string[];
+        handle: string;
+        organisation: {
+            handle: string;
+            name: string;
+            type: import(".prisma/client").$Enums.OrganisationType;
+        };
+    }[]>;
     findFaculty(): Promise<{
         id: string;
         firstName: string;

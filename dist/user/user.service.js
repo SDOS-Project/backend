@@ -20,7 +20,38 @@ let UserService = exports.UserService = class UserService {
     findAll() {
         return `This action returns all user`;
     }
-    findRecommendations(firebaseId) {
+    async findRecommendations(firebaseId) {
+        const user = await this.prisma.user.findUnique({
+            where: {
+                firebaseId,
+            },
+            select: {
+                areasOfInterest: true,
+            },
+        });
+        const matchedUsers = await this.prisma.user.findMany({
+            where: {
+                areasOfInterest: {
+                    hasSome: user.areasOfInterest,
+                },
+            },
+            select: {
+                firstName: true,
+                lastName: true,
+                email: true,
+                handle: true,
+                role: true,
+                areasOfInterest: true,
+                organisation: {
+                    select: {
+                        name: true,
+                        handle: true,
+                        type: true,
+                    },
+                },
+            },
+        });
+        return matchedUsers;
     }
     async findFaculty() {
         console.log('getFaculty');
