@@ -9,13 +9,13 @@ export declare class ProjectController {
         handle: string;
     }>;
     findAll(): Promise<{
+        handle: string;
         name: string;
         description: string;
         status: import(".prisma/client").$Enums.ProjectStatus;
-        handle: string;
         organisations: {
-            name: string;
             handle: string;
+            name: string;
             type: import(".prisma/client").$Enums.OrganisationType;
             logoUrl: string;
         }[];
@@ -28,13 +28,13 @@ export declare class ProjectController {
         }[];
     }[]>;
     findOne(handle: string): Promise<{
+        handle: string;
         name: string;
         description: string;
         status: import(".prisma/client").$Enums.ProjectStatus;
-        handle: string;
         organisations: {
-            name: string;
             handle: string;
+            name: string;
         }[];
         users: {
             firstName: string;
@@ -45,14 +45,17 @@ export declare class ProjectController {
         }[];
     }>;
     findUpdates(handle: string): Promise<{
-        content: string;
         user: {
             firstName: string;
             lastName: string;
             handle: string;
         };
         createdAt: Date;
+        content: string;
     }[]>;
+    findConfig(firebaseId: string, handle: string): Promise<{
+        isAdmin: boolean;
+    }>;
     addUpdates(handle: string, addUpdateDto: AddUpdateDto): Promise<{
         id: string;
         projectId: string;

@@ -1,7 +1,6 @@
 import { Controller, Get, Body, Patch, Param, Delete } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { User } from 'src/common/decorators/user.decorator';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('User')
@@ -12,11 +11,6 @@ export class UserController {
   @Get()
   findAll() {
     return this.userService.findAll();
-  }
-
-  @Get('/config')
-  getConfig(@User('sub') firebaseId: string) {
-    return this.userService.getConfig(firebaseId);
   }
 
   @Get('/faculty')

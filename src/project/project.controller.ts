@@ -12,6 +12,7 @@ import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { AddUpdateDto } from './dto/add-update.dto';
+import { User } from 'src/common/decorators/user.decorator';
 
 @ApiTags('Project')
 @Controller('project')
@@ -36,6 +37,11 @@ export class ProjectController {
   @Get(':handle/updates')
   findUpdates(@Param('handle') handle: string) {
     return this.projectService.findUpdates(handle);
+  }
+
+  @Get(':handle/config')
+  findConfig(@User('sub') firebaseId: string, @Param('handle') handle: string) {
+    return this.projectService.findConfig(firebaseId, handle);
   }
 
   @Post(':handle/updates')

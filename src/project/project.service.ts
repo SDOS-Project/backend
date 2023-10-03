@@ -150,6 +150,29 @@ export class ProjectService {
     return project.updates;
   }
 
+  async findConfig(firebaseId: string, handle: string) {
+    const project = await this.prisma.project.findUnique({
+      where: {
+        handle,
+      },
+      select: {
+        users: {
+          select: {
+            firebaseId: true,
+          },
+        },
+      },
+    });
+    if (!project)
+      throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
+    let isAdmin = false;
+    if (project.users.some((user) => user.firebaseId === firebaseId))
+      isAdmin = true;
+    return {
+      isAdmin,
+    };
+  }
+
   update(handle: string, updateProjectDto: UpdateProjectDto) {
     // write a function to update the project
   }

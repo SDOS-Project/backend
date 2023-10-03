@@ -19,6 +19,7 @@ const create_project_dto_1 = require("./dto/create-project.dto");
 const update_project_dto_1 = require("./dto/update-project.dto");
 const swagger_1 = require("@nestjs/swagger");
 const add_update_dto_1 = require("./dto/add-update.dto");
+const user_decorator_1 = require("../common/decorators/user.decorator");
 let ProjectController = exports.ProjectController = class ProjectController {
     constructor(projectService) {
         this.projectService = projectService;
@@ -34,6 +35,9 @@ let ProjectController = exports.ProjectController = class ProjectController {
     }
     findUpdates(handle) {
         return this.projectService.findUpdates(handle);
+    }
+    findConfig(firebaseId, handle) {
+        return this.projectService.findConfig(firebaseId, handle);
     }
     addUpdates(handle, addUpdateDto) {
         return this.projectService.addUpdate(handle, addUpdateDto);
@@ -72,6 +76,14 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], ProjectController.prototype, "findUpdates", null);
+__decorate([
+    (0, common_1.Get)(':handle/config'),
+    __param(0, (0, user_decorator_1.User)('sub')),
+    __param(1, (0, common_1.Param)('handle')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", void 0)
+], ProjectController.prototype, "findConfig", null);
 __decorate([
     (0, common_1.Post)(':handle/updates'),
     __param(0, (0, common_1.Param)('handle')),

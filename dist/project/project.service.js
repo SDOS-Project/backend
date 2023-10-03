@@ -156,6 +156,28 @@ let ProjectService = exports.ProjectService = class ProjectService {
             throw new common_1.HttpException('Project not found', common_1.HttpStatus.NOT_FOUND);
         return project.updates;
     }
+    async findConfig(firebaseId, handle) {
+        const project = await this.prisma.project.findUnique({
+            where: {
+                handle,
+            },
+            select: {
+                users: {
+                    select: {
+                        firebaseId: true,
+                    },
+                },
+            },
+        });
+        if (!project)
+            throw new common_1.HttpException('Project not found', common_1.HttpStatus.NOT_FOUND);
+        let isAdmin = false;
+        if (project.users.some((user) => user.firebaseId === firebaseId))
+            isAdmin = true;
+        return {
+            isAdmin,
+        };
+    }
     update(handle, updateProjectDto) {
     }
     async addUpdate(handle, addUpdateDto) {
