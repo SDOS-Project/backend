@@ -109,9 +109,6 @@ let UserService = exports.UserService = class UserService {
         }
         return user;
     }
-    async getConfig(firebaseId) {
-        return 'This action returns user config';
-    }
     async findProjects(handle) {
         const user = await this.prisma.user.findUnique({
             where: {

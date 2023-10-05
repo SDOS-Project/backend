@@ -58,7 +58,6 @@ export declare class UserService {
             type: import(".prisma/client").$Enums.OrganisationType;
         };
     }>;
-    getConfig(firebaseId: string): Promise<string>;
     findProjects(handle: string): Promise<{
         handle: string;
         name: string;
