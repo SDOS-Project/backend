@@ -123,6 +123,7 @@ let ProjectService = exports.ProjectService = class ProjectService {
                     select: {
                         name: true,
                         handle: true,
+                        logoUrl: true,
                     },
                 },
             },

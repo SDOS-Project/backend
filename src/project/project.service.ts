@@ -115,6 +115,7 @@ export class ProjectService {
           select: {
             name: true,
             handle: true,
+            logoUrl: true,
           },
         },
       },
