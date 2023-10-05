@@ -1,3 +1,4 @@
+import { Organisation } from './../organisation/entities/organisation.entity';
 import { OrganisationSignUpDto } from './dto/organisation.signup.dto';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { LoginDto } from './dto/login.dto';
@@ -44,6 +45,23 @@ export class AuthService {
   }
 
   async signup(signUpDto: SignUpDto) {
+    const organisation = await this.prisma.organisation.findUnique({
+      where: {
+        handle: signUpDto.organisationHandle,
+      },
+    });
+    if (signUpDto.role === 'FACULTY' && organisation.type !== 'ACADEMIC') {
+      throw new HttpException(
+        'Faculty can only be associated with academic organisations',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    if (signUpDto.role === 'EMPLOYEE' && organisation.type !== 'CORPORATE') {
+      throw new HttpException(
+        'Employee can only be associated with corporate organisations',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
     try {
       const hash = await bcrypt.hash(signUpDto.password, saltRounds);
       const user = await this.prisma.user.create({

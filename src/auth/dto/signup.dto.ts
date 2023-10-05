@@ -48,7 +48,7 @@ export class SignUpDto {
   @IsArray()
   @IsString({ each: true })
   @ArrayMinSize(1)
-  @IsIn(areasOfInterest)
+  // @IsIn(areasOfInterest)
   areasOfInterest: string[];
 
   @ApiProperty()

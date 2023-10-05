@@ -23,14 +23,17 @@ let UserService = exports.UserService = class UserService {
     async findRecommendations(firebaseId) {
         const user = await this.prisma.user.findUnique({
             where: {
-                firebaseId,
+                firebaseId: firebaseId,
             },
             select: {
+                id: true,
                 areasOfInterest: true,
             },
         });
-        const matchedUsers = await this.prisma.user.findMany({
+        console.log(user);
+        return await this.prisma.user.findMany({
             where: {
+                id: { not: user.id },
                 areasOfInterest: {
                     hasSome: user.areasOfInterest,
                 },
@@ -51,7 +54,6 @@ let UserService = exports.UserService = class UserService {
                 },
             },
         });
-        return matchedUsers;
     }
     async findFaculty() {
         console.log('getFaculty');

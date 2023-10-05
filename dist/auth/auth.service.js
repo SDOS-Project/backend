@@ -52,6 +52,17 @@ let AuthService = exports.AuthService = class AuthService {
         return !user ? organisation : user;
     }
     async signup(signUpDto) {
+        const organisation = await this.prisma.organisation.findUnique({
+            where: {
+                handle: signUpDto.organisationHandle,
+            },
+        });
+        if (signUpDto.role === 'FACULTY' && organisation.type !== 'ACADEMIC') {
+            throw new common_1.HttpException('Faculty can only be associated with academic organisations', common_1.HttpStatus.BAD_REQUEST);
+        }
+        if (signUpDto.role === 'EMPLOYEE' && organisation.type !== 'CORPORATE') {
+            throw new common_1.HttpException('Employee can only be associated with corporate organisations', common_1.HttpStatus.BAD_REQUEST);
+        }
         try {
             const hash = await bcrypt.hash(signUpDto.password, saltRounds);
             const user = await this.prisma.user.create({
