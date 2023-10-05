@@ -14,16 +14,13 @@ export class UserService {
   async findRecommendations(firebaseId: string) {
     const user = await this.prisma.user.findUnique({
       where: {
-        firebaseId: firebaseId,
+        firebaseId,
       },
       select: {
         id: true,
         areasOfInterest: true,
       },
     });
-
-    console.log(user);
-
     return await this.prisma.user.findMany({
       where: {
         id: { not: user.id },
