@@ -16,11 +16,25 @@ export class AuthService {
         firebaseId: sub,
         email: loginDto.email,
       },
+      select: {
+        firstName: true,
+        lastName: true,
+        email: true,
+        role: true,
+        handle: true,
+      },
     });
     const organisation = await this.prisma.organisation.findUnique({
       where: {
         firebaseId: sub,
         email: loginDto.email,
+      },
+      select: {
+        name: true,
+        email: true,
+        type: true,
+        logoUrl: true,
+        handle: true,
       },
     });
     if (!user && !organisation) {

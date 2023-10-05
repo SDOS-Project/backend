@@ -6,31 +6,17 @@ export declare class AuthService {
     private prisma;
     constructor(prisma: PrismaService);
     login(sub: string, loginDto: LoginDto): Promise<{
-        id: string;
         firstName: string;
         lastName: string;
         email: string;
-        password: string;
         role: import(".prisma/client").$Enums.UserRole;
-        areasOfInterest: string[];
-        organisationId: string;
-        createdAt: Date;
-        updatedAt: Date;
         handle: string;
-        firebaseId: string;
     } | {
-        id: string;
+        email: string;
+        handle: string;
         name: string;
         type: import(".prisma/client").$Enums.OrganisationType;
-        email: string;
-        password: string;
-        address: string;
         logoUrl: string;
-        ipPolicy: string;
-        handle: string;
-        firebaseId: string;
-        createdAt: Date;
-        updatedAt: Date;
     }>;
     signup(signUpDto: SignUpDto): Promise<{
         id: string;
