@@ -16,8 +16,26 @@ let OrganisationService = exports.OrganisationService = class OrganisationServic
     constructor(prisma) {
         this.prisma = prisma;
     }
-    async findAll() {
-        return await this.prisma.organisation.findMany();
+    async findAll(firebaseId) {
+        return await this.prisma.organisation.findMany({
+            where: { firebaseId: { not: firebaseId } },
+            select: {
+                name: true,
+                email: true,
+                handle: true,
+                type: true,
+                logoUrl: true,
+                address: true,
+            },
+        });
+    }
+    async findDropdown() {
+        return await this.prisma.organisation.findMany({
+            select: {
+                name: true,
+                handle: true,
+            },
+        });
     }
     findOne(handle) {
         const organisation = this.prisma.organisation.findUnique({

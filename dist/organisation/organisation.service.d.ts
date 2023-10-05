@@ -3,19 +3,17 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export declare class OrganisationService {
     private prisma;
     constructor(prisma: PrismaService);
-    findAll(): Promise<{
-        id: string;
+    findAll(firebaseId: string): Promise<{
         name: string;
         type: import(".prisma/client").$Enums.OrganisationType;
         email: string;
-        password: string;
         address: string;
         logoUrl: string;
-        ipPolicy: string;
         handle: string;
-        firebaseId: string;
-        createdAt: Date;
-        updatedAt: Date;
+    }[]>;
+    findDropdown(): Promise<{
+        name: string;
+        handle: string;
     }[]>;
     findOne(handle: string): import(".prisma/client").Prisma.Prisma__OrganisationClient<{
         id: string;
@@ -32,27 +30,27 @@ export declare class OrganisationService {
         updatedAt: Date;
     }, null, import("@prisma/client/runtime/library").DefaultArgs>;
     findUsers(handle: string): Promise<{
-        firstName: string;
-        lastName: string;
         email: string;
         handle: string;
+        firstName: string;
+        lastName: string;
     }[]>;
     findProjects(handle: string): Promise<{
         name: string;
-        description: string;
-        status: import(".prisma/client").$Enums.ProjectStatus;
         handle: string;
-        organisations: {
-            name: string;
-            handle: string;
-            type: import(".prisma/client").$Enums.OrganisationType;
-            logoUrl: string;
-        }[];
         users: {
+            email: string;
+            handle: string;
             firstName: string;
             lastName: string;
-            email: string;
             role: import(".prisma/client").$Enums.UserRole;
+        }[];
+        description: string;
+        status: import(".prisma/client").$Enums.ProjectStatus;
+        organisations: {
+            name: string;
+            type: import(".prisma/client").$Enums.OrganisationType;
+            logoUrl: string;
             handle: string;
         }[];
     }[]>;

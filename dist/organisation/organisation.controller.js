@@ -17,12 +17,16 @@ const common_1 = require("@nestjs/common");
 const organisation_service_1 = require("./organisation.service");
 const update_organisation_dto_1 = require("./dto/update-organisation.dto");
 const swagger_1 = require("@nestjs/swagger");
+const user_decorator_1 = require("../common/decorators/user.decorator");
 let OrganisationController = exports.OrganisationController = class OrganisationController {
     constructor(organisationService) {
         this.organisationService = organisationService;
     }
-    findAll() {
-        return this.organisationService.findAll();
+    findAll(firebaseId) {
+        return this.organisationService.findAll(firebaseId);
+    }
+    findDropdown() {
+        return this.organisationService.findDropdown();
     }
     findOne(handle) {
         return this.organisationService.findOne(handle);
@@ -42,10 +46,17 @@ let OrganisationController = exports.OrganisationController = class Organisation
 };
 __decorate([
     (0, common_1.Get)(),
+    __param(0, (0, user_decorator_1.User)('sub')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], OrganisationController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Get)('/dropdown'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
-], OrganisationController.prototype, "findAll", null);
+], OrganisationController.prototype, "findDropdown", null);
 __decorate([
     (0, common_1.Get)(':handle'),
     __param(0, (0, common_1.Param)('handle')),

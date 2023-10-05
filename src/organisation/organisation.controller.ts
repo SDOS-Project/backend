@@ -2,6 +2,7 @@ import { Controller, Get, Body, Patch, Param, Delete } from '@nestjs/common';
 import { OrganisationService } from './organisation.service';
 import { UpdateOrganisationDto } from './dto/update-organisation.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { User } from 'src/common/decorators/user.decorator';
 
 @ApiTags('Organisation')
 @Controller('organisation')
@@ -9,8 +10,13 @@ export class OrganisationController {
   constructor(private readonly organisationService: OrganisationService) {}
 
   @Get()
-  findAll() {
-    return this.organisationService.findAll();
+  findAll(@User('sub') firebaseId: string) {
+    return this.organisationService.findAll(firebaseId);
+  }
+
+  @Get('/dropdown')
+  findDropdown() {
+    return this.organisationService.findDropdown();
   }
 
   @Get(':handle')

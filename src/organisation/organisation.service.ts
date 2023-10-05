@@ -6,8 +6,27 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class OrganisationService {
   constructor(private prisma: PrismaService) {}
 
-  async findAll() {
-    return await this.prisma.organisation.findMany();
+  async findAll(firebaseId: string) {
+    return await this.prisma.organisation.findMany({
+      where: { firebaseId: { not: firebaseId } },
+      select: {
+        name: true,
+        email: true,
+        handle: true,
+        type: true,
+        logoUrl: true,
+        address: true,
+      },
+    });
+  }
+
+  async findDropdown() {
+    return await this.prisma.organisation.findMany({
+      select: {
+        name: true,
+        handle: true,
+      },
+    });
   }
 
   findOne(handle: string) {

@@ -36,7 +36,7 @@ export class AppModule implements NestModule {
       .apply(PreAuthMiddleware)
       .exclude(
         { path: '/', method: RequestMethod.GET },
-        { path: 'organisation', method: RequestMethod.GET },
+        { path: 'organisation/dropdown', method: RequestMethod.GET },
       )
       .forRoutes({
         path: '*',
