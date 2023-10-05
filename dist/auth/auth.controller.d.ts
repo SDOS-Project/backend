@@ -19,18 +19,11 @@ export declare class AuthController {
         logoUrl: string;
     }>;
     signup(signUpDto: SignUpDto): Promise<{
-        id: string;
         firstName: string;
         lastName: string;
         email: string;
-        password: string;
         role: import(".prisma/client").$Enums.UserRole;
-        areasOfInterest: string[];
-        organisationId: string;
-        createdAt: Date;
-        updatedAt: Date;
         handle: string;
-        firebaseId: string;
     }>;
     organisationSignup(organisationSignUpDto: OrganisationSignUpDto): Promise<{
         id: string;

@@ -67,6 +67,13 @@ export class AuthService {
             generateRandomAlphanumericWithLength(5),
           firebaseId: signUpDto.firebaseId,
         },
+        select: {
+          firstName: true,
+          lastName: true,
+          email: true,
+          role: true,
+          handle: true,
+        },
       });
       return user;
     } catch (error) {

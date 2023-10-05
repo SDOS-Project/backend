@@ -17,6 +17,7 @@ exports.areasOfInterest = Object.freeze([
     'Quantum Computing',
     'Ethics in Computing',
     'Education and E-Learning',
+    'Natural Language Processing (NLP)',
     'Social Computing and Social Networks',
     'Core Systems',
 ]);

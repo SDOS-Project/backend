@@ -6,64 +6,15 @@ export declare class ProjectService {
     private prisma;
     constructor(prisma: PrismaService);
     create(createProjectDto: CreateProjectDto): Promise<{
-        handle: string;
+        handle: any;
     }>;
-    findAll(): Promise<{
-        name: string;
-        description: string;
-        status: import(".prisma/client").$Enums.ProjectStatus;
-        handle: string;
-        organisations: {
-            name: string;
-            handle: string;
-            type: import(".prisma/client").$Enums.OrganisationType;
-            logoUrl: string;
-        }[];
-        users: {
-            firstName: string;
-            lastName: string;
-            email: string;
-            role: import(".prisma/client").$Enums.UserRole;
-            handle: string;
-        }[];
-    }[]>;
-    findOne(handle: string): Promise<{
-        name: string;
-        description: string;
-        status: import(".prisma/client").$Enums.ProjectStatus;
-        handle: string;
-        organisations: {
-            name: string;
-            handle: string;
-        }[];
-        users: {
-            firstName: string;
-            lastName: string;
-            email: string;
-            role: import(".prisma/client").$Enums.UserRole;
-            handle: string;
-        }[];
-    }>;
-    findUpdates(handle: string): Promise<{
-        content: string;
-        user: {
-            firstName: string;
-            lastName: string;
-            handle: string;
-        };
-        createdAt: Date;
-    }[]>;
+    findAll(): Promise<any>;
+    findOne(handle: string): Promise<any>;
+    findUpdates(handle: string): Promise<any>;
     findConfig(firebaseId: string, handle: string): Promise<{
         isAdmin: boolean;
     }>;
     update(handle: string, updateProjectDto: UpdateProjectDto): void;
-    addUpdate(handle: string, addUpdateDto: AddUpdateDto, firebaseId: string): Promise<{
-        id: string;
-        projectId: string;
-        content: string;
-        userId: string;
-        createdAt: Date;
-        updatedAt: Date;
-    }>;
+    addUpdate(handle: string, addUpdateDto: AddUpdateDto, firebaseId: string): Promise<any>;
     remove(id: number): string;
 }

@@ -7,12 +7,12 @@ export declare class UserService {
     findRecommendations(firebaseId: string): Promise<{
         organisation: {
             name: string;
-            handle: string;
             type: import(".prisma/client").$Enums.OrganisationType;
+            handle: string;
         };
+        email: string;
         firstName: string;
         lastName: string;
-        email: string;
         role: import(".prisma/client").$Enums.UserRole;
         areasOfInterest: string[];
         handle: string;
@@ -48,12 +48,12 @@ export declare class UserService {
     findOne(handle: string): Promise<{
         organisation: {
             name: string;
-            handle: string;
             type: import(".prisma/client").$Enums.OrganisationType;
+            handle: string;
         };
+        email: string;
         firstName: string;
         lastName: string;
-        email: string;
         role: import(".prisma/client").$Enums.UserRole;
         areasOfInterest: string[];
         handle: string;
@@ -64,17 +64,17 @@ export declare class UserService {
         description: string;
         status: import(".prisma/client").$Enums.ProjectStatus;
         handle: string;
-        organisations: {
-            name: string;
-            handle: string;
-            type: import(".prisma/client").$Enums.OrganisationType;
-            logoUrl: string;
-        }[];
         users: {
+            email: string;
             firstName: string;
             lastName: string;
-            email: string;
             role: import(".prisma/client").$Enums.UserRole;
+            handle: string;
+        }[];
+        organisations: {
+            name: string;
+            type: import(".prisma/client").$Enums.OrganisationType;
+            logoUrl: string;
             handle: string;
         }[];
     }[]>;

@@ -74,6 +74,13 @@ let AuthService = exports.AuthService = class AuthService {
                         (0, utils_1.default)(5),
                     firebaseId: signUpDto.firebaseId,
                 },
+                select: {
+                    firstName: true,
+                    lastName: true,
+                    email: true,
+                    role: true,
+                    handle: true,
+                },
             });
             return user;
         }
