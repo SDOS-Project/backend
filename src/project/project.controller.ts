@@ -53,10 +53,10 @@ export class ProjectController {
     return this.projectService.addUpdate(handle, addUpdateDto, firebaseId);
   }
 
-  @Patch(':id')
+  @Patch(':handle')
   update(
     @User('sub') firebaseId: string,
-    @Param('id') handle: string,
+    @Param('handle') handle: string,
     @Body() updateProjectDto: UpdateProjectDto,
   ) {
     return this.projectService.update(firebaseId, handle, updateProjectDto);

@@ -9,49 +9,49 @@ export declare class ProjectService {
         handle: string;
     }>;
     findAll(): Promise<{
-        handle: string;
         name: string;
         description: string;
         status: import(".prisma/client").$Enums.ProjectStatus;
+        handle: string;
         organisations: {
-            handle: string;
             name: string;
+            handle: string;
             type: import(".prisma/client").$Enums.OrganisationType;
             logoUrl: string;
         }[];
         users: {
+            handle: string;
             firstName: string;
             lastName: string;
             email: string;
             role: import(".prisma/client").$Enums.UserRole;
-            handle: string;
         }[];
     }[]>;
     findOne(handle: string): Promise<{
-        handle: string;
         name: string;
         description: string;
         status: import(".prisma/client").$Enums.ProjectStatus;
+        handle: string;
         organisations: {
-            handle: string;
             name: string;
+            handle: string;
             logoUrl: string;
         }[];
         users: {
+            handle: string;
             firstName: string;
             lastName: string;
             email: string;
             role: import(".prisma/client").$Enums.UserRole;
-            handle: string;
         }[];
     }>;
     findUpdates(handle: string): Promise<{
+        createdAt: Date;
         user: {
+            handle: string;
             firstName: string;
             lastName: string;
-            handle: string;
         };
-        createdAt: Date;
         content: string;
     }[]>;
     findConfig(firebaseId: string, handle: string): Promise<{

@@ -94,9 +94,9 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ProjectController.prototype, "addUpdates", null);
 __decorate([
-    (0, common_1.Patch)(':id'),
+    (0, common_1.Patch)(':handle'),
     __param(0, (0, user_decorator_1.User)('sub')),
-    __param(1, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Param)('handle')),
     __param(2, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, String, update_project_dto_1.UpdateProjectDto]),
