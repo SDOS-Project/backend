@@ -65,7 +65,7 @@ export declare class ProjectController {
         createdAt: Date;
         updatedAt: Date;
     }>;
-    update(handle: string, updateProjectDto: UpdateProjectDto): Promise<{
+    update(firebaseId: string, handle: string, updateProjectDto: UpdateProjectDto): Promise<{
         id: string;
         name: string;
         description: string;

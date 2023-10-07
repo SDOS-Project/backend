@@ -12,16 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateProjectDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const client_1 = require("@prisma/client");
-const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
-class UpdateDto {
-}
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], UpdateDto.prototype, "content", void 0);
 class UpdateProjectDto {
 }
 exports.UpdateProjectDto = UpdateProjectDto;
@@ -41,9 +32,4 @@ __decorate([
     (0, class_validator_1.IsEnum)(client_1.ProjectStatus),
     __metadata("design:type", String)
 ], UpdateProjectDto.prototype, "status", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    (0, class_transformer_1.Type)(() => UpdateDto),
-    __metadata("design:type", UpdateDto)
-], UpdateProjectDto.prototype, "update", void 0);
 //# sourceMappingURL=update-project.dto.js.map

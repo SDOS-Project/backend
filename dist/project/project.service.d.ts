@@ -57,7 +57,7 @@ export declare class ProjectService {
     findConfig(firebaseId: string, handle: string): Promise<{
         isAdmin: boolean;
     }>;
-    update(handle: string, updateProjectDto: UpdateProjectDto): Promise<{
+    update(firebaseId: string, handle: string, updateProjectDto: UpdateProjectDto): Promise<{
         id: string;
         name: string;
         description: string;

@@ -161,16 +161,24 @@ let ProjectService = exports.ProjectService = class ProjectService {
         const isAdmin = await this.checkIfUserIsAdmin(firebaseId, handle);
         return { isAdmin };
     }
-    async update(handle, updateProjectDto) {
-        const project = await this.prisma.project.update({
-            where: {
-                handle,
-            },
-            data: {
-                ...updateProjectDto,
-            },
-        });
-        return project;
+    async update(firebaseId, handle, updateProjectDto) {
+        const isAdmin = await this.checkIfUserIsAdmin(firebaseId, handle);
+        if (!isAdmin)
+            throw new common_1.HttpException('Unauthorized', common_1.HttpStatus.UNAUTHORIZED);
+        try {
+            const project = await this.prisma.project.update({
+                where: {
+                    handle,
+                },
+                data: {
+                    ...updateProjectDto,
+                },
+            });
+            return project;
+        }
+        catch (error) {
+            throw new common_1.HttpException(error, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
     async addUpdate(handle, addUpdateDto, firebaseId) {
         const isAdmin = await this.checkIfUserIsAdmin(firebaseId, handle);

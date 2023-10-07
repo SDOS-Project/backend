@@ -55,10 +55,11 @@ export class ProjectController {
 
   @Patch(':id')
   update(
+    @User('sub') firebaseId: string,
     @Param('id') handle: string,
     @Body() updateProjectDto: UpdateProjectDto,
   ) {
-    return this.projectService.update(handle, updateProjectDto);
+    return this.projectService.update(firebaseId, handle, updateProjectDto);
   }
 
   @Delete(':id')

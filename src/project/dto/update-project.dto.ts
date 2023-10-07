@@ -1,14 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { ProjectStatus } from '@prisma/client';
-import { Type } from 'class-transformer';
-import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
-
-class UpdateDto {
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  content: string;
-}
+import { IsEnum, IsString } from 'class-validator';
 
 export class UpdateProjectDto {
   @ApiProperty()
@@ -23,8 +15,4 @@ export class UpdateProjectDto {
   @IsString()
   @IsEnum(ProjectStatus)
   status: ProjectStatus;
-
-  @ApiProperty()
-  @Type(() => UpdateDto)
-  update: UpdateDto;
 }

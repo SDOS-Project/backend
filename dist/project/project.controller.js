@@ -42,8 +42,8 @@ let ProjectController = exports.ProjectController = class ProjectController {
     addUpdates(handle, addUpdateDto, firebaseId) {
         return this.projectService.addUpdate(handle, addUpdateDto, firebaseId);
     }
-    update(handle, updateProjectDto) {
-        return this.projectService.update(handle, updateProjectDto);
+    update(firebaseId, handle, updateProjectDto) {
+        return this.projectService.update(firebaseId, handle, updateProjectDto);
     }
     remove(id) {
         return this.projectService.remove(+id);
@@ -95,10 +95,11 @@ __decorate([
 ], ProjectController.prototype, "addUpdates", null);
 __decorate([
     (0, common_1.Patch)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __param(1, (0, common_1.Body)()),
+    __param(0, (0, user_decorator_1.User)('sub')),
+    __param(1, (0, common_1.Param)('id')),
+    __param(2, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_project_dto_1.UpdateProjectDto]),
+    __metadata("design:paramtypes", [String, String, update_project_dto_1.UpdateProjectDto]),
     __metadata("design:returntype", void 0)
 ], ProjectController.prototype, "update", null);
 __decorate([
