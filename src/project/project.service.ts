@@ -172,6 +172,28 @@ export class ProjectService {
         data: {
           ...updateProjectDto,
         },
+        select: {
+          name: true,
+          description: true,
+          handle: true,
+          status: true,
+          users: {
+            select: {
+              firstName: true,
+              lastName: true,
+              email: true,
+              handle: true,
+              role: true,
+            },
+          },
+          organisations: {
+            select: {
+              name: true,
+              handle: true,
+              logoUrl: true,
+            },
+          },
+        },
       });
       return project;
     } catch (error) {

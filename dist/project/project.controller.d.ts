@@ -9,49 +9,49 @@ export declare class ProjectController {
         handle: string;
     }>;
     findAll(): Promise<{
+        handle: string;
         name: string;
         description: string;
         status: import(".prisma/client").$Enums.ProjectStatus;
-        handle: string;
         organisations: {
-            name: string;
             handle: string;
+            name: string;
             type: import(".prisma/client").$Enums.OrganisationType;
             logoUrl: string;
         }[];
         users: {
-            handle: string;
             firstName: string;
             lastName: string;
             email: string;
             role: import(".prisma/client").$Enums.UserRole;
+            handle: string;
         }[];
     }[]>;
     findOne(handle: string): Promise<{
+        handle: string;
         name: string;
         description: string;
         status: import(".prisma/client").$Enums.ProjectStatus;
-        handle: string;
         organisations: {
-            name: string;
             handle: string;
+            name: string;
             logoUrl: string;
         }[];
         users: {
-            handle: string;
             firstName: string;
             lastName: string;
             email: string;
             role: import(".prisma/client").$Enums.UserRole;
+            handle: string;
         }[];
     }>;
     findUpdates(handle: string): Promise<{
-        createdAt: Date;
         user: {
-            handle: string;
             firstName: string;
             lastName: string;
+            handle: string;
         };
+        createdAt: Date;
         content: string;
     }[]>;
     findConfig(firebaseId: string, handle: string): Promise<{
@@ -66,13 +66,22 @@ export declare class ProjectController {
         updatedAt: Date;
     }>;
     update(firebaseId: string, handle: string, updateProjectDto: UpdateProjectDto): Promise<{
-        id: string;
+        handle: string;
         name: string;
         description: string;
         status: import(".prisma/client").$Enums.ProjectStatus;
-        handle: string;
-        createdAt: Date;
-        updatedAt: Date;
+        organisations: {
+            handle: string;
+            name: string;
+            logoUrl: string;
+        }[];
+        users: {
+            firstName: string;
+            lastName: string;
+            email: string;
+            role: import(".prisma/client").$Enums.UserRole;
+            handle: string;
+        }[];
     }>;
     remove(id: string): string;
 }
