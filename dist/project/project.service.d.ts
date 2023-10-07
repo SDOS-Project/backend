@@ -57,7 +57,15 @@ export declare class ProjectService {
     findConfig(firebaseId: string, handle: string): Promise<{
         isAdmin: boolean;
     }>;
-    update(handle: string, updateProjectDto: UpdateProjectDto): void;
+    update(handle: string, updateProjectDto: UpdateProjectDto): Promise<{
+        id: string;
+        name: string;
+        description: string;
+        status: import(".prisma/client").$Enums.ProjectStatus;
+        handle: string;
+        createdAt: Date;
+        updatedAt: Date;
+    }>;
     addUpdate(handle: string, addUpdateDto: AddUpdateDto, firebaseId: string): Promise<{
         id: string;
         projectId: string;
@@ -66,5 +74,6 @@ export declare class ProjectService {
         createdAt: Date;
         updatedAt: Date;
     }>;
+    checkIfUserIsAdmin(firebaseId: string, handle: string): Promise<boolean>;
     remove(id: number): string;
 }

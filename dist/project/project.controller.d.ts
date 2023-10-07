@@ -65,6 +65,14 @@ export declare class ProjectController {
         createdAt: Date;
         updatedAt: Date;
     }>;
-    update(handle: string, updateProjectDto: UpdateProjectDto): void;
+    update(handle: string, updateProjectDto: UpdateProjectDto): Promise<{
+        id: string;
+        name: string;
+        description: string;
+        status: import(".prisma/client").$Enums.ProjectStatus;
+        handle: string;
+        createdAt: Date;
+        updatedAt: Date;
+    }>;
     remove(id: string): string;
 }

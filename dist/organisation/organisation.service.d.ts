@@ -5,11 +5,11 @@ export declare class OrganisationService {
     constructor(prisma: PrismaService);
     findAll(firebaseId: string): Promise<{
         name: string;
-        type: import(".prisma/client").$Enums.OrganisationType;
         email: string;
+        handle: string;
+        type: import(".prisma/client").$Enums.OrganisationType;
         address: string;
         logoUrl: string;
-        handle: string;
     }[]>;
     findDropdown(): Promise<{
         name: string;
@@ -30,27 +30,27 @@ export declare class OrganisationService {
         updatedAt: Date;
     }, null, import("@prisma/client/runtime/library").DefaultArgs>;
     findUsers(handle: string): Promise<{
-        email: string;
-        handle: string;
         firstName: string;
         lastName: string;
+        email: string;
+        handle: string;
     }[]>;
     findProjects(handle: string): Promise<{
         name: string;
-        handle: string;
-        users: {
-            email: string;
-            handle: string;
-            firstName: string;
-            lastName: string;
-            role: import(".prisma/client").$Enums.UserRole;
-        }[];
         description: string;
         status: import(".prisma/client").$Enums.ProjectStatus;
+        handle: string;
         organisations: {
             name: string;
+            handle: string;
             type: import(".prisma/client").$Enums.OrganisationType;
             logoUrl: string;
+        }[];
+        users: {
+            firstName: string;
+            lastName: string;
+            email: string;
+            role: import(".prisma/client").$Enums.UserRole;
             handle: string;
         }[];
     }[]>;

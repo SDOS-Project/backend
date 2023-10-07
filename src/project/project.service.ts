@@ -133,6 +133,8 @@ export class ProjectService {
       select: {
         updates: {
           select: {
+            content: true,
+            createdAt: true,
             user: {
               select: {
                 firstName: true,
@@ -140,8 +142,6 @@ export class ProjectService {
                 handle: true,
               },
             },
-            content: true,
-            createdAt: true,
           },
         },
       },
@@ -152,30 +152,20 @@ export class ProjectService {
   }
 
   async findConfig(firebaseId: string, handle: string) {
-    const project = await this.prisma.project.findUnique({
+    const isAdmin = await this.checkIfUserIsAdmin(firebaseId, handle);
+    return { isAdmin };
+  }
+
+  async update(handle: string, updateProjectDto: UpdateProjectDto) {
+    const project = await this.prisma.project.update({
       where: {
         handle,
       },
-      select: {
-        users: {
-          select: {
-            firebaseId: true,
-          },
-        },
+      data: {
+        ...updateProjectDto,
       },
     });
-    if (!project)
-      throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
-    let isAdmin = false;
-    if (project.users.some((user) => user.firebaseId === firebaseId))
-      isAdmin = true;
-    return {
-      isAdmin,
-    };
-  }
-
-  update(handle: string, updateProjectDto: UpdateProjectDto) {
-    // write a function to update the project
+    return project;
   }
 
   async addUpdate(
@@ -183,21 +173,8 @@ export class ProjectService {
     addUpdateDto: AddUpdateDto,
     firebaseId: string,
   ) {
-    const project = await this.prisma.project.findUnique({
-      where: {
-        handle,
-      },
-      select: {
-        users: {
-          select: {
-            firebaseId: true,
-          },
-        },
-      },
-    });
-    if (!project)
-      throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
-    if (!project.users.some((user) => user.firebaseId === firebaseId))
+    const isAdmin = await this.checkIfUserIsAdmin(firebaseId, handle);
+    if (!isAdmin)
       throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
     try {
       return await this.prisma.update.create({
@@ -218,6 +195,26 @@ export class ProjectService {
     } catch (error) {
       throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+  }
+
+  async checkIfUserIsAdmin(firebaseId: string, handle: string) {
+    const project = await this.prisma.project.findUnique({
+      where: {
+        handle,
+      },
+      select: {
+        users: {
+          select: {
+            firebaseId: true,
+          },
+        },
+      },
+    });
+    if (!project)
+      throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
+    if (project.users.some((user) => user.firebaseId === firebaseId))
+      return true;
+    return false;
   }
 
   remove(id: number) {
