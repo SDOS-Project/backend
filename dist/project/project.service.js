@@ -221,6 +221,17 @@ let ProjectService = exports.ProjectService = class ProjectService {
                         },
                     },
                 },
+                select: {
+                    content: true,
+                    createdAt: true,
+                    user: {
+                        select: {
+                            firstName: true,
+                            lastName: true,
+                            handle: true,
+                        },
+                    },
+                },
             });
         }
         catch (error) {

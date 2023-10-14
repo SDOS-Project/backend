@@ -76,12 +76,13 @@ export declare class ProjectService {
         }[];
     }>;
     addUpdate(handle: string, addUpdateDto: AddUpdateDto, firebaseId: string): Promise<{
-        id: string;
-        projectId: string;
-        content: string;
-        userId: string;
+        user: {
+            firstName: string;
+            lastName: string;
+            handle: string;
+        };
         createdAt: Date;
-        updatedAt: Date;
+        content: string;
     }>;
     checkIfUserIsAdmin(firebaseId: string, handle: string): Promise<boolean>;
     remove(id: number): string;

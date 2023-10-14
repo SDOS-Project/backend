@@ -58,12 +58,13 @@ export declare class ProjectController {
         isAdmin: boolean;
     }>;
     addUpdates(handle: string, addUpdateDto: AddUpdateDto, firebaseId: string): Promise<{
-        id: string;
-        projectId: string;
-        content: string;
-        userId: string;
+        user: {
+            firstName: string;
+            lastName: string;
+            handle: string;
+        };
         createdAt: Date;
-        updatedAt: Date;
+        content: string;
     }>;
     update(firebaseId: string, handle: string, updateProjectDto: UpdateProjectDto): Promise<{
         handle: string;

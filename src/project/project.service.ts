@@ -224,6 +224,17 @@ export class ProjectService {
             },
           },
         },
+        select: {
+          content: true,
+          createdAt: true,
+          user: {
+            select: {
+              firstName: true,
+              lastName: true,
+              handle: true,
+            },
+          },
+        },
       });
     } catch (error) {
       throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
