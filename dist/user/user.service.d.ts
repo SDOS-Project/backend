@@ -7,9 +7,9 @@ export declare class UserService {
     findRecommendations(firebaseId: string): Promise<{
         firstName: string;
         lastName: string;
-        areasOfInterest: string[];
         email: string;
         role: import(".prisma/client").$Enums.UserRole;
+        areasOfInterest: string[];
         handle: string;
         organisation: {
             handle: string;
@@ -48,9 +48,9 @@ export declare class UserService {
     findOne(handle: string): Promise<{
         firstName: string;
         lastName: string;
-        areasOfInterest: string[];
         email: string;
         role: import(".prisma/client").$Enums.UserRole;
+        areasOfInterest: string[];
         handle: string;
         organisation: {
             handle: string;
@@ -80,9 +80,9 @@ export declare class UserService {
     update(firebaseId: string, updateUserDto: UpdateUserDto): Promise<{
         firstName: string;
         lastName: string;
-        areasOfInterest: string[];
         email: string;
         role: import(".prisma/client").$Enums.UserRole;
+        areasOfInterest: string[];
         handle: string;
         organisation: {
             handle: string;

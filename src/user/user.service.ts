@@ -21,6 +21,9 @@ export class UserService {
         areasOfInterest: true,
       },
     });
+    if (!user) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
     return await this.prisma.user.findMany({
       where: {
         id: { not: user.id },
