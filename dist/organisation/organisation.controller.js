@@ -37,8 +37,8 @@ let OrganisationController = exports.OrganisationController = class Organisation
     findProjects(handle) {
         return this.organisationService.findProjects(handle);
     }
-    update(id, updateOrganisationDto) {
-        return this.organisationService.update(+id, updateOrganisationDto);
+    update(firebaseId, updateOrganisationDto) {
+        return this.organisationService.update(firebaseId, updateOrganisationDto);
     }
     remove(id) {
         return this.organisationService.remove(+id);
@@ -79,8 +79,8 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], OrganisationController.prototype, "findProjects", null);
 __decorate([
-    (0, common_1.Patch)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Patch)(),
+    __param(0, (0, user_decorator_1.User)('sub')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, update_organisation_dto_1.UpdateOrganisationDto]),

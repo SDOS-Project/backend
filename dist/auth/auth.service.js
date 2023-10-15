@@ -128,6 +128,13 @@ let AuthService = exports.AuthService = class AuthService {
                     handle: handle,
                     firebaseId: organisationSignUpDto.firebaseId,
                 },
+                select: {
+                    name: true,
+                    email: true,
+                    type: true,
+                    logoUrl: true,
+                    handle: true,
+                },
             });
             return organisation;
         }

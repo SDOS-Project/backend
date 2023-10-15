@@ -32,17 +32,10 @@ export declare class AuthController {
         handle: string;
     }>;
     organisationSignup(organisationSignUpDto: OrganisationSignUpDto): Promise<{
-        id: string;
+        email: string;
+        handle: string;
         name: string;
         type: import(".prisma/client").$Enums.OrganisationType;
-        email: string;
-        password: string;
-        address: string;
         logoUrl: string;
-        ipPolicy: string;
-        handle: string;
-        firebaseId: string;
-        createdAt: Date;
-        updatedAt: Date;
     }>;
 }

@@ -34,6 +34,14 @@ export class OrganisationService {
       where: {
         handle,
       },
+      select: {
+        name: true,
+        email: true,
+        handle: true,
+        type: true,
+        logoUrl: true,
+        address: true,
+      },
     });
     if (!organisation) {
       throw new HttpException('Organisation not found', HttpStatus.NOT_FOUND);
@@ -102,8 +110,32 @@ export class OrganisationService {
     return organisation.projects;
   }
 
-  update(id: number, updateOrganisationDto: UpdateOrganisationDto) {
-    return `This action updates a #${id} organisation`;
+  async update(
+    firebaseId: string,
+    updateOrganisationDto: UpdateOrganisationDto,
+  ) {
+    const organisation = await this.prisma.organisation.findUnique({
+      where: {
+        firebaseId,
+      },
+    });
+    if (!organisation) {
+      throw new HttpException('Organisation not found', HttpStatus.NOT_FOUND);
+    }
+    return await this.prisma.organisation.update({
+      where: {
+        firebaseId,
+      },
+      data: updateOrganisationDto,
+      select: {
+        name: true,
+        email: true,
+        handle: true,
+        type: true,
+        logoUrl: true,
+        address: true,
+      },
+    });
   }
 
   remove(id: number) {

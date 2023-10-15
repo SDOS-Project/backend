@@ -34,12 +34,12 @@ export class OrganisationController {
     return this.organisationService.findProjects(handle);
   }
 
-  @Patch(':id')
+  @Patch()
   update(
-    @Param('id') id: string,
+    @User('sub') firebaseId: string,
     @Body() updateOrganisationDto: UpdateOrganisationDto,
   ) {
-    return this.organisationService.update(+id, updateOrganisationDto);
+    return this.organisationService.update(firebaseId, updateOrganisationDto);
   }
 
   @Delete(':id')
