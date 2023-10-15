@@ -16,12 +16,18 @@ export declare class OrganisationController {
         handle: string;
     }[]>;
     findOne(handle: string): import(".prisma/client").Prisma.Prisma__OrganisationClient<{
+        id: string;
         name: string;
         type: import(".prisma/client").$Enums.OrganisationType;
         email: string;
+        password: string;
         address: string;
         logoUrl: string;
+        ipPolicy: string;
         handle: string;
+        firebaseId: string;
+        createdAt: Date;
+        updatedAt: Date;
     }, null, import("@prisma/client/runtime/library").DefaultArgs>;
     findUsers(handle: string): Promise<{
         email: string;

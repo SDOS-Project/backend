@@ -34,14 +34,14 @@ export class OrganisationService {
       where: {
         handle,
       },
-      select: {
-        name: true,
-        email: true,
-        handle: true,
-        type: true,
-        logoUrl: true,
-        address: true,
-      },
+      // select: {
+      //   name: true,
+      //   email: true,
+      //   handle: true,
+      //   type: true,
+      //   logoUrl: true,
+      //   address: true,
+      // },
     });
     if (!organisation) {
       throw new HttpException('Organisation not found', HttpStatus.NOT_FOUND);

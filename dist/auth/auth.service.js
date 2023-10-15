@@ -116,7 +116,7 @@ let AuthService = exports.AuthService = class AuthService {
             const handle = organisationSignUpDto.name.split(' ').join('-').toLowerCase() +
                 '-' +
                 (0, utils_1.default)(5);
-            const organisation = await this.prisma.organisation.create({
+            return await this.prisma.organisation.create({
                 data: {
                     name: organisationSignUpDto.name,
                     email: organisationSignUpDto.email,
@@ -136,7 +136,6 @@ let AuthService = exports.AuthService = class AuthService {
                     handle: true,
                 },
             });
-            return organisation;
         }
         catch (error) {
             throw new Error(error);

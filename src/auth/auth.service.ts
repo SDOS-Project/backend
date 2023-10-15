@@ -124,7 +124,7 @@ export class AuthService {
         '-' +
         generateRandomAlphanumericWithLength(5);
 
-      const organisation = await this.prisma.organisation.create({
+      return await this.prisma.organisation.create({
         data: {
           name: organisationSignUpDto.name,
           email: organisationSignUpDto.email,
@@ -144,7 +144,6 @@ export class AuthService {
           handle: true,
         },
       });
-      return organisation;
     } catch (error) {
       throw new Error(error);
     }
