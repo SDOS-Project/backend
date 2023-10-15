@@ -5,11 +5,9 @@ import {
   IsArray,
   IsEmail,
   IsEnum,
-  IsIn,
   IsNotEmpty,
   IsString,
 } from 'class-validator';
-import { areasOfInterest } from 'src/types/areasOfInterests';
 
 export class SignUpDto {
   @ApiProperty()
@@ -48,7 +46,6 @@ export class SignUpDto {
   @IsArray()
   @IsString({ each: true })
   @ArrayMinSize(1)
-  // @IsIn(areasOfInterest)
   areasOfInterest: string[];
 
   @ApiProperty()

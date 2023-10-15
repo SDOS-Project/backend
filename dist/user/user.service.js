@@ -146,8 +146,28 @@ let UserService = exports.UserService = class UserService {
         }
         return user.projects;
     }
-    update(id, updateUserDto) {
-        return `This action updates a #${id} user`;
+    async update(firebaseId, updateUserDto) {
+        const user = await this.prisma.user.findUnique({
+            where: {
+                firebaseId,
+            },
+        });
+        if (!user) {
+            throw new common_1.HttpException('User not found', common_1.HttpStatus.NOT_FOUND);
+        }
+        return await this.prisma.user.update({
+            where: {
+                firebaseId,
+            },
+            data: updateUserDto,
+            select: {
+                firstName: true,
+                lastName: true,
+                email: true,
+                role: true,
+                handle: true,
+            },
+        });
     }
     remove(id) {
         return `This action removes a #${id} user`;

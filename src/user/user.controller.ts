@@ -39,9 +39,12 @@ export class UserController {
     return this.userService.findProjects(handle);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(id, updateUserDto);
+  @Patch()
+  update(
+    @User('sub') firebaseId: string,
+    @Body() updateUserDto: UpdateUserDto,
+  ) {
+    return this.userService.update(firebaseId, updateUserDto);
   }
 
   @Delete(':id')
