@@ -158,8 +158,16 @@ export class UserService {
         firstName: true,
         lastName: true,
         email: true,
-        role: true,
         handle: true,
+        role: true,
+        areasOfInterest: true,
+        organisation: {
+          select: {
+            name: true,
+            handle: true,
+            type: true,
+          },
+        },
       },
     });
   }

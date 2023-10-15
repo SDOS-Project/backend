@@ -82,7 +82,13 @@ export declare class UserService {
         lastName: string;
         email: string;
         role: import(".prisma/client").$Enums.UserRole;
+        areasOfInterest: string[];
         handle: string;
+        organisation: {
+            handle: string;
+            name: string;
+            type: import(".prisma/client").$Enums.OrganisationType;
+        };
     }>;
     remove(id: number): string;
 }
