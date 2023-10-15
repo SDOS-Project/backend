@@ -10,7 +10,13 @@ export declare class AuthService {
         lastName: string;
         email: string;
         role: import(".prisma/client").$Enums.UserRole;
+        areasOfInterest: string[];
         handle: string;
+        organisation: {
+            handle: string;
+            name: string;
+            type: import(".prisma/client").$Enums.OrganisationType;
+        };
     } | {
         email: string;
         handle: string;

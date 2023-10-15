@@ -1,6 +1,5 @@
 export declare class UpdateUserDto {
     firstName: string;
     lastName: string;
-    email: string;
     areasOfInterest: string[];
 }
