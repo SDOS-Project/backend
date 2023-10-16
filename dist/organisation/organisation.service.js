@@ -42,6 +42,14 @@ let OrganisationService = exports.OrganisationService = class OrganisationServic
             where: {
                 handle,
             },
+            select: {
+                name: true,
+                email: true,
+                handle: true,
+                type: true,
+                logoUrl: true,
+                address: true,
+            },
         });
         if (!organisation) {
             throw new common_1.HttpException('Organisation not found', common_1.HttpStatus.NOT_FOUND);
