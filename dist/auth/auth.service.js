@@ -135,6 +135,7 @@ let AuthService = exports.AuthService = class AuthService {
                     type: true,
                     logoUrl: true,
                     address: true,
+                    ipPolicy: true,
                 },
             });
         }

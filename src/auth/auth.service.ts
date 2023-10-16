@@ -143,6 +143,7 @@ export class AuthService {
           type: true,
           logoUrl: true,
           address: true,
+          ipPolicy: true,
         },
       });
     } catch (error) {

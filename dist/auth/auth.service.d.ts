@@ -38,5 +38,6 @@ export declare class AuthService {
         type: import(".prisma/client").$Enums.OrganisationType;
         address: string;
         logoUrl: string;
+        ipPolicy: string;
     }>;
 }
