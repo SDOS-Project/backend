@@ -23,6 +23,7 @@ export declare class AuthController {
         name: string;
         type: import(".prisma/client").$Enums.OrganisationType;
         logoUrl: string;
+        ipPolicy: string;
     }>;
     signup(signUpDto: SignUpDto): Promise<{
         firstName: string;

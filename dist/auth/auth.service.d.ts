@@ -23,6 +23,7 @@ export declare class AuthService {
         name: string;
         type: import(".prisma/client").$Enums.OrganisationType;
         logoUrl: string;
+        ipPolicy: string;
     }>;
     signup(signUpDto: SignUpDto): Promise<{
         firstName: string;

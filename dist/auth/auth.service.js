@@ -52,6 +52,7 @@ let AuthService = exports.AuthService = class AuthService {
                 type: true,
                 logoUrl: true,
                 handle: true,
+                ipPolicy: true,
             },
         });
         if (!user && !organisation) {
