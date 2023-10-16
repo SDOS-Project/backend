@@ -143,6 +143,9 @@ export class ProjectService {
               },
             },
           },
+          orderBy: {
+            createdAt: 'desc',
+          },
         },
       },
     });

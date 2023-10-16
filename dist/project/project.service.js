@@ -150,6 +150,9 @@ let ProjectService = exports.ProjectService = class ProjectService {
                             },
                         },
                     },
+                    orderBy: {
+                        createdAt: 'desc',
+                    },
                 },
             },
         });
