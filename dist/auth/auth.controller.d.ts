@@ -36,6 +36,7 @@ export declare class AuthController {
         handle: string;
         name: string;
         type: import(".prisma/client").$Enums.OrganisationType;
+        address: string;
         logoUrl: string;
     }>;
 }

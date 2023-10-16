@@ -139,9 +139,10 @@ export class AuthService {
         select: {
           name: true,
           email: true,
+          handle: true,
           type: true,
           logoUrl: true,
-          handle: true,
+          address: true,
         },
       });
     } catch (error) {
