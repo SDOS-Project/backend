@@ -21,6 +21,7 @@ export declare class OrganisationController {
         email: string;
         address: string;
         logoUrl: string;
+        ipPolicy: string;
         handle: string;
     }, null, import("@prisma/client/runtime/library").DefaultArgs>;
     findUsers(handle: string): Promise<{
@@ -54,6 +55,7 @@ export declare class OrganisationController {
         email: string;
         address: string;
         logoUrl: string;
+        ipPolicy: string;
         handle: string;
     }>;
     remove(id: string): string;

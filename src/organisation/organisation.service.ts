@@ -41,6 +41,7 @@ export class OrganisationService {
         type: true,
         logoUrl: true,
         address: true,
+        ipPolicy: true,
       },
     });
     if (!organisation) {
@@ -134,6 +135,7 @@ export class OrganisationService {
         type: true,
         logoUrl: true,
         address: true,
+        ipPolicy: true,
       },
     });
   }

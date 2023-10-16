@@ -49,6 +49,7 @@ let OrganisationService = exports.OrganisationService = class OrganisationServic
                 type: true,
                 logoUrl: true,
                 address: true,
+                ipPolicy: true,
             },
         });
         if (!organisation) {
@@ -136,6 +137,7 @@ let OrganisationService = exports.OrganisationService = class OrganisationServic
                 type: true,
                 logoUrl: true,
                 address: true,
+                ipPolicy: true,
             },
         });
     }
