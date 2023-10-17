@@ -47,6 +47,7 @@ let UserService = exports.UserService = class UserService {
                 handle: true,
                 role: true,
                 areasOfInterest: true,
+                imgUrl: true,
                 organisation: {
                     select: {
                         name: true,
@@ -58,14 +59,12 @@ let UserService = exports.UserService = class UserService {
         });
     }
     async findFaculty() {
-        console.log('getFaculty');
         try {
             const faculty = await this.prisma.user.findMany({
                 where: {
                     role: client_1.UserRole.FACULTY,
                 },
             });
-            console.log(faculty);
             return faculty;
         }
         catch (error) {
@@ -97,6 +96,7 @@ let UserService = exports.UserService = class UserService {
                 handle: true,
                 role: true,
                 areasOfInterest: true,
+                imgUrl: true,
                 organisation: {
                     select: {
                         name: true,
@@ -130,6 +130,7 @@ let UserService = exports.UserService = class UserService {
                                 email: true,
                                 handle: true,
                                 role: true,
+                                imgUrl: true,
                             },
                         },
                         organisations: {
@@ -166,17 +167,7 @@ let UserService = exports.UserService = class UserService {
             select: {
                 firstName: true,
                 lastName: true,
-                email: true,
-                handle: true,
-                role: true,
                 areasOfInterest: true,
-                organisation: {
-                    select: {
-                        name: true,
-                        handle: true,
-                        type: true,
-                    },
-                },
             },
         });
     }

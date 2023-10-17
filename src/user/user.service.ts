@@ -38,6 +38,7 @@ export class UserService {
         handle: true,
         role: true,
         areasOfInterest: true,
+        imgUrl: true,
         organisation: {
           select: {
             name: true,
@@ -50,14 +51,12 @@ export class UserService {
   }
 
   async findFaculty() {
-    console.log('getFaculty');
     try {
       const faculty = await this.prisma.user.findMany({
         where: {
           role: UserRole.FACULTY,
         },
       });
-      console.log(faculty);
       return faculty;
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -89,6 +88,7 @@ export class UserService {
         handle: true,
         role: true,
         areasOfInterest: true,
+        imgUrl: true,
         organisation: {
           select: {
             name: true,
@@ -123,6 +123,7 @@ export class UserService {
                 email: true,
                 handle: true,
                 role: true,
+                imgUrl: true,
               },
             },
             organisations: {
@@ -160,17 +161,7 @@ export class UserService {
       select: {
         firstName: true,
         lastName: true,
-        email: true,
-        handle: true,
-        role: true,
         areasOfInterest: true,
-        organisation: {
-          select: {
-            name: true,
-            handle: true,
-            type: true,
-          },
-        },
       },
     });
   }
