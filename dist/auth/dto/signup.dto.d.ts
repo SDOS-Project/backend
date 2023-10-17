@@ -8,4 +8,5 @@ export declare class SignUpDto {
     organisationHandle: string;
     areasOfInterest: string[];
     firebaseId: string;
+    imgUrl: string;
 }

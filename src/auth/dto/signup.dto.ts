@@ -52,4 +52,9 @@ export class SignUpDto {
   @IsNotEmpty()
   @IsString()
   firebaseId: string;
+
+  @ApiProperty()
+  // @IsNotEmpty()
+  @IsString()
+  imgUrl: string;
 }

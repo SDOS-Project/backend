@@ -6,22 +6,22 @@ export declare class AuthController {
     private readonly authService;
     constructor(authService: AuthService);
     login(sub: string, loginDto: LoginDto): Promise<{
-        organisation: {
-            name: string;
-            handle: string;
-            type: import(".prisma/client").$Enums.OrganisationType;
-        };
         firstName: string;
         lastName: string;
         email: string;
         role: import(".prisma/client").$Enums.UserRole;
         areasOfInterest: string[];
         handle: string;
+        organisation: {
+            handle: string;
+            name: string;
+            type: import(".prisma/client").$Enums.OrganisationType;
+        };
     } | {
-        name: string;
         email: string;
-        handle: string;
         imgUrl: string;
+        handle: string;
+        name: string;
         type: import(".prisma/client").$Enums.OrganisationType;
         ipPolicy: string;
     }>;
@@ -41,10 +41,10 @@ export declare class AuthController {
         imgUrl: string;
     }>;
     organisationSignup(organisationSignUpDto: OrganisationSignUpDto): Promise<{
-        name: string;
         email: string;
-        handle: string;
         imgUrl: string;
+        handle: string;
+        name: string;
         type: import(".prisma/client").$Enums.OrganisationType;
         address: string;
         ipPolicy: string;
