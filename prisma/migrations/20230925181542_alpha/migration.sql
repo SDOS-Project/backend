@@ -48,7 +48,7 @@ CREATE TABLE "Organisation" (
     "type" "OrganisationType" NOT NULL,
     "email" TEXT NOT NULL,
     "address" TEXT NOT NULL,
-    "logoUrl" TEXT NOT NULL,
+    "imgUrl" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 

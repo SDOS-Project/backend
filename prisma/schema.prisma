@@ -26,6 +26,7 @@ model User {
   updates         Update[]
   handle          String       @unique
   firebaseId      String       @unique
+  imgUrl          String
 }
 
 model Organisation {
@@ -35,7 +36,7 @@ model Organisation {
   email      String           @unique
   password   String
   address    String
-  logoUrl    String
+  imgUrl    String
   users      User[]
   projects   Project[]        @relation("ProjectOrganisations")
   ipPolicy   String

@@ -4,7 +4,7 @@ export declare class OrganisationSignUpDto {
     email: string;
     password: string;
     type: OrganisationType;
-    logoUrl: string;
+    imgUrl: string;
     address: string;
     ipPolicy: string;
     firebaseId: string;

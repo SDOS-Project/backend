@@ -90,7 +90,7 @@ let ProjectService = exports.ProjectService = class ProjectService {
                             name: true,
                             handle: true,
                             type: true,
-                            logoUrl: true,
+                            imgUrl: true,
                         },
                     },
                 },
@@ -123,7 +123,7 @@ let ProjectService = exports.ProjectService = class ProjectService {
                     select: {
                         name: true,
                         handle: true,
-                        logoUrl: true,
+                        imgUrl: true,
                     },
                 },
             },
@@ -194,7 +194,7 @@ let ProjectService = exports.ProjectService = class ProjectService {
                         select: {
                             name: true,
                             handle: true,
-                            logoUrl: true,
+                            imgUrl: true,
                         },
                     },
                 },

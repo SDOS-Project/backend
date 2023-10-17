@@ -6,39 +6,47 @@ export declare class AuthController {
     private readonly authService;
     constructor(authService: AuthService);
     login(sub: string, loginDto: LoginDto): Promise<{
+        organisation: {
+            name: string;
+            handle: string;
+            type: import(".prisma/client").$Enums.OrganisationType;
+        };
         firstName: string;
         lastName: string;
         email: string;
         role: import(".prisma/client").$Enums.UserRole;
         areasOfInterest: string[];
         handle: string;
-        organisation: {
-            handle: string;
-            name: string;
-            type: import(".prisma/client").$Enums.OrganisationType;
-        };
     } | {
+        name: string;
         email: string;
         handle: string;
-        name: string;
+        imgUrl: string;
         type: import(".prisma/client").$Enums.OrganisationType;
-        logoUrl: string;
         ipPolicy: string;
     }>;
     signup(signUpDto: SignUpDto): Promise<{
+        id: string;
         firstName: string;
         lastName: string;
         email: string;
+        password: string;
         role: import(".prisma/client").$Enums.UserRole;
+        areasOfInterest: string[];
+        organisationId: string;
+        createdAt: Date;
+        updatedAt: Date;
         handle: string;
+        firebaseId: string;
+        imgUrl: string;
     }>;
     organisationSignup(organisationSignUpDto: OrganisationSignUpDto): Promise<{
+        name: string;
         email: string;
         handle: string;
-        name: string;
+        imgUrl: string;
         type: import(".prisma/client").$Enums.OrganisationType;
         address: string;
-        logoUrl: string;
         ipPolicy: string;
     }>;
 }

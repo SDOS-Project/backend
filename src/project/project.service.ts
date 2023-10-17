@@ -82,7 +82,7 @@ export class ProjectService {
               name: true,
               handle: true,
               type: true,
-              logoUrl: true,
+              imgUrl: true,
             },
           },
         },
@@ -115,7 +115,7 @@ export class ProjectService {
           select: {
             name: true,
             handle: true,
-            logoUrl: true,
+            imgUrl: true,
           },
         },
       },
@@ -193,7 +193,7 @@ export class ProjectService {
             select: {
               name: true,
               handle: true,
-              logoUrl: true,
+              imgUrl: true,
             },
           },
         },

@@ -9,15 +9,15 @@ export declare class ProjectService {
         handle: string;
     }>;
     findAll(): Promise<{
-        handle: string;
         name: string;
         description: string;
         status: import(".prisma/client").$Enums.ProjectStatus;
+        handle: string;
         organisations: {
-            handle: string;
             name: string;
+            handle: string;
+            imgUrl: string;
             type: import(".prisma/client").$Enums.OrganisationType;
-            logoUrl: string;
         }[];
         users: {
             firstName: string;
@@ -28,14 +28,14 @@ export declare class ProjectService {
         }[];
     }[]>;
     findOne(handle: string): Promise<{
-        handle: string;
         name: string;
         description: string;
         status: import(".prisma/client").$Enums.ProjectStatus;
+        handle: string;
         organisations: {
-            handle: string;
             name: string;
-            logoUrl: string;
+            handle: string;
+            imgUrl: string;
         }[];
         users: {
             firstName: string;
@@ -58,14 +58,14 @@ export declare class ProjectService {
         isAdmin: boolean;
     }>;
     update(firebaseId: string, handle: string, updateProjectDto: UpdateProjectDto): Promise<{
-        handle: string;
         name: string;
         description: string;
         status: import(".prisma/client").$Enums.ProjectStatus;
+        handle: string;
         organisations: {
-            handle: string;
             name: string;
-            logoUrl: string;
+            handle: string;
+            imgUrl: string;
         }[];
         users: {
             firstName: string;

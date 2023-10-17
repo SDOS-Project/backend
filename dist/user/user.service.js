@@ -137,7 +137,7 @@ let UserService = exports.UserService = class UserService {
                                 name: true,
                                 handle: true,
                                 type: true,
-                                logoUrl: true,
+                                imgUrl: true,
                             },
                         },
                     },
