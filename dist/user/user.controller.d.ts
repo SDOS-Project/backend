@@ -58,6 +58,7 @@ export declare class UserController {
         imgUrl: string;
         organisation: {
             handle: string;
+            imgUrl: string;
             name: string;
             type: import(".prisma/client").$Enums.OrganisationType;
         };
