@@ -37,8 +37,8 @@ let OrganisationService = exports.OrganisationService = class OrganisationServic
             },
         });
     }
-    findOne(handle) {
-        const organisation = this.prisma.organisation.findUnique({
+    async findOne(handle) {
+        const organisation = await this.prisma.organisation.findUnique({
             where: {
                 handle,
             },

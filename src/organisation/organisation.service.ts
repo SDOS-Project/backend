@@ -29,8 +29,8 @@ export class OrganisationService {
     });
   }
 
-  findOne(handle: string) {
-    const organisation = this.prisma.organisation.findUnique({
+  async findOne(handle: string) {
+    const organisation = await this.prisma.organisation.findUnique({
       where: {
         handle,
       },
