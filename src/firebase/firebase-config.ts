@@ -1,8 +1,9 @@
+import { config } from './config';
+
 const firebaseConfig = {
-  projectId: 'sdos-530a1',
-  private_key:
-    '-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDm1i2aIDoGD6cW\nlrxnKoCpAqQSSn+umTyeklWItXjwVBCCPBQlpCoq4qY1WC8edhCuYMSgzQYZM9ZF\n0uM4AjYoNz+CF1RzQ0lCkZnFt0IAG4AIvfxK7HovlLw6J4OzhlgQi64vYEqFbNTw\nbEHhgD8qMfRpPrq4xP/HBKBhZH+XqhVpPOuvbEGUfEUbcoDhKEtd3AMDZJwOy3wm\neZ9yW0G6jhvUIEQ2V1Z/l5yF2woOh/kFlQEGo8r/3lMTTCno4l1N/icgnfVxVcgN\nyK7dKRJ7I3wbMzy21y3Ln7GIYakAoewPH3wyUC3oJJoGPngXvbuSePc3VFN8+yYN\nbCqbBLhnAgMBAAECggEAA/6rOF0cE/RxDvuEftaQoRwkwb+co7q5fqxdTZSHvMT/\nqiP8XJsRiGohYo/y9M3UmRKfTyxtJsIruvac1wsha82/oXKM6W0TLKiUvC62i4ZD\npM3A5X0KhPNH1KElbtXBhWZyw8Agr1wZoqAvqFrjUklzXN+TNKpixiDG3m3yT/9p\nmwyIr1Pj7MCjTI9m0ryyxf3jIEt2Hc211UPnVY8cIdH4k2mIjM3Y6PYSCDh6Ouz4\nA3ScGuvXuG7+hg4VbXR28O4zGXeBgSI6BdEu2ptPnImaUDZ1FBO8Mn3/3vkGd03H\nIBznCheKMHaFC+8M3C+HXCDjyYHzbqecw0VETfU4sQKBgQD/uDX8Is7PgJCdnUJB\nc14w2A/jQ0mz9DtBhiCEKKNNDcMZ0Mc+nUu0llTMZWslsSWQ/f79jV9C1zGqxTFn\ngH4NVcGw91Opzo9iDDJ+4KsfDOJpRzlVlZhCPGW183Y8UmZ78bYJt0BphSbVfGsD\na5ty3JV81lpPssB9+EvwS4UjVwKBgQDnFvtVdC7c4nl3vy/l3QZxV8pKq7IU2UHz\nJ6/VoBFVfEdAJiidPZ2pBt8yxjk9/v1zG1iRQRN7V/OBIdcCxA6Z6lxH47VKoFCw\njta0JzC+iM2At+N9wAquHQHZDannxbBzQxAHdGw1shhmbNZS3+K8Db+u9M4DgLX0\nNoZ12VR5cQKBgQD2htPcsH3qg8pneO0gBiXfNt0SPpN2XlUmFTWR00+jgEn/wEvl\nbGVIwskbiAak/sP1pTjHnhwhZy6lsJexbamYF320qqvIf6+xWYrw0I2IULaRwi1e\n+eogqPNxVzY8b0AH632Qnk8Fq21F0T2lvX7OXCPthwTn4q86gj5LebLv3wKBgEoS\nnMd8cVUOJx9SIjlNCrakDEy5EmEKbtBRJVSVdVjweCpA0P3t9S5r7Hlq/og3xufx\nmQceU+9SdtQqk6/oRkHh1Giavc7I6nRdpMakVUSNt0mOKBZzyziaRbBcZ9zKClA3\n69hn4hOoHZgfROfVqejbg1jCUZLf2/MG0zzNR/2RAoGBAP1fdHI7W545UvmtdmDc\nD/pVF7hU3cJCMMW22A+RinjKZa56qQEtH2+uCtktaoCEa5rjcqYC/wbnfLwwI48u\nYoesf5cTqci89DDI2EUZ7jGyPtcTErSdHKyrOI5H4GGX1nHmRtXGp9v42F5LWmaS\nrfdoxoCyH0fqwTHRSw6FWT5+\n-----END PRIVATE KEY-----\n',
-  client_email: 'firebase-adminsdk-qnjg1@sdos-530a1.iam.gserviceaccount.com',
+  projectId: config.projectId,
+  private_key: config.private_key,
+  client_email: config.client_email,
 };
 
 export default firebaseConfig;
