@@ -93,6 +93,7 @@ let AuthService = exports.AuthService = class AuthService {
                         '-' +
                         (0, utils_1.default)(5),
                     firebaseId: signUpDto.firebaseId,
+                    imgUrl: signUpDto.imgUrl,
                 },
                 select: {
                     firstName: true,
@@ -100,6 +101,7 @@ let AuthService = exports.AuthService = class AuthService {
                     email: true,
                     role: true,
                     handle: true,
+                    imgUrl: true,
                 },
             });
             return user;

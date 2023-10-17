@@ -19,31 +19,24 @@ export declare class AuthController {
         };
     } | {
         email: string;
-        imgUrl: string;
         handle: string;
+        imgUrl: string;
         name: string;
         type: import(".prisma/client").$Enums.OrganisationType;
         ipPolicy: string;
     }>;
     signup(signUpDto: SignUpDto): Promise<{
-        id: string;
         firstName: string;
         lastName: string;
         email: string;
-        password: string;
         role: import(".prisma/client").$Enums.UserRole;
-        areasOfInterest: string[];
-        organisationId: string;
-        createdAt: Date;
-        updatedAt: Date;
         handle: string;
-        firebaseId: string;
         imgUrl: string;
     }>;
     organisationSignup(organisationSignUpDto: OrganisationSignUpDto): Promise<{
         email: string;
-        imgUrl: string;
         handle: string;
+        imgUrl: string;
         name: string;
         type: import(".prisma/client").$Enums.OrganisationType;
         address: string;

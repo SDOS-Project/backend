@@ -92,6 +92,7 @@ export class AuthService {
             '-' +
             generateRandomAlphanumericWithLength(5),
           firebaseId: signUpDto.firebaseId,
+          imgUrl: signUpDto.imgUrl,
         },
         select: {
           firstName: true,
@@ -99,6 +100,7 @@ export class AuthService {
           email: true,
           role: true,
           handle: true,
+          imgUrl: true,
         },
       });
       return user;
