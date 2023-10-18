@@ -89,5 +89,5 @@ export declare class UserService {
         lastName: string;
         areasOfInterest: string[];
     }>;
-    remove(id: number): string;
+    remove(firebaseId: string, handle: string): Promise<void>;
 }

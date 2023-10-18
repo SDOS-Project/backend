@@ -43,8 +43,8 @@ let UserController = exports.UserController = class UserController {
     update(firebaseId, updateUserDto) {
         return this.userService.update(firebaseId, updateUserDto);
     }
-    remove(id) {
-        return this.userService.remove(+id);
+    remove(firebaseId, handle) {
+        return this.userService.remove(firebaseId, handle);
     }
 };
 __decorate([
@@ -95,10 +95,11 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "update", null);
 __decorate([
-    (0, common_1.Delete)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Delete)(':handle'),
+    __param(0, (0, user_decorator_1.User)('sub')),
+    __param(1, (0, common_1.Param)('handle')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "remove", null);
 exports.UserController = UserController = __decorate([

@@ -47,8 +47,8 @@ export class UserController {
     return this.userService.update(firebaseId, updateUserDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+  @Delete(':handle')
+  remove(@User('sub') firebaseId: string, @Param('handle') handle: string) {
+    return this.userService.remove(firebaseId, handle);
   }
 }

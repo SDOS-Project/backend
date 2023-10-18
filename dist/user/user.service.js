@@ -173,8 +173,36 @@ let UserService = exports.UserService = class UserService {
             },
         });
     }
-    remove(id) {
-        return `This action removes a #${id} user`;
+    async remove(firebaseId, handle) {
+        const user = await this.prisma.user.findUnique({
+            where: {
+                handle,
+            },
+            select: {
+                organisation: {
+                    select: {
+                        firebaseId: true,
+                    },
+                },
+            },
+        });
+        if (!user) {
+            throw new common_1.HttpException('User not found', common_1.HttpStatus.NOT_FOUND);
+        }
+        if (user.organisation.firebaseId !== firebaseId) {
+            throw new common_1.HttpException('Unauthorized', common_1.HttpStatus.UNAUTHORIZED);
+        }
+        try {
+            await this.prisma.user.delete({
+                where: {
+                    handle,
+                },
+            });
+            return;
+        }
+        catch (error) {
+            throw new common_1.HttpException(error.message, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 };
 exports.UserService = UserService = __decorate([
