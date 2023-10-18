@@ -2,9 +2,11 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UserRole } from '@prisma/client';
+import * as admin from 'firebase-admin';
 
 @Injectable()
 export class UserService {
+  private firebaseAdmin: admin.app.App;
   constructor(private prisma: PrismaService) {}
 
   findAll() {
@@ -174,6 +176,7 @@ export class UserService {
         handle,
       },
       select: {
+        firebaseId: true,
         organisation: {
           select: {
             firebaseId: true,
@@ -188,6 +191,7 @@ export class UserService {
       throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
     }
     try {
+      await this.firebaseAdmin.auth().deleteUser(user.firebaseId);
       await this.prisma.user.delete({
         where: {
           handle,

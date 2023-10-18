@@ -2,6 +2,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 export declare class UserService {
     private prisma;
+    private firebaseAdmin;
     constructor(prisma: PrismaService);
     findAll(): string;
     findRecommendations(firebaseId: string): Promise<{

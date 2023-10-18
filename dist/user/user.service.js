@@ -179,6 +179,7 @@ let UserService = exports.UserService = class UserService {
                 handle,
             },
             select: {
+                firebaseId: true,
                 organisation: {
                     select: {
                         firebaseId: true,
@@ -193,6 +194,7 @@ let UserService = exports.UserService = class UserService {
             throw new common_1.HttpException('Unauthorized', common_1.HttpStatus.UNAUTHORIZED);
         }
         try {
+            await this.firebaseAdmin.auth().deleteUser(user.firebaseId);
             await this.prisma.user.delete({
                 where: {
                     handle,

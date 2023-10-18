@@ -12,7 +12,7 @@ var PreAuthMiddleware_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PreAuthMiddleware = void 0;
 const common_1 = require("@nestjs/common");
-const firebase_service_1 = require("../firebase/firebase-service");
+const firebase_service_1 = require("../firebase/firebase.service");
 let PreAuthMiddleware = exports.PreAuthMiddleware = PreAuthMiddleware_1 = class PreAuthMiddleware {
     constructor(firebaseApp) {
         this.firebaseApp = firebaseApp;
