@@ -13,9 +13,11 @@ exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
 const client_1 = require("@prisma/client");
+const admin = require("firebase-admin");
 let UserService = exports.UserService = class UserService {
     constructor(prisma) {
         this.prisma = prisma;
+        this.firebaseAdmin = admin.app();
     }
     findAll() {
         return `This action returns all user`;
@@ -203,6 +205,7 @@ let UserService = exports.UserService = class UserService {
             return;
         }
         catch (error) {
+            console.log(error);
             throw new common_1.HttpException(error.message, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

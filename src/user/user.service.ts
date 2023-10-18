@@ -7,7 +7,9 @@ import * as admin from 'firebase-admin';
 @Injectable()
 export class UserService {
   private firebaseAdmin: admin.app.App;
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) {
+    this.firebaseAdmin = admin.app();
+  }
 
   findAll() {
     return `This action returns all user`;
@@ -199,6 +201,7 @@ export class UserService {
       });
       return;
     } catch (error) {
+      console.log(error);
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
