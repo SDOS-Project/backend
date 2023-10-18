@@ -14,6 +14,7 @@ export declare class UserService {
         imgUrl: string;
         organisation: {
             handle: string;
+            imgUrl: string;
             name: string;
             type: import(".prisma/client").$Enums.OrganisationType;
         };

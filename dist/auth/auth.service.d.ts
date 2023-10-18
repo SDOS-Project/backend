@@ -14,6 +14,7 @@ export declare class AuthService {
         handle: string;
         organisation: {
             handle: string;
+            imgUrl: string;
             name: string;
             type: import(".prisma/client").$Enums.OrganisationType;
         };
@@ -32,6 +33,12 @@ export declare class AuthService {
         role: import(".prisma/client").$Enums.UserRole;
         handle: string;
         imgUrl: string;
+        organisation: {
+            handle: string;
+            imgUrl: string;
+            name: string;
+            type: import(".prisma/client").$Enums.OrganisationType;
+        };
     }>;
     organisationSignup(organisationSignUpDto: OrganisationSignUpDto): Promise<{
         email: string;

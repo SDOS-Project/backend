@@ -37,6 +37,7 @@ let AuthService = exports.AuthService = class AuthService {
                         name: true,
                         handle: true,
                         type: true,
+                        imgUrl: true,
                     },
                 },
             },
@@ -102,6 +103,14 @@ let AuthService = exports.AuthService = class AuthService {
                     role: true,
                     handle: true,
                     imgUrl: true,
+                    organisation: {
+                        select: {
+                            name: true,
+                            handle: true,
+                            type: true,
+                            imgUrl: true,
+                        },
+                    },
                 },
             });
             return user;
