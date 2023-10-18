@@ -69,6 +69,7 @@ let OrganisationService = exports.OrganisationService = class OrganisationServic
                         firstName: true,
                         lastName: true,
                         email: true,
+                        imgUrl: true,
                     },
                 },
             },

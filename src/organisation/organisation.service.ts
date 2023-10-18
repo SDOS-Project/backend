@@ -62,6 +62,7 @@ export class OrganisationService {
             firstName: true,
             lastName: true,
             email: true,
+            imgUrl: true,
           },
         },
       },

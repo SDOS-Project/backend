@@ -4,59 +4,60 @@ export declare class OrganisationController {
     private readonly organisationService;
     constructor(organisationService: OrganisationService);
     findAll(firebaseId: string): Promise<{
-        email: string;
-        handle: string;
-        imgUrl: string;
         name: string;
         type: import(".prisma/client").$Enums.OrganisationType;
+        email: string;
         address: string;
+        imgUrl: string;
+        handle: string;
     }[]>;
     findDropdown(): Promise<{
-        handle: string;
         name: string;
+        handle: string;
     }[]>;
     findOne(handle: string): Promise<{
-        email: string;
-        handle: string;
-        imgUrl: string;
         name: string;
         type: import(".prisma/client").$Enums.OrganisationType;
+        email: string;
         address: string;
+        imgUrl: string;
         ipPolicy: string;
+        handle: string;
     }>;
     findUsers(handle: string): Promise<{
+        email: string;
+        imgUrl: string;
+        handle: string;
         firstName: string;
         lastName: string;
-        email: string;
-        handle: string;
     }[]>;
     findProjects(handle: string): Promise<{
-        handle: string;
         name: string;
+        handle: string;
         users: {
+            email: string;
+            handle: string;
             firstName: string;
             lastName: string;
-            email: string;
             role: import(".prisma/client").$Enums.UserRole;
-            handle: string;
         }[];
         description: string;
         status: import(".prisma/client").$Enums.ProjectStatus;
         organisations: {
-            handle: string;
-            imgUrl: string;
             name: string;
             type: import(".prisma/client").$Enums.OrganisationType;
+            imgUrl: string;
+            handle: string;
         }[];
     }[]>;
     update(firebaseId: string, updateOrganisationDto: UpdateOrganisationDto): Promise<{
-        email: string;
-        handle: string;
-        imgUrl: string;
         name: string;
         type: import(".prisma/client").$Enums.OrganisationType;
+        email: string;
         address: string;
+        imgUrl: string;
         ipPolicy: string;
+        handle: string;
     }>;
     remove(id: string): string;
 }
