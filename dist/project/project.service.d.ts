@@ -9,40 +9,40 @@ export declare class ProjectService {
         handle: string;
     }>;
     findAll(): Promise<{
-        handle: string;
         name: string;
+        description: string;
+        status: import(".prisma/client").$Enums.ProjectStatus;
+        handle: string;
+        organisations: {
+            name: string;
+            handle: string;
+            imgUrl: string;
+            type: import(".prisma/client").$Enums.OrganisationType;
+        }[];
         users: {
             firstName: string;
             lastName: string;
             email: string;
             role: import(".prisma/client").$Enums.UserRole;
             handle: string;
-        }[];
-        description: string;
-        status: import(".prisma/client").$Enums.ProjectStatus;
-        organisations: {
-            handle: string;
-            imgUrl: string;
-            name: string;
-            type: import(".prisma/client").$Enums.OrganisationType;
         }[];
     }[]>;
     findOne(handle: string): Promise<{
-        handle: string;
         name: string;
+        description: string;
+        status: import(".prisma/client").$Enums.ProjectStatus;
+        handle: string;
+        organisations: {
+            name: string;
+            handle: string;
+            imgUrl: string;
+        }[];
         users: {
             firstName: string;
             lastName: string;
             email: string;
             role: import(".prisma/client").$Enums.UserRole;
             handle: string;
-        }[];
-        description: string;
-        status: import(".prisma/client").$Enums.ProjectStatus;
-        organisations: {
-            handle: string;
-            imgUrl: string;
-            name: string;
         }[];
     }>;
     findUpdates(handle: string): Promise<{
@@ -51,28 +51,28 @@ export declare class ProjectService {
             lastName: string;
             handle: string;
         };
-        createdAt: Date;
         content: string;
+        createdAt: Date;
     }[]>;
     findConfig(firebaseId: string, handle: string): Promise<{
         isAdmin: boolean;
     }>;
     update(firebaseId: string, handle: string, updateProjectDto: UpdateProjectDto): Promise<{
-        handle: string;
         name: string;
+        description: string;
+        status: import(".prisma/client").$Enums.ProjectStatus;
+        handle: string;
+        organisations: {
+            name: string;
+            handle: string;
+            imgUrl: string;
+        }[];
         users: {
             firstName: string;
             lastName: string;
             email: string;
             role: import(".prisma/client").$Enums.UserRole;
             handle: string;
-        }[];
-        description: string;
-        status: import(".prisma/client").$Enums.ProjectStatus;
-        organisations: {
-            handle: string;
-            imgUrl: string;
-            name: string;
         }[];
     }>;
     addUpdate(handle: string, addUpdateDto: AddUpdateDto, firebaseId: string): Promise<{
@@ -81,8 +81,8 @@ export declare class ProjectService {
             lastName: string;
             handle: string;
         };
-        createdAt: Date;
         content: string;
+        createdAt: Date;
     }>;
     checkIfUserIsAdmin(firebaseId: string, handle: string): Promise<boolean>;
     remove(id: number): string;

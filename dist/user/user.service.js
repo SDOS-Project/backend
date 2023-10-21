@@ -205,7 +205,6 @@ let UserService = exports.UserService = class UserService {
             return;
         }
         catch (error) {
-            console.log(error);
             throw new common_1.HttpException(error.message, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
