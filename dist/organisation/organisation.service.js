@@ -118,15 +118,7 @@ let OrganisationService = exports.OrganisationService = class OrganisationServic
         return organisation.projects;
     }
     async update(firebaseId, updateOrganisationDto) {
-        const organisation = await this.prisma.organisation.findUnique({
-            where: {
-                firebaseId,
-            },
-        });
-        if (!organisation) {
-            throw new common_1.HttpException('Organisation not found', common_1.HttpStatus.NOT_FOUND);
-        }
-        return await this.prisma.organisation.update({
+        const organisation = await this.prisma.organisation.update({
             where: {
                 firebaseId,
             },
@@ -141,9 +133,10 @@ let OrganisationService = exports.OrganisationService = class OrganisationServic
                 ipPolicy: true,
             },
         });
-    }
-    remove(id) {
-        return `This action removes a #${id} organisation`;
+        if (!organisation) {
+            throw new common_1.HttpException('Organisation not found', common_1.HttpStatus.NOT_FOUND);
+        }
+        return organisation;
     }
 };
 exports.OrganisationService = OrganisationService = __decorate([

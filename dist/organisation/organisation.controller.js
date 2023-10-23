@@ -40,9 +40,6 @@ let OrganisationController = exports.OrganisationController = class Organisation
     update(firebaseId, updateOrganisationDto) {
         return this.organisationService.update(firebaseId, updateOrganisationDto);
     }
-    remove(id) {
-        return this.organisationService.remove(+id);
-    }
 };
 __decorate([
     (0, common_1.Get)(),
@@ -86,13 +83,6 @@ __decorate([
     __metadata("design:paramtypes", [String, update_organisation_dto_1.UpdateOrganisationDto]),
     __metadata("design:returntype", void 0)
 ], OrganisationController.prototype, "update", null);
-__decorate([
-    (0, common_1.Delete)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
-], OrganisationController.prototype, "remove", null);
 exports.OrganisationController = OrganisationController = __decorate([
     (0, swagger_1.ApiTags)('Organisation'),
     (0, common_1.Controller)('organisation'),

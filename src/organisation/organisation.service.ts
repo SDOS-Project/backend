@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UpdateOrganisationDto } from './dto/update-organisation.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class OrganisationService {
@@ -116,15 +116,7 @@ export class OrganisationService {
     firebaseId: string,
     updateOrganisationDto: UpdateOrganisationDto,
   ) {
-    const organisation = await this.prisma.organisation.findUnique({
-      where: {
-        firebaseId,
-      },
-    });
-    if (!organisation) {
-      throw new HttpException('Organisation not found', HttpStatus.NOT_FOUND);
-    }
-    return await this.prisma.organisation.update({
+    const organisation = await this.prisma.organisation.update({
       where: {
         firebaseId,
       },
@@ -139,9 +131,9 @@ export class OrganisationService {
         ipPolicy: true,
       },
     });
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} organisation`;
+    if (!organisation) {
+      throw new HttpException('Organisation not found', HttpStatus.NOT_FOUND);
+    }
+    return organisation;
   }
 }

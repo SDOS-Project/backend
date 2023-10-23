@@ -1,8 +1,8 @@
-import { Controller, Get, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Body, Patch, Param } from '@nestjs/common';
 import { OrganisationService } from './organisation.service';
 import { UpdateOrganisationDto } from './dto/update-organisation.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { User } from 'src/common/decorators/user.decorator';
+import { User } from '../common/decorators/user.decorator';
 
 @ApiTags('Organisation')
 @Controller('organisation')
@@ -40,10 +40,5 @@ export class OrganisationController {
     @Body() updateOrganisationDto: UpdateOrganisationDto,
   ) {
     return this.organisationService.update(firebaseId, updateOrganisationDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.organisationService.remove(+id);
   }
 }
