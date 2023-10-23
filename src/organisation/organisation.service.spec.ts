@@ -3,100 +3,17 @@ import { OrganisationService } from './organisation.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { UpdateOrganisationDto } from './dto/update-organisation.dto';
-import { OrganisationType, ProjectStatus, UserRole } from '@prisma/client';
 import { OrganisationController } from './organisation.controller';
+import {
+  firstMockOrganisation,
+  mockOrganisationArray,
+  mockProjectArray,
+  mockUserArray,
+} from './organisation.mocks';
 
 describe('OrganisationService', () => {
   let service: OrganisationService;
   let prismaService: PrismaService;
-
-  const mockUserArray = [
-    {
-      id: '1',
-      firstName: 'User 1',
-      lastName: 'User 1',
-      email: 'user1@example.com',
-      password: 'password',
-      role: UserRole.FACULTY,
-      areasOfInterest: ['area1', 'area2'],
-      organisationId: '1',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      handle: 'user-1',
-      firebaseId: 'firebase-id-1',
-      imgUrl: 'user1.jpg',
-    },
-    {
-      id: '2',
-      firstName: 'User 2',
-      lastName: 'User 2',
-      email: 'user2@example.com',
-      password: 'password',
-      role: UserRole.EMPLOYEE,
-      areasOfInterest: ['area3', 'area4'],
-      organisationId: '1',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      handle: 'user-2',
-      firebaseId: 'firebase-id-2',
-      imgUrl: 'user2.jpg',
-    },
-  ];
-
-  const mockProjectArray = [
-    {
-      id: '1',
-      name: 'Project 1',
-      description: 'Description 1',
-      status: ProjectStatus.ONGOING,
-      handle: 'project-1',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      id: '2',
-      name: 'Project 2',
-      description: 'Description 2',
-      status: ProjectStatus.COMPLETED,
-      handle: 'project-2',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-  ];
-
-  const firstMockOrganisation = {
-    id: '1',
-    name: 'Org 1',
-    type: OrganisationType.ACADEMIC,
-    email: 'org1@example.com',
-    password: 'password',
-    address: '123 Org St',
-    imgUrl: 'org1.jpg',
-    ipPolicy: 'allow-all',
-    handle: 'org-1',
-    firebaseId: 'firebase-id-1',
-    projects: mockProjectArray,
-    users: mockUserArray,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  };
-
-  const secondMockOrganisation = {
-    id: '2',
-    name: 'Org 2',
-    type: OrganisationType.CORPORATE,
-    email: 'org2@example.com',
-    password: 'password',
-    address: '456 Corp St',
-    imgUrl: 'org2.jpg',
-    ipPolicy: 'restrictive',
-    handle: 'org-2',
-    firebaseId: 'firebase-id-2',
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  };
-
-  const mockOrganisationArray = [firstMockOrganisation, secondMockOrganisation];
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
