@@ -89,6 +89,7 @@ export declare class UserService {
         firstName: string;
         lastName: string;
         areasOfInterest: string[];
+        handle: string;
     }>;
     remove(firebaseId: string, handle: string): Promise<void>;
 }

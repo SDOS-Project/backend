@@ -88,6 +88,7 @@ export declare class UserController {
         firstName: string;
         lastName: string;
         areasOfInterest: string[];
+        handle: string;
     }>;
     remove(firebaseId: string, handle: string): Promise<void>;
 }

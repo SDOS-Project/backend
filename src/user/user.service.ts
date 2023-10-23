@@ -168,6 +168,7 @@ export class UserService {
         firstName: true,
         lastName: true,
         areasOfInterest: true,
+        handle: true,
       },
     });
   }
