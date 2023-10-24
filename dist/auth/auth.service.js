@@ -67,6 +67,9 @@ let AuthService = exports.AuthService = class AuthService {
             where: {
                 handle: signUpDto.organisationHandle,
             },
+            select: {
+                type: true,
+            },
         });
         if (signUpDto.role === 'FACULTY' && organisation.type !== 'ACADEMIC') {
             throw new common_1.HttpException('Faculty can only be associated with academic organisations', common_1.HttpStatus.BAD_REQUEST);

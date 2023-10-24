@@ -59,6 +59,9 @@ export class AuthService {
       where: {
         handle: signUpDto.organisationHandle,
       },
+      select: {
+        type: true,
+      },
     });
     if (signUpDto.role === 'FACULTY' && organisation.type !== 'ACADEMIC') {
       throw new HttpException(
