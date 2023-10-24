@@ -2,11 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { OrganisationController } from './organisation.controller';
 import { OrganisationService } from './organisation.service';
 import { PrismaService } from '../prisma/prisma.service';
-import {
-  mockOrganisationArray,
-  mockProjectArray,
-  mockUserArray,
-} from './organisation.mocks';
+import { mockOrganisationArray, mockProjectArray, mockUserArray } from './mock';
 
 describe('OrganisationController', () => {
   let service: OrganisationService;

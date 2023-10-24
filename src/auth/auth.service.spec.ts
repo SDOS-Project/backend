@@ -1,39 +1,21 @@
-import { mockOrganisationArray } from './../organisation/organisation.mocks';
+import { mockOrganisationArray } from '../organisation/mock';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from './auth.service';
-import { LoginDto } from './dto/login.dto';
 import { PrismaService } from '../prisma/prisma.service';
-import { OrganisationType, UserRole } from '@prisma/client';
+import { OrganisationType } from '@prisma/client';
 import { HttpException, HttpStatus } from '@nestjs/common';
-import { SignUpDto } from './dto/signup.dto';
 import { OrganisationSignUpDto } from './dto/organisation.signup.dto';
+import {
+  loginDto,
+  mockUser,
+  organisationSignUpDto,
+  signupDto,
+  sub,
+} from './mock';
 
 describe('AuthService', () => {
   let service: AuthService;
   let prismaService: PrismaService;
-
-  const mockUser = {
-    id: '1',
-    firstName: 'User 1',
-    lastName: 'User 1',
-    email: 'user1@example.com',
-    password: 'password',
-    role: UserRole.FACULTY,
-    areasOfInterest: ['area1', 'area2'],
-    organisationId: '1',
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    handle: 'user-1',
-    firebaseId: 'firebase-id-1',
-    imgUrl: 'user1.jpg',
-    organisation: {
-      id: '1',
-      name: 'Org 1',
-      type: OrganisationType.ACADEMIC,
-      imgUrl: 'org1.jpg',
-      handle: 'org-1',
-    },
-  };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -49,11 +31,6 @@ describe('AuthService', () => {
   });
 
   describe('login', () => {
-    const sub = 'firebaseId';
-    const loginDto: LoginDto = {
-      email: '',
-      password: '',
-    };
     it('it should return a user or organisation', async () => {
       jest.spyOn(prismaService.user, 'findUnique').mockResolvedValue(mockUser);
 
@@ -73,18 +50,6 @@ describe('AuthService', () => {
   });
 
   describe('signup', () => {
-    const signupDto: SignUpDto = {
-      firstName: 'User 1',
-      lastName: 'User 1',
-      email: 'user@gmail.com',
-      password: 'password',
-      role: UserRole.FACULTY,
-      organisationHandle: 'org-1',
-      areasOfInterest: ['area1', 'area2'],
-      firebaseId: 'firebase-id-1',
-      imgUrl: 'user1.jpg',
-    };
-
     it('should throw an error if organisation type is not academic', async () => {
       jest
         .spyOn(prismaService.organisation, 'findUnique')
@@ -99,17 +64,6 @@ describe('AuthService', () => {
   });
 
   describe('organisationSignup', () => {
-    const organisationSignUpDto: OrganisationSignUpDto = {
-      name: 'Org 1',
-      email: '',
-      password: '',
-      type: OrganisationType.ACADEMIC,
-      imgUrl: 'org1.jpg',
-      address: 'Address 1',
-      ipPolicy: 'ip policy',
-      firebaseId: 'firebase-id-1',
-    };
-
     it('should create and return an organisation', async () => {
       jest
         .spyOn(prismaService.organisation, 'create')

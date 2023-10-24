@@ -9,40 +9,40 @@ export declare class ProjectController {
         handle: string;
     }>;
     findAll(): Promise<{
-        name: string;
-        description: string;
-        status: import(".prisma/client").$Enums.ProjectStatus;
         handle: string;
-        organisations: {
-            name: string;
-            handle: string;
-            imgUrl: string;
-            type: import(".prisma/client").$Enums.OrganisationType;
-        }[];
+        name: string;
         users: {
             firstName: string;
             lastName: string;
             email: string;
             role: import(".prisma/client").$Enums.UserRole;
             handle: string;
+        }[];
+        description: string;
+        status: import(".prisma/client").$Enums.ProjectStatus;
+        organisations: {
+            handle: string;
+            imgUrl: string;
+            name: string;
+            type: import(".prisma/client").$Enums.OrganisationType;
         }[];
     }[]>;
     findOne(handle: string): Promise<{
-        name: string;
-        description: string;
-        status: import(".prisma/client").$Enums.ProjectStatus;
         handle: string;
-        organisations: {
-            name: string;
-            handle: string;
-            imgUrl: string;
-        }[];
+        name: string;
         users: {
             firstName: string;
             lastName: string;
             email: string;
             role: import(".prisma/client").$Enums.UserRole;
             handle: string;
+        }[];
+        description: string;
+        status: import(".prisma/client").$Enums.ProjectStatus;
+        organisations: {
+            handle: string;
+            imgUrl: string;
+            name: string;
         }[];
     }>;
     findUpdates(handle: string): Promise<{
@@ -51,8 +51,8 @@ export declare class ProjectController {
             lastName: string;
             handle: string;
         };
-        content: string;
         createdAt: Date;
+        content: string;
     }[]>;
     findConfig(firebaseId: string, handle: string): Promise<{
         isAdmin: boolean;
@@ -63,25 +63,25 @@ export declare class ProjectController {
             lastName: string;
             handle: string;
         };
-        content: string;
         createdAt: Date;
+        content: string;
     }>;
     update(firebaseId: string, handle: string, updateProjectDto: UpdateProjectDto): Promise<{
-        name: string;
-        description: string;
-        status: import(".prisma/client").$Enums.ProjectStatus;
         handle: string;
-        organisations: {
-            name: string;
-            handle: string;
-            imgUrl: string;
-        }[];
+        name: string;
         users: {
             firstName: string;
             lastName: string;
             email: string;
             role: import(".prisma/client").$Enums.UserRole;
             handle: string;
+        }[];
+        description: string;
+        status: import(".prisma/client").$Enums.ProjectStatus;
+        organisations: {
+            handle: string;
+            imgUrl: string;
+            name: string;
         }[];
     }>;
     remove(id: string): string;

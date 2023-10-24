@@ -9,7 +9,7 @@ import {
   mockOrganisationArray,
   mockProjectArray,
   mockUserArray,
-} from './organisation.mocks';
+} from './mock';
 
 describe('OrganisationService', () => {
   let service: OrganisationService;
