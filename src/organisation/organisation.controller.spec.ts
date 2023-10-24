@@ -28,9 +28,7 @@ describe('OrganisationController', () => {
 
   describe('findAll', () => {
     it('it should return an array of organisations', async () => {
-      jest
-        .spyOn(service, `findAll`)
-        .mockImplementation(async () => mockOrganisationArray);
+      jest.spyOn(service, `findAll`).mockResolvedValue(mockOrganisationArray);
 
       expect(await controller.findAll('firebaseId')).toBe(
         mockOrganisationArray,
@@ -42,7 +40,7 @@ describe('OrganisationController', () => {
     it('it should return an array of organisations with only handle and name fields', async () => {
       jest
         .spyOn(service, `findDropdown`)
-        .mockImplementation(async () => mockOrganisationArray);
+        .mockResolvedValue(mockOrganisationArray);
 
       expect(await controller.findDropdown()).toBe(mockOrganisationArray);
     });
@@ -52,7 +50,7 @@ describe('OrganisationController', () => {
     it('it should return an organisation with the given handle', async () => {
       jest
         .spyOn(service, `findOne`)
-        .mockImplementation(async () => mockOrganisationArray[0]);
+        .mockResolvedValue(mockOrganisationArray[0]);
 
       expect(await controller.findOne(mockOrganisationArray[0].handle)).toBe(
         mockOrganisationArray[0],
@@ -62,9 +60,7 @@ describe('OrganisationController', () => {
 
   describe('findUsers', () => {
     it('it should return an array of users for the given organisation', async () => {
-      jest
-        .spyOn(service, `findUsers`)
-        .mockImplementation(async () => mockUserArray);
+      jest.spyOn(service, `findUsers`).mockResolvedValue(mockUserArray);
 
       expect(await controller.findUsers(mockOrganisationArray[0].handle)).toBe(
         mockUserArray,
@@ -74,9 +70,7 @@ describe('OrganisationController', () => {
 
   describe('findProjects', () => {
     it('it should return an array of projects for the given organisation', async () => {
-      jest
-        .spyOn(service, `findProjects`)
-        .mockImplementation(async () => mockProjectArray);
+      jest.spyOn(service, `findProjects`).mockResolvedValue(mockProjectArray);
 
       expect(
         await controller.findProjects(mockOrganisationArray[0].handle),
@@ -86,9 +80,7 @@ describe('OrganisationController', () => {
 
   describe('update', () => {
     it('it should return an updated organisation', async () => {
-      jest
-        .spyOn(service, `update`)
-        .mockImplementation(async () => mockOrganisationArray[0]);
+      jest.spyOn(service, `update`).mockResolvedValue(mockOrganisationArray[0]);
 
       expect(
         await controller.update('firebaseId', mockOrganisationArray[0]),
