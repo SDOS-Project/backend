@@ -2,7 +2,7 @@ import { OrganisationSignUpDto } from './dto/organisation.signup.dto';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { LoginDto } from './dto/login.dto';
 import { SignUpDto } from './dto/signup.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import generateRandomAlphanumericWithLength from './utils';
 import * as bcrypt from 'bcrypt';
 
