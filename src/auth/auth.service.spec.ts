@@ -2,9 +2,7 @@ import { mockOrganisationArray } from '../organisation/mock';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from './auth.service';
 import { PrismaService } from '../prisma/prisma.service';
-import { OrganisationType } from '@prisma/client';
 import { HttpException, HttpStatus } from '@nestjs/common';
-import { OrganisationSignUpDto } from './dto/organisation.signup.dto';
 import {
   loginDto,
   mockUser,
