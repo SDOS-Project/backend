@@ -23,6 +23,7 @@ export class AuthService {
         handle: true,
         role: true,
         areasOfInterest: true,
+        imgUrl: true,
         organisation: {
           select: {
             name: true,

@@ -5,11 +5,11 @@ export declare class OrganisationService {
     constructor(prisma: PrismaService);
     findAll(firebaseId: string): Promise<{
         name: string;
-        type: import(".prisma/client").$Enums.OrganisationType;
         email: string;
-        address: string;
-        imgUrl: string;
         handle: string;
+        imgUrl: string;
+        type: import(".prisma/client").$Enums.OrganisationType;
+        address: string;
     }[]>;
     findDropdown(): Promise<{
         name: string;
@@ -17,46 +17,46 @@ export declare class OrganisationService {
     }[]>;
     findOne(handle: string): Promise<{
         name: string;
-        type: import(".prisma/client").$Enums.OrganisationType;
         email: string;
-        address: string;
-        imgUrl: string;
-        ipPolicy: string;
         handle: string;
+        imgUrl: string;
+        type: import(".prisma/client").$Enums.OrganisationType;
+        address: string;
+        ipPolicy: string;
     }>;
     findUsers(handle: string): Promise<{
-        email: string;
-        imgUrl: string;
-        handle: string;
         firstName: string;
         lastName: string;
+        email: string;
+        handle: string;
+        imgUrl: string;
     }[]>;
     findProjects(handle: string): Promise<{
         name: string;
-        handle: string;
-        users: {
-            email: string;
-            handle: string;
-            firstName: string;
-            lastName: string;
-            role: import(".prisma/client").$Enums.UserRole;
-        }[];
         description: string;
         status: import(".prisma/client").$Enums.ProjectStatus;
+        handle: string;
         organisations: {
             name: string;
-            type: import(".prisma/client").$Enums.OrganisationType;
+            handle: string;
             imgUrl: string;
+            type: import(".prisma/client").$Enums.OrganisationType;
+        }[];
+        users: {
+            firstName: string;
+            lastName: string;
+            email: string;
+            role: import(".prisma/client").$Enums.UserRole;
             handle: string;
         }[];
     }[]>;
     update(firebaseId: string, updateOrganisationDto: UpdateOrganisationDto): Promise<{
         name: string;
-        type: import(".prisma/client").$Enums.OrganisationType;
         email: string;
-        address: string;
-        imgUrl: string;
-        ipPolicy: string;
         handle: string;
+        imgUrl: string;
+        type: import(".prisma/client").$Enums.OrganisationType;
+        address: string;
+        ipPolicy: string;
     }>;
 }
