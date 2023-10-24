@@ -6,6 +6,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { OrganisationType, UserRole } from '@prisma/client';
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { SignUpDto } from './dto/signup.dto';
+import { OrganisationSignUpDto } from './dto/organisation.signup.dto';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -116,4 +117,27 @@ describe('AuthService', () => {
   //     expect(await service.signup(signupDto)).toBe(mockUser);
   //   });
   // });
+
+  describe('organisationSignup', () => {
+    const organisationSignUpDto: OrganisationSignUpDto = {
+      name: 'Org 1',
+      email: '',
+      password: '',
+      type: OrganisationType.ACADEMIC,
+      imgUrl: 'org1.jpg',
+      address: 'Address 1',
+      ipPolicy: 'ip policy',
+      firebaseId: 'firebase-id-1',
+    };
+
+    it('should create and return an organisation', async () => {
+      jest
+        .spyOn(prismaService.organisation, 'create')
+        .mockResolvedValue(mockOrganisationArray[0]);
+
+      expect(await service.organisationSignup(organisationSignUpDto)).toBe(
+        mockOrganisationArray[0],
+      );
+    });
+  });
 });

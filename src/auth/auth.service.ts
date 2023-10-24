@@ -118,12 +118,9 @@ export class AuthService {
       });
     } catch (error) {
       if (error.code === 'P2002') {
-        throw new HttpException(
-          'A user with similar credentials already exists',
-          HttpStatus.CONFLICT,
-        );
+        throw new HttpException('User already exists', HttpStatus.CONFLICT);
       }
-      throw new Error(error);
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -162,7 +159,13 @@ export class AuthService {
         },
       });
     } catch (error) {
-      throw new Error(error);
+      if (error.code === 'P2002') {
+        throw new HttpException(
+          'Organisation already exists',
+          HttpStatus.CONFLICT,
+        );
+      }
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 }

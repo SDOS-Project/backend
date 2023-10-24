@@ -120,9 +120,9 @@ let AuthService = exports.AuthService = class AuthService {
         }
         catch (error) {
             if (error.code === 'P2002') {
-                throw new common_1.HttpException('A user with similar credentials already exists', common_1.HttpStatus.CONFLICT);
+                throw new common_1.HttpException('User already exists', common_1.HttpStatus.CONFLICT);
             }
-            throw new Error(error);
+            throw new common_1.HttpException(error, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     async organisationSignup(organisationSignUpDto) {
@@ -155,7 +155,10 @@ let AuthService = exports.AuthService = class AuthService {
             });
         }
         catch (error) {
-            throw new Error(error);
+            if (error.code === 'P2002') {
+                throw new common_1.HttpException('Organisation already exists', common_1.HttpStatus.CONFLICT);
+            }
+            throw new common_1.HttpException(error, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 };

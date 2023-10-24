@@ -7,6 +7,7 @@ import {
   IsEnum,
   IsNotEmpty,
   IsString,
+  IsUrl,
 } from 'class-validator';
 
 export class SignUpDto {
@@ -56,5 +57,6 @@ export class SignUpDto {
   @ApiProperty()
   // @IsNotEmpty()
   @IsString()
+  @IsUrl()
   imgUrl: string;
 }

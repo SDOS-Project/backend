@@ -26,6 +26,7 @@ export class OrganisationSignUpDto {
   @ApiProperty()
   // @IsNotEmpty()
   @IsString()
+  @IsUrl()
   imgUrl: string;
 
   @ApiProperty()
