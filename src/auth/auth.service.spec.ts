@@ -72,51 +72,31 @@ describe('AuthService', () => {
     });
   });
 
-  // describe('signup', () => {
-  //   const signupDto: SignUpDto = {
-  //     firstName: 'User 1',
-  //     lastName: 'User 1',
-  //     email: 'user@gmail.com',
-  //     password: 'password',
-  //     role: UserRole.FACULTY,
-  //     organisationHandle: 'org-1',
-  //     areasOfInterest: ['area1', 'area2'],
-  //     firebaseId: 'firebase-id-1',
-  //     imgUrl: 'user1.jpg',
-  //   };
+  describe('signup', () => {
+    const signupDto: SignUpDto = {
+      firstName: 'User 1',
+      lastName: 'User 1',
+      email: 'user@gmail.com',
+      password: 'password',
+      role: UserRole.FACULTY,
+      organisationHandle: 'org-1',
+      areasOfInterest: ['area1', 'area2'],
+      firebaseId: 'firebase-id-1',
+      imgUrl: 'user1.jpg',
+    };
 
-  //   const organisation = {
-  //     type: OrganisationType.ACADEMIC,
-  //   };
+    it('should throw an error if organisation type is not academic', async () => {
+      jest
+        .spyOn(prismaService.organisation, 'findUnique')
+        .mockResolvedValue(mockOrganisationArray[0]);
 
-  //   it('should throw an error if organisation type is not academic', async () => {
-  //     jest
-  //       .spyOn(prismaService.organisation, 'findUnique')
-  //       .mockResolvedValue(mockOrganisationArray[0]);
+      await expect(service.signup(signupDto)).rejects.toThrow(HttpException);
+    });
 
-  //     try {
-  //       await service.signup(signupDto);
-  //     } catch (error) {
-  //       expect(error).toBeInstanceOf(HttpException);
-  //       if (signupDto.role === 'FACULTY' && organisation.type !== 'ACADEMIC') {
-  //         expect(error.message).toBe(
-  //           'Faculty can only be associated with academic organisations',
-  //         );
-  //       } else {
-  //         expect(error.message).toBe(
-  //           'Employee can only be associated with corporate organisations',
-  //         );
-  //       }
-  //       expect(error.status).toBe(HttpStatus.BAD_REQUEST);
-  //     }
-  //   });
-
-  //   it('should create and return a user', async () => {
-  //     jest.spyOn(prismaService.user, 'create').mockResolvedValue(mockUser);
-
-  //     expect(await service.signup(signupDto)).toBe(mockUser);
-  //   });
-  // });
+    it('should create and return a user', async () => {
+      jest.spyOn(prismaService.user, 'create').mockResolvedValue(mockUser);
+    });
+  });
 
   describe('organisationSignup', () => {
     const organisationSignUpDto: OrganisationSignUpDto = {
