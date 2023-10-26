@@ -22,9 +22,6 @@ let UserController = exports.UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
     }
-    findAll() {
-        return this.userService.findAll();
-    }
     findRecommendations(firebaseId) {
         return this.userService.findRecommendations(firebaseId);
     }
@@ -47,12 +44,6 @@ let UserController = exports.UserController = class UserController {
         return this.userService.remove(firebaseId, handle);
     }
 };
-__decorate([
-    (0, common_1.Get)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], UserController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)('/recommended'),
     __param(0, (0, user_decorator_1.User)('sub')),

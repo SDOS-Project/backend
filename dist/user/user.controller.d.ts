@@ -3,14 +3,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 export declare class UserController {
     private readonly userService;
     constructor(userService: UserService);
-    findAll(): string;
     findRecommendations(firebaseId: string): Promise<{
-        organisation: {
-            name: string;
-            handle: string;
-            imgUrl: string;
-            type: import(".prisma/client").$Enums.OrganisationType;
-        };
         firstName: string;
         lastName: string;
         email: string;
@@ -18,6 +11,12 @@ export declare class UserController {
         areasOfInterest: string[];
         handle: string;
         imgUrl: string;
+        organisation: {
+            handle: string;
+            imgUrl: string;
+            name: string;
+            type: import(".prisma/client").$Enums.OrganisationType;
+        };
     }[]>;
     findFaculty(): Promise<{
         id: string;
@@ -50,12 +49,6 @@ export declare class UserController {
         imgUrl: string;
     }[]>;
     findOne(handle: string): Promise<{
-        organisation: {
-            name: string;
-            handle: string;
-            imgUrl: string;
-            type: import(".prisma/client").$Enums.OrganisationType;
-        };
         firstName: string;
         lastName: string;
         email: string;
@@ -63,18 +56,16 @@ export declare class UserController {
         areasOfInterest: string[];
         handle: string;
         imgUrl: string;
-    }>;
-    findProjects(handle: string): Promise<{
-        name: string;
-        description: string;
-        status: import(".prisma/client").$Enums.ProjectStatus;
-        handle: string;
-        organisations: {
-            name: string;
+        organisation: {
             handle: string;
             imgUrl: string;
+            name: string;
             type: import(".prisma/client").$Enums.OrganisationType;
-        }[];
+        };
+    }>;
+    findProjects(handle: string): Promise<{
+        handle: string;
+        name: string;
         users: {
             firstName: string;
             lastName: string;
@@ -82,6 +73,14 @@ export declare class UserController {
             role: import(".prisma/client").$Enums.UserRole;
             handle: string;
             imgUrl: string;
+        }[];
+        description: string;
+        status: import(".prisma/client").$Enums.ProjectStatus;
+        organisations: {
+            handle: string;
+            imgUrl: string;
+            name: string;
+            type: import(".prisma/client").$Enums.OrganisationType;
         }[];
     }[]>;
     update(firebaseId: string, updateUserDto: UpdateUserDto): Promise<{

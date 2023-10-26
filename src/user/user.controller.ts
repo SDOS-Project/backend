@@ -9,11 +9,6 @@ import { User } from 'src/common/decorators/user.decorator';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Get()
-  findAll() {
-    return this.userService.findAll();
-  }
-
   @Get('/recommended')
   findRecommendations(@User('sub') firebaseId: string) {
     return this.userService.findRecommendations(firebaseId);

@@ -11,10 +11,6 @@ export class UserService {
     this.firebaseAdmin = admin.app();
   }
 
-  findAll() {
-    return `This action returns all user`;
-  }
-
   async findRecommendations(firebaseId: string) {
     const user = await this.prisma.user.findUnique({
       where: {
