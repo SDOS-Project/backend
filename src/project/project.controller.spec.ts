@@ -70,4 +70,19 @@ describe('ProjectController', () => {
       ).toBe(result);
     });
   });
+
+  describe('addUpdate', () => {
+    it('should return an update', async () => {
+      const result = mockProject.updates[0];
+      jest.spyOn(service, 'addUpdate').mockResolvedValue(result);
+
+      expect(
+        await controller.addUpdate(
+          mockProject.handle,
+          { userHandle: mockUser.handle, content: 'Test Content' },
+          mockUser.firebaseId,
+        ),
+      ).toBe(result);
+    });
+  });
 });
