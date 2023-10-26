@@ -59,4 +59,15 @@ describe('ProjectController', () => {
       expect(await controller.findUpdates('test-project')).toBe(result);
     });
   });
+
+  describe('findConfig', () => {
+    it('should return a config', async () => {
+      const result = { isAdmin: true };
+      jest.spyOn(service, 'findConfig').mockResolvedValue(result);
+
+      expect(
+        await controller.findConfig(mockUser.firebaseId, mockProject.handle),
+      ).toBe(result);
+    });
+  });
 });
