@@ -64,4 +64,26 @@ describe('ProjectService', () => {
       expect(await service.findOne('test-project')).toBe(result);
     });
   });
+
+  describe('findUpdates', () => {
+    it('should return an array of updates', async () => {
+      const result = mockProject.updates;
+      jest
+        .spyOn(prismaService.project, 'findUnique')
+        .mockResolvedValue(mockProject);
+
+      expect(await service.findUpdates(mockProject.handle)).toBe(result);
+    });
+    it('should throw an error if project not found', async () => {
+      jest.spyOn(prismaService.project, 'findUnique').mockResolvedValue(null);
+
+      try {
+        expect(await service.findUpdates('test-project')).toBe(null);
+      } catch (error) {
+        expect(error).toBeInstanceOf(HttpException);
+        expect(error.message).toBe('Project not found');
+        expect(error.status).toBe(HttpStatus.NOT_FOUND);
+      }
+    });
+  });
 });
