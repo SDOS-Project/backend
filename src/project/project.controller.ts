@@ -61,9 +61,4 @@ export class ProjectController {
   ) {
     return this.projectService.update(firebaseId, handle, updateProjectDto);
   }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.projectService.remove(+id);
-  }
 }

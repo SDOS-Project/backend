@@ -45,9 +45,6 @@ let ProjectController = exports.ProjectController = class ProjectController {
     update(firebaseId, handle, updateProjectDto) {
         return this.projectService.update(firebaseId, handle, updateProjectDto);
     }
-    remove(id) {
-        return this.projectService.remove(+id);
-    }
 };
 __decorate([
     (0, common_1.Post)(),
@@ -102,13 +99,6 @@ __decorate([
     __metadata("design:paramtypes", [String, String, update_project_dto_1.UpdateProjectDto]),
     __metadata("design:returntype", void 0)
 ], ProjectController.prototype, "update", null);
-__decorate([
-    (0, common_1.Delete)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
-], ProjectController.prototype, "remove", null);
 exports.ProjectController = ProjectController = __decorate([
     (0, swagger_1.ApiTags)('Project'),
     (0, common_1.Controller)('project'),

@@ -262,12 +262,9 @@ let ProjectService = exports.ProjectService = class ProjectService {
         });
         if (!project)
             throw new common_1.HttpException('Project not found', common_1.HttpStatus.NOT_FOUND);
-        if (project.users.some((user) => user.firebaseId === firebaseId))
-            return true;
-        return false;
-    }
-    remove(id) {
-        return `This action removes a #${id} project`;
+        return project.users.some((user) => user.firebaseId === firebaseId)
+            ? true
+            : false;
     }
 };
 exports.ProjectService = ProjectService = __decorate([

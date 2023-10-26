@@ -84,5 +84,4 @@ export declare class ProjectController {
             handle: string;
         }[];
     }>;
-    remove(id: string): string;
 }

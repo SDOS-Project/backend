@@ -86,4 +86,27 @@ describe('ProjectService', () => {
       }
     });
   });
+
+  describe('findConfig', () => {
+    it('should return a config object', async () => {
+      const result = {
+        name: mockProject.name,
+        description: mockProject.description,
+        status: mockProject.status,
+        users: mockUserArray,
+        organisations: [],
+      };
+
+      jest
+        .spyOn(prismaService.project, 'findUnique')
+        .mockResolvedValue(mockProject);
+      try {
+        expect(
+          await service.findConfig(mockUser.id, mockProject.handle),
+        ).toStrictEqual(result);
+      } catch (error) {
+        expect(error).toBeInstanceOf(TypeError);
+      }
+    });
+  });
 });

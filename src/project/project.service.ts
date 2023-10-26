@@ -271,12 +271,8 @@ export class ProjectService {
     });
     if (!project)
       throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
-    if (project.users.some((user) => user.firebaseId === firebaseId))
-      return true;
-    return false;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} project`;
+    return project.users.some((user) => user.firebaseId === firebaseId)
+      ? true
+      : false;
   }
 }

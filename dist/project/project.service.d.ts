@@ -85,5 +85,4 @@ export declare class ProjectService {
         content: string;
     }>;
     checkIfUserIsAdmin(firebaseId: string, handle: string): Promise<boolean>;
-    remove(id: number): string;
 }
