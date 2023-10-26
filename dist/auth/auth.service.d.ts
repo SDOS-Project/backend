@@ -6,6 +6,12 @@ export declare class AuthService {
     private prisma;
     constructor(prisma: PrismaService);
     login(sub: string, loginDto: LoginDto): Promise<{
+        organisation: {
+            name: string;
+            handle: string;
+            imgUrl: string;
+            type: import(".prisma/client").$Enums.OrganisationType;
+        };
         firstName: string;
         lastName: string;
         email: string;
@@ -13,39 +19,33 @@ export declare class AuthService {
         areasOfInterest: string[];
         handle: string;
         imgUrl: string;
-        organisation: {
-            handle: string;
-            imgUrl: string;
-            name: string;
-            type: import(".prisma/client").$Enums.OrganisationType;
-        };
     } | {
+        name: string;
         email: string;
         handle: string;
         imgUrl: string;
-        name: string;
         type: import(".prisma/client").$Enums.OrganisationType;
         ipPolicy: string;
     }>;
     signup(signUpDto: SignUpDto): Promise<{
+        organisation: {
+            name: string;
+            handle: string;
+            imgUrl: string;
+            type: import(".prisma/client").$Enums.OrganisationType;
+        };
         firstName: string;
         lastName: string;
         email: string;
         role: import(".prisma/client").$Enums.UserRole;
         handle: string;
         imgUrl: string;
-        organisation: {
-            handle: string;
-            imgUrl: string;
-            name: string;
-            type: import(".prisma/client").$Enums.OrganisationType;
-        };
     }>;
     organisationSignup(organisationSignUpDto: OrganisationSignUpDto): Promise<{
+        name: string;
         email: string;
         handle: string;
         imgUrl: string;
-        name: string;
         type: import(".prisma/client").$Enums.OrganisationType;
         address: string;
         ipPolicy: string;

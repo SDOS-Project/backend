@@ -24,7 +24,7 @@ export const mockUserArray = [
     password: 'password',
     role: UserRole.EMPLOYEE,
     areasOfInterest: ['area3', 'area4'],
-    organisationId: '1',
+    organisationId: '2',
     createdAt: new Date(),
     updatedAt: new Date(),
     handle: 'user-2',

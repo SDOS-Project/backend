@@ -26,7 +26,7 @@ exports.mockUserArray = [
         password: 'password',
         role: client_1.UserRole.EMPLOYEE,
         areasOfInterest: ['area3', 'area4'],
-        organisationId: '1',
+        organisationId: '2',
         createdAt: new Date(),
         updatedAt: new Date(),
         handle: 'user-2',

@@ -12,7 +12,7 @@ import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { AddUpdateDto } from './dto/add-update.dto';
-import { User } from 'src/common/decorators/user.decorator';
+import { User } from '../common/decorators/user.decorator';
 
 @ApiTags('Project')
 @Controller('project')

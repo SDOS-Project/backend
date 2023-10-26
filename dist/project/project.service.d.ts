@@ -1,6 +1,6 @@
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { AddUpdateDto } from './dto/add-update.dto';
 export declare class ProjectService {
     private prisma;
@@ -11,13 +11,6 @@ export declare class ProjectService {
     findAll(): Promise<{
         handle: string;
         name: string;
-        users: {
-            firstName: string;
-            lastName: string;
-            email: string;
-            role: import(".prisma/client").$Enums.UserRole;
-            handle: string;
-        }[];
         description: string;
         status: import(".prisma/client").$Enums.ProjectStatus;
         organisations: {
@@ -26,10 +19,6 @@ export declare class ProjectService {
             name: string;
             type: import(".prisma/client").$Enums.OrganisationType;
         }[];
-    }[]>;
-    findOne(handle: string): Promise<{
-        handle: string;
-        name: string;
         users: {
             firstName: string;
             lastName: string;
@@ -37,12 +26,23 @@ export declare class ProjectService {
             role: import(".prisma/client").$Enums.UserRole;
             handle: string;
         }[];
+    }[]>;
+    findOne(handle: string): Promise<{
+        handle: string;
+        name: string;
         description: string;
         status: import(".prisma/client").$Enums.ProjectStatus;
         organisations: {
             handle: string;
             imgUrl: string;
             name: string;
+        }[];
+        users: {
+            firstName: string;
+            lastName: string;
+            email: string;
+            role: import(".prisma/client").$Enums.UserRole;
+            handle: string;
         }[];
     }>;
     findUpdates(handle: string): Promise<{
@@ -60,19 +60,19 @@ export declare class ProjectService {
     update(firebaseId: string, handle: string, updateProjectDto: UpdateProjectDto): Promise<{
         handle: string;
         name: string;
-        users: {
-            firstName: string;
-            lastName: string;
-            email: string;
-            role: import(".prisma/client").$Enums.UserRole;
-            handle: string;
-        }[];
         description: string;
         status: import(".prisma/client").$Enums.ProjectStatus;
         organisations: {
             handle: string;
             imgUrl: string;
             name: string;
+        }[];
+        users: {
+            firstName: string;
+            lastName: string;
+            email: string;
+            role: import(".prisma/client").$Enums.UserRole;
+            handle: string;
         }[];
     }>;
     addUpdate(handle: string, addUpdateDto: AddUpdateDto, firebaseId: string): Promise<{

@@ -1,8 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
-import generateRandomAlphanumericWithLength from 'src/auth/utils';
+import { PrismaService } from '../prisma/prisma.service';
+import generateRandomAlphanumericWithLength from '../auth/utils';
 import { AddUpdateDto } from './dto/add-update.dto';
 
 @Injectable()
@@ -24,6 +24,18 @@ export class ProjectService {
       });
       if (!partner)
         throw new HttpException('Partner not found', HttpStatus.NOT_FOUND);
+      if (creator.handle === partner.handle) {
+        throw new HttpException(
+          'Creator and partner cannot be the same',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+      if (creator.organisationId === partner.organisationId) {
+        throw new HttpException(
+          'Creator and partner cannot be from the same organisation',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
       const project = await this.prisma.project.create({
         data: {
           name: createProjectDto.name,

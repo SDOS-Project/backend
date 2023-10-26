@@ -33,6 +33,12 @@ let ProjectService = exports.ProjectService = class ProjectService {
             });
             if (!partner)
                 throw new common_1.HttpException('Partner not found', common_1.HttpStatus.NOT_FOUND);
+            if (creator.handle === partner.handle) {
+                throw new common_1.HttpException('Creator and partner cannot be the same', common_1.HttpStatus.BAD_REQUEST);
+            }
+            if (creator.organisationId === partner.organisationId) {
+                throw new common_1.HttpException('Creator and partner cannot be from the same organisation', common_1.HttpStatus.BAD_REQUEST);
+            }
             const project = await this.prisma.project.create({
                 data: {
                     name: createProjectDto.name,
