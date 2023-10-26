@@ -50,4 +50,13 @@ describe('ProjectController', () => {
       expect(await controller.findOne('test-project')).toBe(result);
     });
   });
+
+  describe('findUpdates', () => {
+    it('should return an array of updates', async () => {
+      const result = mockProject.updates;
+      jest.spyOn(service, 'findUpdates').mockResolvedValue(result);
+
+      expect(await controller.findUpdates('test-project')).toBe(result);
+    });
+  });
 });
