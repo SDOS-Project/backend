@@ -75,7 +75,7 @@ export declare class ProjectService {
             handle: string;
         }[];
     }>;
-    addUpdate(handle: string, addUpdateDto: AddUpdateDto, firebaseId: string): Promise<{
+    addUpdate(firebaseId: string, handle: string, addUpdateDto: AddUpdateDto): Promise<{
         user: {
             firstName: string;
             lastName: string;

@@ -40,7 +40,7 @@ let ProjectController = exports.ProjectController = class ProjectController {
         return this.projectService.findConfig(firebaseId, handle);
     }
     addUpdates(handle, addUpdateDto, firebaseId) {
-        return this.projectService.addUpdate(handle, addUpdateDto, firebaseId);
+        return this.projectService.addUpdate(firebaseId, handle, addUpdateDto);
     }
     update(firebaseId, handle, updateProjectDto) {
         return this.projectService.update(firebaseId, handle, updateProjectDto);

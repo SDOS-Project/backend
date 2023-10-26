@@ -6,6 +6,7 @@ import { CreateProjectDto } from './dto/create-project.dto';
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { mockUserArray } from '../organisation/mock';
 import { mockUser } from '../auth/mock';
+import { AddUpdateDto } from './dto/add-update.dto';
 
 describe('ProjectService', () => {
   let service: ProjectService;
@@ -106,6 +107,55 @@ describe('ProjectService', () => {
         ).toStrictEqual(result);
       } catch (error) {
         expect(error).toBeInstanceOf(TypeError);
+      }
+    });
+    it('should throw an error if project not found', async () => {
+      jest.spyOn(prismaService.project, 'findUnique').mockResolvedValue(null);
+
+      try {
+        expect(await service.findUpdates('test-project')).toBe(null);
+      } catch (error) {
+        expect(error).toBeInstanceOf(HttpException);
+        expect(error.message).toBe('Project not found');
+        expect(error.status).toBe(HttpStatus.NOT_FOUND);
+      }
+    });
+  });
+
+  describe('addUpdate', () => {
+    it('should return an update', async () => {
+      const createUpdateDto: AddUpdateDto = {
+        userHandle: mockUser.handle,
+        content: 'Test Content',
+      };
+      const result = mockProject.updates[0];
+      jest
+        .spyOn(prismaService.project, 'findUnique')
+        .mockResolvedValue(mockProject);
+      jest
+        .spyOn(prismaService.update, 'create')
+        .mockResolvedValue(mockProject.updates[0]);
+      try {
+        expect(
+          await service.addUpdate(
+            mockUser.id,
+            mockProject.handle,
+            createUpdateDto,
+          ),
+        ).toBe(result);
+      } catch (error) {
+        expect(error).toBeInstanceOf(TypeError);
+      }
+    });
+    it('should throw an error if project not found', async () => {
+      jest.spyOn(prismaService.project, 'findUnique').mockResolvedValue(null);
+
+      try {
+        expect(await service.findUpdates('test-project')).toBe(null);
+      } catch (error) {
+        expect(error).toBeInstanceOf(HttpException);
+        expect(error.message).toBe('Project not found');
+        expect(error.status).toBe(HttpStatus.NOT_FOUND);
       }
     });
   });

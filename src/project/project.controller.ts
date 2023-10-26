@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param } from '@nestjs/common';
 import { ProjectService } from './project.service';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
@@ -50,7 +42,7 @@ export class ProjectController {
     @Body() addUpdateDto: AddUpdateDto,
     @User('sub') firebaseId: string,
   ) {
-    return this.projectService.addUpdate(handle, addUpdateDto, firebaseId);
+    return this.projectService.addUpdate(firebaseId, handle, addUpdateDto);
   }
 
   @Patch(':handle')

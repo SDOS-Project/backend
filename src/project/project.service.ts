@@ -217,9 +217,9 @@ export class ProjectService {
   }
 
   async addUpdate(
+    firebaseId: string,
     handle: string,
     addUpdateDto: AddUpdateDto,
-    firebaseId: string,
   ) {
     const isAdmin = await this.checkIfUserIsAdmin(firebaseId, handle);
     if (!isAdmin)

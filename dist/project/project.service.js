@@ -211,7 +211,7 @@ let ProjectService = exports.ProjectService = class ProjectService {
             throw new common_1.HttpException(error, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    async addUpdate(handle, addUpdateDto, firebaseId) {
+    async addUpdate(firebaseId, handle, addUpdateDto) {
         const isAdmin = await this.checkIfUserIsAdmin(firebaseId, handle);
         if (!isAdmin)
             throw new common_1.HttpException('Unauthorized', common_1.HttpStatus.UNAUTHORIZED);
