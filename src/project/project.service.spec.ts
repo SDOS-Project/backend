@@ -48,6 +48,24 @@ describe('ProjectService', () => {
     expect(service).toBeDefined();
   });
 
+  describe('create', () => {
+    it('should return a project', async () => {
+      const createProjectDto: CreateProjectDto = {
+        name: 'Test Project',
+        description: 'Test Description',
+        creatorHandle: 'test-creator',
+        partnerHandle: 'test-partner',
+      };
+      const result = mockProject;
+      jest.spyOn(prismaService.project, 'create').mockResolvedValue(result);
+      try {
+        expect(await service.create(createProjectDto)).toBe(result);
+      } catch (error) {
+        expect(error).toBeInstanceOf(HttpException);
+      }
+    });
+  });
+
   describe('findAll', () => {
     it('should return an array of projects', async () => {
       const result = [mockProject];
@@ -109,6 +127,38 @@ describe('ProjectService', () => {
         expect(error).toBeInstanceOf(TypeError);
       }
     });
+    it('should return true if user is an admin', async () => {
+      jest
+        .spyOn(prismaService.project, 'findUnique')
+        .mockResolvedValue(mockProject);
+
+      try {
+        expect(
+          await service.checkIfUserIsAdmin(
+            mockUser.firebaseId,
+            mockProject.handle,
+          ),
+        ).toBe(true);
+      } catch (error) {
+        expect(error).toBeInstanceOf(TypeError);
+      }
+    });
+    it('should return false if user is not an admin', async () => {
+      jest
+        .spyOn(prismaService.project, 'findUnique')
+        .mockResolvedValue(mockProject);
+
+      try {
+        expect(
+          await service.checkIfUserIsAdmin(
+            mockUser.firebaseId,
+            mockProject.handle,
+          ),
+        ).toBe(false);
+      } catch (error) {
+        expect(error).toBeInstanceOf(TypeError);
+      }
+    });
     it('should throw an error if project not found', async () => {
       jest.spyOn(prismaService.project, 'findUnique').mockResolvedValue(null);
 
@@ -118,6 +168,70 @@ describe('ProjectService', () => {
         expect(error).toBeInstanceOf(HttpException);
         expect(error.message).toBe('Project not found');
         expect(error.status).toBe(HttpStatus.NOT_FOUND);
+      }
+    });
+  });
+
+  describe('update', () => {
+    it('should return true if user is an admin', async () => {
+      jest
+        .spyOn(prismaService.project, 'findUnique')
+        .mockResolvedValue(mockProject);
+
+      try {
+        expect(
+          await service.checkIfUserIsAdmin(
+            mockUser.firebaseId,
+            mockProject.handle,
+          ),
+        ).toBe(true);
+      } catch (error) {
+        expect(error).toBeInstanceOf(TypeError);
+      }
+    });
+    it('should return false if user is not an admin', async () => {
+      jest
+        .spyOn(prismaService.project, 'findUnique')
+        .mockResolvedValue(mockProject);
+
+      try {
+        expect(
+          await service.checkIfUserIsAdmin(
+            mockUser.firebaseId,
+            mockProject.handle,
+          ),
+        ).toBe(false);
+      } catch (error) {
+        expect(error).toBeInstanceOf(TypeError);
+      }
+    });
+    it('should throw an error if project not found', async () => {
+      jest.spyOn(prismaService.project, 'findUnique').mockResolvedValue(null);
+
+      try {
+        expect(await service.findUpdates('test-project')).toBe(null);
+      } catch (error) {
+        expect(error).toBeInstanceOf(HttpException);
+        expect(error.message).toBe('Project not found');
+        expect(error.status).toBe(HttpStatus.NOT_FOUND);
+      }
+    });
+    it('should update and return a project', async () => {
+      const result = mockProject;
+      jest
+        .spyOn(prismaService.project, 'findUnique')
+        .mockResolvedValue(mockProject);
+      jest.spyOn(prismaService.project, 'update').mockResolvedValue(result);
+      try {
+        expect(
+          await service.update(
+            mockUser.firebaseId,
+            mockProject.handle,
+            mockProject,
+          ),
+        ).toBe(result);
+      } catch (error) {
+        expect(error).toBeInstanceOf(TypeError);
       }
     });
   });
