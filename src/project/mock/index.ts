@@ -1,5 +1,8 @@
 import { ProjectStatus } from '@prisma/client';
 import { CreateProjectDto } from '../dto/create-project.dto';
+import { mockOrganisationArray, mockUserArray } from '../../organisation/mock';
+import { mockUser } from '../../auth/mock';
+import { AddUpdateDto } from '../dto/add-update.dto';
 
 export const mockProject = {
   id: 'test-id',
@@ -20,8 +23,11 @@ export const mockProject = {
       updatedAt: new Date(),
       userId: 'test-user',
       projectId: 'test-project',
+      user: mockUser,
     },
   ],
+  users: mockUserArray,
+  organisations: mockOrganisationArray,
 };
 
 export const mockCreateProjectDto: CreateProjectDto = {
@@ -29,4 +35,9 @@ export const mockCreateProjectDto: CreateProjectDto = {
   description: 'Test Description',
   creatorHandle: 'test-creator',
   partnerHandle: 'test-partner',
+};
+
+export const createUpdateDto: AddUpdateDto = {
+  userHandle: mockUser.handle,
+  content: 'Test Content',
 };

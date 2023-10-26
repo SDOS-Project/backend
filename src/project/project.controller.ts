@@ -37,7 +37,7 @@ export class ProjectController {
   }
 
   @Post(':handle/updates')
-  addUpdates(
+  addUpdate(
     @Param('handle') handle: string,
     @Body() addUpdateDto: AddUpdateDto,
     @User('sub') firebaseId: string,

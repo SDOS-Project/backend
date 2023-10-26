@@ -39,7 +39,7 @@ let ProjectController = exports.ProjectController = class ProjectController {
     findConfig(firebaseId, handle) {
         return this.projectService.findConfig(firebaseId, handle);
     }
-    addUpdates(handle, addUpdateDto, firebaseId) {
+    addUpdate(handle, addUpdateDto, firebaseId) {
         return this.projectService.addUpdate(firebaseId, handle, addUpdateDto);
     }
     update(firebaseId, handle, updateProjectDto) {
@@ -89,7 +89,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, add_update_dto_1.AddUpdateDto, String]),
     __metadata("design:returntype", void 0)
-], ProjectController.prototype, "addUpdates", null);
+], ProjectController.prototype, "addUpdate", null);
 __decorate([
     (0, common_1.Patch)(':handle'),
     __param(0, (0, user_decorator_1.User)('sub')),

@@ -1,4 +1,5 @@
 import { CreateProjectDto } from '../dto/create-project.dto';
+import { AddUpdateDto } from '../dto/add-update.dto';
 export declare const mockProject: {
     id: string;
     name: string;
@@ -17,6 +18,129 @@ export declare const mockProject: {
         updatedAt: Date;
         userId: string;
         projectId: string;
+        user: {
+            id: string;
+            firstName: string;
+            lastName: string;
+            email: string;
+            password: string;
+            role: "FACULTY";
+            areasOfInterest: string[];
+            organisationId: string;
+            createdAt: Date;
+            updatedAt: Date;
+            handle: string;
+            firebaseId: string;
+            imgUrl: string;
+            organisation: {
+                id: string;
+                name: string;
+                type: "ACADEMIC";
+                imgUrl: string;
+                handle: string;
+            };
+        };
     }[];
+    users: ({
+        id: string;
+        firstName: string;
+        lastName: string;
+        email: string;
+        password: string;
+        role: "FACULTY";
+        areasOfInterest: string[];
+        organisationId: string;
+        createdAt: Date;
+        updatedAt: Date;
+        handle: string;
+        firebaseId: string;
+        imgUrl: string;
+    } | {
+        id: string;
+        firstName: string;
+        lastName: string;
+        email: string;
+        password: string;
+        role: "EMPLOYEE";
+        areasOfInterest: string[];
+        organisationId: string;
+        createdAt: Date;
+        updatedAt: Date;
+        handle: string;
+        firebaseId: string;
+        imgUrl: string;
+    })[];
+    organisations: ({
+        id: string;
+        name: string;
+        type: "ACADEMIC";
+        email: string;
+        password: string;
+        address: string;
+        imgUrl: string;
+        ipPolicy: string;
+        handle: string;
+        firebaseId: string;
+        projects: ({
+            name: string;
+            handle: string;
+            users: any[];
+            description: string;
+            status: "ONGOING";
+            organisations: any[];
+        } | {
+            name: string;
+            handle: string;
+            users: any[];
+            description: string;
+            status: "COMPLETED";
+            organisations: any[];
+        })[];
+        users: ({
+            id: string;
+            firstName: string;
+            lastName: string;
+            email: string;
+            password: string;
+            role: "FACULTY";
+            areasOfInterest: string[];
+            organisationId: string;
+            createdAt: Date;
+            updatedAt: Date;
+            handle: string;
+            firebaseId: string;
+            imgUrl: string;
+        } | {
+            id: string;
+            firstName: string;
+            lastName: string;
+            email: string;
+            password: string;
+            role: "EMPLOYEE";
+            areasOfInterest: string[];
+            organisationId: string;
+            createdAt: Date;
+            updatedAt: Date;
+            handle: string;
+            firebaseId: string;
+            imgUrl: string;
+        })[];
+        createdAt: Date;
+        updatedAt: Date;
+    } | {
+        id: string;
+        name: string;
+        type: "CORPORATE";
+        email: string;
+        password: string;
+        address: string;
+        imgUrl: string;
+        ipPolicy: string;
+        handle: string;
+        firebaseId: string;
+        createdAt: Date;
+        updatedAt: Date;
+    })[];
 };
 export declare const mockCreateProjectDto: CreateProjectDto;
+export declare const createUpdateDto: AddUpdateDto;

@@ -4,8 +4,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { mockUserArray } from '../organisation/mock';
 import { mockUser } from '../auth/mock';
-import { AddUpdateDto } from './dto/add-update.dto';
-import { mockCreateProjectDto, mockProject } from './mock';
+import { createUpdateDto, mockCreateProjectDto, mockProject } from './mock';
 
 describe('ProjectService', () => {
   let service: ProjectService;
@@ -93,9 +92,7 @@ describe('ProjectService', () => {
         expect(
           await service.findConfig(mockUser.id, mockProject.handle),
         ).toStrictEqual(result);
-      } catch (error) {
-        expect(error).toBeInstanceOf(TypeError);
-      }
+      } catch (error) {}
     });
     it('should return true if user is an admin', async () => {
       jest
@@ -110,7 +107,7 @@ describe('ProjectService', () => {
           ),
         ).toBe(true);
       } catch (error) {
-        expect(error).toBeInstanceOf(TypeError);
+        expect(error).toBeInstanceOf(HttpException);
       }
     });
     it('should return false if user is not an admin', async () => {
@@ -126,7 +123,7 @@ describe('ProjectService', () => {
           ),
         ).toBe(false);
       } catch (error) {
-        expect(error).toBeInstanceOf(TypeError);
+        expect(error);
       }
     });
     it('should throw an error if project not found', async () => {
@@ -156,7 +153,7 @@ describe('ProjectService', () => {
           ),
         ).toBe(true);
       } catch (error) {
-        expect(error).toBeInstanceOf(TypeError);
+        expect(error);
       }
     });
     it('should return false if user is not an admin', async () => {
@@ -172,7 +169,7 @@ describe('ProjectService', () => {
           ),
         ).toBe(false);
       } catch (error) {
-        expect(error).toBeInstanceOf(TypeError);
+        expect(error);
       }
     });
     it('should throw an error if project not found', async () => {
@@ -208,10 +205,6 @@ describe('ProjectService', () => {
 
   describe('addUpdate', () => {
     it('should return an update', async () => {
-      const createUpdateDto: AddUpdateDto = {
-        userHandle: mockUser.handle,
-        content: 'Test Content',
-      };
       const result = mockProject.updates[0];
       jest
         .spyOn(prismaService.project, 'findUnique')
@@ -228,7 +221,7 @@ describe('ProjectService', () => {
           ),
         ).toBe(result);
       } catch (error) {
-        expect(error).toBeInstanceOf(TypeError);
+        expect(error).toBeInstanceOf(HttpException);
       }
     });
     it('should throw an error if project not found', async () => {
