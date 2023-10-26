@@ -1,39 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ProjectService } from './project.service';
 import { PrismaService } from '../prisma/prisma.service';
-import { ProjectStatus } from '@prisma/client';
-import { CreateProjectDto } from './dto/create-project.dto';
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { mockUserArray } from '../organisation/mock';
 import { mockUser } from '../auth/mock';
 import { AddUpdateDto } from './dto/add-update.dto';
+import { mockCreateProjectDto, mockProject } from './mock';
 
 describe('ProjectService', () => {
   let service: ProjectService;
   let prismaService: PrismaService;
-
-  const mockProject = {
-    id: 'test-id',
-    name: 'Test Project',
-    description: 'Test Description',
-    creatorHandle: 'test-creator',
-    partnerHandle: 'test-partner',
-    handle: 'test-project',
-    status: ProjectStatus.ONGOING,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    updates: [
-      {
-        id: 'test-id',
-        title: 'Test Title',
-        content: 'Test Description',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        userId: 'test-user',
-        projectId: 'test-project',
-      },
-    ],
-  };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -50,16 +26,10 @@ describe('ProjectService', () => {
 
   describe('create', () => {
     it('should return a project', async () => {
-      const createProjectDto: CreateProjectDto = {
-        name: 'Test Project',
-        description: 'Test Description',
-        creatorHandle: 'test-creator',
-        partnerHandle: 'test-partner',
-      };
       const result = mockProject;
       jest.spyOn(prismaService.project, 'create').mockResolvedValue(result);
       try {
-        expect(await service.create(createProjectDto)).toBe(result);
+        expect(await service.create(mockCreateProjectDto)).toBe(result);
       } catch (error) {
         expect(error).toBeInstanceOf(HttpException);
       }
