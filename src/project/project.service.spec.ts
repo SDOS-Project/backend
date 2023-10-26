@@ -55,4 +55,13 @@ describe('ProjectService', () => {
       expect(await service.findAll()).toBe(result);
     });
   });
+
+  describe('findOne', () => {
+    it('should return a project', async () => {
+      const result = mockProject;
+      jest.spyOn(prismaService.project, 'findUnique').mockResolvedValue(result);
+
+      expect(await service.findOne('test-project')).toBe(result);
+    });
+  });
 });
