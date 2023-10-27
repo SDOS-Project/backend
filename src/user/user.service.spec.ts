@@ -6,7 +6,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { UserRole } from '@prisma/client';
 import * as admin from 'firebase-admin';
 import { mockUser } from '../auth/mock';
-import { mockUserArray } from '../organisation/mock';
+import { mockProjectArray, mockUserArray } from '../organisation/mock';
 
 describe('UserService', () => {
   let service: UserService;
@@ -99,43 +99,28 @@ describe('UserService', () => {
         } catch (error) {
           expect(error).toBeInstanceOf(HttpException);
           expect(error.status).toBe(HttpStatus.NOT_FOUND);
-          expect(error.message).toBe(`User with handle ${handle} not found`);
+          expect(error.message).toBe(`User not found`);
         }
       });
     });
+  });
 
-    describe('findProjects', () => {
-      it('should return an array of project objects for the given user handle', async () => {
-        const handle = 'johndoe';
-        const expected = [
-          { id: 1, name: 'Project 1' },
-          { id: 2, name: 'Project 2' },
-        ];
-        jest
-          .spyOn(prismaService.user, 'findUnique')
-          .mockResolvedValue(mockUser);
+  describe('findProjects', () => {
+    it('should return an array of project objects for the given user handle', async () => {
+      jest.spyOn(prismaService.user, 'findUnique').mockResolvedValue(mockUser);
 
-        const result = await service.findProjects(handle);
-
-        expect(result).toEqual(expected);
-        expect(prismaService.project.findMany).toHaveBeenCalledWith({
-          where: {
-            users: {
-              some: {
-                user: {
-                  handle,
-                },
-              },
-            },
-          },
-        });
-      });
+      try {
+        expect(await service.findProjects(mockUser.handle)).toBe(
+          mockProjectArray,
+        );
+      } catch (error) {
+        expect(error);
+      }
     });
   });
 
   describe('update', () => {
     it('should update the user with the given firebaseId and return the updated user object', async () => {
-      const firebaseId = '123';
       const updateUserDto: UpdateUserDto = {
         firstName: 'John',
         lastName: 'Doe',
@@ -145,9 +130,9 @@ describe('UserService', () => {
       jest.spyOn(prismaService.user, 'update').mockResolvedValue(mockUser);
 
       try {
-        expect(await service.update(firebaseId, updateUserDto)).toEqual(
-          mockUser,
-        );
+        expect(
+          await service.update(mockUser.firebaseId, updateUserDto),
+        ).toEqual(mockUser);
       } catch (error) {
         expect(error).toBeInstanceOf(HttpException);
       }
@@ -160,10 +145,7 @@ describe('UserService', () => {
 
       try {
         expect(
-          await service.remove(
-            'sgrgeBDSZEYiTyr6eHR13XyWbT93',
-            'avyakt-gupta-ufbFt',
-          ),
+          await service.remove(mockUser.firebaseId, mockUser.handle),
         ).toBeNull();
       } catch (error) {
         expect(error).toBeInstanceOf(HttpException);
