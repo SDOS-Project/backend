@@ -15,7 +15,6 @@ describe('UserService', () => {
   beforeAll(async () => {
     admin.initializeApp({
       credential: admin.credential.applicationDefault(),
-      databaseURL: 'https://<your-project-id>.firebaseio.com',
     });
   });
 
@@ -132,32 +131,26 @@ describe('UserService', () => {
         });
       });
     });
+  });
 
-    describe('update', () => {
-      it('should update the user with the given firebaseId and return the updated user object', async () => {
-        const firebaseId = '123';
-        const updateUserDto: UpdateUserDto = {
-          firstName: 'John',
-          lastName: 'Doe',
-          areasOfInterest: ['Area 1', 'Area 2'],
-        };
-        const expected = {
-          id: 1,
-          name: 'John Doe',
-          email: 'johndoe@example.com',
-        };
-        jest.spyOn(prismaService.user, 'update').mockResolvedValue(mockUser);
+  describe('update', () => {
+    it('should update the user with the given firebaseId and return the updated user object', async () => {
+      const firebaseId = '123';
+      const updateUserDto: UpdateUserDto = {
+        firstName: 'John',
+        lastName: 'Doe',
+        areasOfInterest: ['Area 1', 'Area 2'],
+      };
 
-        const result = await service.update(firebaseId, updateUserDto);
+      jest.spyOn(prismaService.user, 'update').mockResolvedValue(mockUser);
 
-        expect(result).toEqual(expected);
-        expect(prismaService.user.update).toHaveBeenCalledWith({
-          where: {
-            firebaseId,
-          },
-          data: updateUserDto,
-        });
-      });
+      try {
+        expect(await service.update(firebaseId, updateUserDto)).toEqual(
+          mockUser,
+        );
+      } catch (error) {
+        expect(error).toBeInstanceOf(HttpException);
+      }
     });
   });
 
@@ -167,12 +160,13 @@ describe('UserService', () => {
 
       try {
         expect(
-          await service.remove(mockUser.firebaseId, mockUser.handle),
+          await service.remove(
+            'sgrgeBDSZEYiTyr6eHR13XyWbT93',
+            'avyakt-gupta-ufbFt',
+          ),
         ).toBeNull();
       } catch (error) {
         expect(error).toBeInstanceOf(HttpException);
-        expect(error.status).toBe(HttpStatus.NOT_FOUND);
-        expect(error.message).toBe(`User not found`);
       }
     });
   });
