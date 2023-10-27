@@ -1,14 +1,19 @@
-import { mock } from 'node:test';
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import { PrismaService } from '../prisma/prisma.service';
-import { mockUserArray } from 'src/organisation/mock';
-import { mockUser } from 'src/auth/mock';
+import { mockUser } from '../auth/mock';
+import * as admin from 'firebase-admin';
 
 describe('UserController', () => {
   let controller: UserController;
   let service: UserService;
+
+  beforeAll(async () => {
+    admin.initializeApp({
+      credential: admin.credential.applicationDefault(),
+    });
+  });
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -28,7 +33,7 @@ describe('UserController', () => {
     it('should return an array of user objects', async () => {
       jest.spyOn(service, 'findRecommendations').mockResolvedValue([mockUser]);
 
-      expect(await controller.findRecommendations('firebaseId')).toBe([
+      expect(await controller.findRecommendations('firebaseId')).toStrictEqual([
         mockUser,
       ]);
     });
@@ -38,7 +43,15 @@ describe('UserController', () => {
     it('should return an array of user objects with role FACULTY', async () => {
       jest.spyOn(service, 'findFaculty').mockResolvedValue([mockUser]);
 
-      expect(await controller.findFaculty()).toBe([mockUser]);
+      expect(await controller.findFaculty()).toStrictEqual([mockUser]);
+    });
+  });
+
+  describe('findEmployees', () => {
+    it('should return an array of user objects with role EMPLOYEE', async () => {
+      jest.spyOn(service, 'findEmployees').mockResolvedValue([mockUser]);
+
+      expect(await controller.findEmployees()).toStrictEqual([mockUser]);
     });
   });
 });
