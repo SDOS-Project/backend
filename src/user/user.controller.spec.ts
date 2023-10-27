@@ -5,6 +5,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { mockUser } from '../auth/mock';
 import * as admin from 'firebase-admin';
 import { mockUpdateUserDto } from './mock';
+import { mockProjectArray } from '../organisation/mock';
 
 describe('UserController', () => {
   let controller: UserController;
@@ -66,7 +67,15 @@ describe('UserController', () => {
     });
   });
 
-  describe('findProjects', () => {});
+  describe('findProjects', () => {
+    it('should return an array of project objects', async () => {
+      jest.spyOn(service, 'findProjects').mockResolvedValue(mockProjectArray);
+
+      expect(await controller.findProjects(mockUser.firebaseId)).toStrictEqual(
+        mockProjectArray,
+      );
+    });
+  });
 
   describe('update', () => {
     it('should return a user object', async () => {
