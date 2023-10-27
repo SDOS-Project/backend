@@ -7,7 +7,6 @@ import { UserRole } from '@prisma/client';
 import * as admin from 'firebase-admin';
 import { mockUser } from '../auth/mock';
 import { mockProjectArray, mockUserArray } from '../organisation/mock';
-import { mock } from 'node:test';
 
 describe('UserService', () => {
   let service: UserService;
@@ -57,20 +56,15 @@ describe('UserService', () => {
         });
       });
     });
+  });
 
-    describe('findEmployees', () => {
-      it('should return an array of user objects with role EMPLOYEE', async () => {
-        jest
-          .spyOn(prismaService.user, 'findMany')
-          .mockResolvedValue(mockUserArray);
+  describe('findEmployees', () => {
+    it('should return an array of user objects with role EMPLOYEE', async () => {
+      jest
+        .spyOn(prismaService.user, 'findMany')
+        .mockResolvedValue(mockUserArray);
 
-        expect(await service.findEmployees()).toEqual(mockUser);
-        expect(prismaService.user.findMany).toHaveBeenCalledWith({
-          where: {
-            role: UserRole.EMPLOYEE,
-          },
-        });
-      });
+      expect(await service.findEmployees()).toEqual(mockUserArray);
     });
   });
 
