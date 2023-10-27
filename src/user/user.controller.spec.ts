@@ -54,4 +54,12 @@ describe('UserController', () => {
       expect(await controller.findEmployees()).toStrictEqual([mockUser]);
     });
   });
+
+  describe('findOne', () => {
+    it('should return a user object', async () => {
+      jest.spyOn(service, 'findOne').mockResolvedValue(mockUser);
+
+      expect(await controller.findOne('firebaseId')).toStrictEqual(mockUser);
+    });
+  });
 });
