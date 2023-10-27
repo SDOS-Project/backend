@@ -4,6 +4,7 @@ import { UserService } from './user.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { mockUser } from '../auth/mock';
 import * as admin from 'firebase-admin';
+import { mockUpdateUserDto } from './mock';
 
 describe('UserController', () => {
   let controller: UserController;
@@ -60,6 +61,16 @@ describe('UserController', () => {
       jest.spyOn(service, 'findOne').mockResolvedValue(mockUser);
 
       expect(await controller.findOne('firebaseId')).toStrictEqual(mockUser);
+    });
+  });
+
+  describe('update', () => {
+    it('should return a user object', async () => {
+      jest.spyOn(service, 'update').mockResolvedValue(mockUser);
+
+      expect(
+        await controller.update('firebaseId', mockUpdateUserDto),
+      ).toStrictEqual(mockUser);
     });
   });
 });

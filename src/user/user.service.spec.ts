@@ -6,6 +6,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import * as admin from 'firebase-admin';
 import { mockUser } from '../auth/mock';
 import { mockProjectArray, mockUserArray } from '../organisation/mock';
+import { mockUpdateUserDto } from './mock';
 
 describe('UserService', () => {
   let service: UserService;
@@ -114,17 +115,11 @@ describe('UserService', () => {
 
   describe('update', () => {
     it('should update the user with the given firebaseId and return the updated user object', async () => {
-      const updateUserDto: UpdateUserDto = {
-        firstName: 'John',
-        lastName: 'Doe',
-        areasOfInterest: ['Area 1', 'Area 2'],
-      };
-
       jest.spyOn(prismaService.user, 'update').mockResolvedValue(mockUser);
 
       try {
         expect(
-          await service.update(mockUser.firebaseId, updateUserDto),
+          await service.update(mockUser.firebaseId, mockUpdateUserDto),
         ).toEqual(mockUser);
       } catch (error) {
         expect(error).toBeInstanceOf(HttpException);
