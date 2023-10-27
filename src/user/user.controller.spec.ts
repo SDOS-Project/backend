@@ -34,9 +34,9 @@ describe('UserController', () => {
     it('should return an array of user objects', async () => {
       jest.spyOn(service, 'findRecommendations').mockResolvedValue([mockUser]);
 
-      expect(await controller.findRecommendations('firebaseId')).toStrictEqual([
-        mockUser,
-      ]);
+      expect(
+        await controller.findRecommendations(mockUser.firebaseId),
+      ).toStrictEqual([mockUser]);
     });
   });
 
@@ -60,17 +60,31 @@ describe('UserController', () => {
     it('should return a user object', async () => {
       jest.spyOn(service, 'findOne').mockResolvedValue(mockUser);
 
-      expect(await controller.findOne('firebaseId')).toStrictEqual(mockUser);
+      expect(await controller.findOne(mockUser.firebaseId)).toStrictEqual(
+        mockUser,
+      );
     });
   });
+
+  describe('findProjects', () => {});
 
   describe('update', () => {
     it('should return a user object', async () => {
       jest.spyOn(service, 'update').mockResolvedValue(mockUser);
 
       expect(
-        await controller.update('firebaseId', mockUpdateUserDto),
+        await controller.update(mockUser.firebaseId, mockUpdateUserDto),
       ).toStrictEqual(mockUser);
+    });
+  });
+
+  describe('remove', () => {
+    it('should return a user object', async () => {
+      jest.spyOn(service, 'remove').mockResolvedValue(null);
+
+      expect(
+        await controller.remove(mockUser.firebaseId, mockUser.handle),
+      ).toStrictEqual(null);
     });
   });
 });

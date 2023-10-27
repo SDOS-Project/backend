@@ -2,7 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UserService } from './user.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { HttpException, HttpStatus } from '@nestjs/common';
-import { UpdateUserDto } from './dto/update-user.dto';
 import * as admin from 'firebase-admin';
 import { mockUser } from '../auth/mock';
 import { mockProjectArray, mockUserArray } from '../organisation/mock';
