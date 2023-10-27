@@ -7,6 +7,7 @@ import { UserRole } from '@prisma/client';
 import * as admin from 'firebase-admin';
 import { mockUser } from '../auth/mock';
 import { mockProjectArray, mockUserArray } from '../organisation/mock';
+import { mock } from 'node:test';
 
 describe('UserService', () => {
   let service: UserService;
@@ -71,37 +72,25 @@ describe('UserService', () => {
         });
       });
     });
+  });
 
-    describe('findOne', () => {
-      it('should return a user object with the given handle', async () => {
-        const handle = 'johndoe';
-        const expected = { id: 1, name: 'John Doe', handle };
-        jest
-          .spyOn(prismaService.user, 'findUnique')
-          .mockResolvedValue(mockUser);
+  describe('findOne', () => {
+    it('should return a user object with the given handle', async () => {
+      jest.spyOn(prismaService.user, 'findUnique').mockResolvedValue(mockUser);
 
-        const result = await service.findOne(handle);
+      expect(await service.findOne(mockUser.handle)).toEqual(mockUser);
+    });
 
-        expect(result).toEqual(expected);
-        expect(prismaService.user.findFirst).toHaveBeenCalledWith({
-          where: {
-            handle,
-          },
-        });
-      });
+    it('should throw an HttpException with status code 404 if user is not found', async () => {
+      jest.spyOn(prismaService.user, 'findUnique').mockResolvedValue(null);
 
-      it('should throw an HttpException with status code 404 if user is not found', async () => {
-        const handle = 'johndoe';
-        jest.spyOn(prismaService.user, 'findFirst').mockResolvedValue(null);
-
-        try {
-          await service.findOne(handle);
-        } catch (error) {
-          expect(error).toBeInstanceOf(HttpException);
-          expect(error.status).toBe(HttpStatus.NOT_FOUND);
-          expect(error.message).toBe(`User not found`);
-        }
-      });
+      try {
+        await service.findOne(mockUser.handle);
+      } catch (error) {
+        expect(error).toBeInstanceOf(HttpException);
+        expect(error.status).toBe(HttpStatus.NOT_FOUND);
+        expect(error.message).toBe(`User not found`);
+      }
     });
   });
 
@@ -115,6 +104,18 @@ describe('UserService', () => {
         );
       } catch (error) {
         expect(error);
+      }
+    });
+
+    it('should throw an HttpException with status code 404 if user is not found', async () => {
+      jest.spyOn(prismaService.user, 'findUnique').mockResolvedValue(null);
+
+      try {
+        await service.findOne(mockUser.handle);
+      } catch (error) {
+        expect(error).toBeInstanceOf(HttpException);
+        expect(error.status).toBe(HttpStatus.NOT_FOUND);
+        expect(error.message).toBe(`User not found`);
       }
     });
   });
@@ -137,6 +138,18 @@ describe('UserService', () => {
         expect(error).toBeInstanceOf(HttpException);
       }
     });
+
+    it('should throw an HttpException with status code 404 if user is not found', async () => {
+      jest.spyOn(prismaService.user, 'findUnique').mockResolvedValue(null);
+
+      try {
+        await service.findOne(mockUser.handle);
+      } catch (error) {
+        expect(error).toBeInstanceOf(HttpException);
+        expect(error.status).toBe(HttpStatus.NOT_FOUND);
+        expect(error.message).toBe(`User not found`);
+      }
+    });
   });
 
   describe('remove', () => {
@@ -149,6 +162,18 @@ describe('UserService', () => {
         ).toBeNull();
       } catch (error) {
         expect(error).toBeInstanceOf(HttpException);
+      }
+    });
+
+    it('should throw an HttpException with status code 404 if user is not found', async () => {
+      jest.spyOn(prismaService.user, 'findUnique').mockResolvedValue(null);
+
+      try {
+        await service.findOne(mockUser.handle);
+      } catch (error) {
+        expect(error).toBeInstanceOf(HttpException);
+        expect(error.status).toBe(HttpStatus.NOT_FOUND);
+        expect(error.message).toBe(`User not found`);
       }
     });
   });
