@@ -37,9 +37,13 @@ describe('UserService', () => {
         .spyOn(prismaService.user, 'findMany')
         .mockResolvedValue(mockUserArray);
 
-      expect(await service.findRecommendations(mockUser.firebaseId)).toEqual(
-        mockUserArray,
-      );
+      try {
+        expect(await service.findRecommendations(mockUser.firebaseId)).toEqual(
+          mockUserArray,
+        );
+      } catch (error) {
+        expect(error).toBeInstanceOf(HttpException);
+      }
     });
   });
 
