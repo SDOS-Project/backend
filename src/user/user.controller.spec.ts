@@ -1,3 +1,4 @@
+import { mock } from 'node:test';
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
@@ -30,6 +31,14 @@ describe('UserController', () => {
       expect(await controller.findRecommendations('firebaseId')).toBe([
         mockUser,
       ]);
+    });
+  });
+
+  describe('findFaculty', () => {
+    it('should return an array of user objects with role FACULTY', async () => {
+      jest.spyOn(service, 'findFaculty').mockResolvedValue([mockUser]);
+
+      expect(await controller.findFaculty()).toBe([mockUser]);
     });
   });
 });
