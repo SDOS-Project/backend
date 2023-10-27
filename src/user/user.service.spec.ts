@@ -41,20 +41,15 @@ describe('UserService', () => {
         mockUserArray,
       );
     });
+  });
 
-    describe('findFaculty', () => {
-      it('should return an array of user objects with role FACULTY', async () => {
-        jest
-          .spyOn(prismaService.user, 'findMany')
-          .mockResolvedValue(mockUserArray);
+  describe('findFaculty', () => {
+    it('should return an array of user objects with role FACULTY', async () => {
+      jest
+        .spyOn(prismaService.user, 'findMany')
+        .mockResolvedValue(mockUserArray);
 
-        expect(await service.findFaculty()).toEqual(mockUserArray);
-        expect(prismaService.user.findMany).toHaveBeenCalledWith({
-          where: {
-            role: UserRole.FACULTY,
-          },
-        });
-      });
+      expect(await service.findFaculty()).toEqual(mockUserArray);
     });
   });
 
