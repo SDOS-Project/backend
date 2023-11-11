@@ -7,7 +7,6 @@ import {
   IsEnum,
   IsNotEmpty,
   IsString,
-  IsUrl,
 } from 'class-validator';
 
 export class SignUpDto {
@@ -55,8 +54,6 @@ export class SignUpDto {
   firebaseId: string;
 
   @ApiProperty()
-  // @IsNotEmpty()
   @IsString()
-  @IsUrl()
   imgUrl: string;
 }
