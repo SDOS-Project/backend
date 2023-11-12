@@ -203,6 +203,8 @@ export class UserService {
           },
         });
 
+        console.log('1');
+
         await transaction.organisation.update({
           where: {
             id: user.organisation.id,
@@ -216,6 +218,8 @@ export class UserService {
           },
         });
 
+        console.log('2');
+
         await transaction.project.deleteMany({
           where: {
             users: {
@@ -226,11 +230,15 @@ export class UserService {
           },
         });
 
+        console.log('3');
+
         await transaction.user.delete({
           where: {
             id: user.id,
           },
         });
+
+        console.log('4');
 
         await this.firebaseAdmin.auth().deleteUser(user.firebaseId);
       });
