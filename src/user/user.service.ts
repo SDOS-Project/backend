@@ -194,16 +194,6 @@ export class UserService {
           throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
         }
 
-        await transaction.project.deleteMany({
-          where: {
-            users: {
-              some: {
-                handle,
-              },
-            },
-          },
-        });
-
         await transaction.organisation.update({
           where: {
             firebaseId,
@@ -221,6 +211,16 @@ export class UserService {
           where: {
             user: {
               handle,
+            },
+          },
+        });
+
+        await transaction.project.deleteMany({
+          where: {
+            users: {
+              some: {
+                handle,
+              },
             },
           },
         });
