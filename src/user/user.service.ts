@@ -203,8 +203,6 @@ export class UserService {
           },
         });
 
-        console.log('1');
-
         await transaction.project.deleteMany({
           where: {
             users: {
@@ -214,7 +212,6 @@ export class UserService {
             },
           },
         });
-        console.log('2');
 
         await transaction.user.delete({
           where: {
@@ -222,20 +219,18 @@ export class UserService {
           },
         });
 
-        console.log('3');
-
-        await transaction.organisation.update({
-          where: {
-            id: user.organisation.id,
-          },
-          data: {
-            users: {
-              disconnect: {
-                id: user.id,
-              },
-            },
-          },
-        });
+        // await transaction.organisation.update({
+        //   where: {
+        //     id: user.organisation.id,
+        //   },
+        //   data: {
+        //     users: {
+        //       disconnect: {
+        //         handle: user.handle,
+        //       },
+        //     },
+        //   },
+        // });
 
         console.log('4');
 
