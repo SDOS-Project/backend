@@ -180,10 +180,12 @@ export class UserService {
             id: true,
             handle: true,
             firebaseId: true,
-            projects: true,
-            updates: true,
-            organisation: true,
-            organisationId: true,
+            organisation: {
+              select: {
+                id: true,
+                firebaseId: true,
+              },
+            },
           },
         });
 
@@ -203,7 +205,7 @@ export class UserService {
 
         await transaction.organisation.update({
           where: {
-            id: user.organisationId,
+            id: user.organisation.id,
           },
           data: {
             users: {
