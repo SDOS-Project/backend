@@ -170,31 +170,68 @@ export class UserService {
   }
 
   async remove(firebaseId: string, handle: string) {
-    const user = await this.prisma.user.findUnique({
-      where: {
-        handle,
-      },
-      select: {
-        firebaseId: true,
-        organisation: {
+    try {
+      await this.prisma.$transaction(async (transaction) => {
+        const user = await transaction.user.findUnique({
+          where: {
+            handle,
+          },
           select: {
             firebaseId: true,
+            organisation: {
+              select: {
+                firebaseId: true,
+              },
+            },
           },
-        },
-      },
-    });
-    if (!user) {
-      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
-    }
-    if (user.organisation.firebaseId !== firebaseId) {
-      throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
-    }
-    try {
-      await this.firebaseAdmin.auth().deleteUser(user.firebaseId);
-      await this.prisma.user.delete({
-        where: {
-          handle,
-        },
+        });
+
+        if (!user) {
+          throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+        }
+
+        if (user.organisation.firebaseId !== firebaseId) {
+          throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
+        }
+
+        await transaction.project.deleteMany({
+          where: {
+            users: {
+              some: {
+                handle,
+              },
+            },
+          },
+        });
+
+        await transaction.organisation.update({
+          where: {
+            firebaseId,
+          },
+          data: {
+            users: {
+              delete: {
+                handle,
+              },
+            },
+          },
+        });
+
+        await transaction.update.deleteMany({
+          where: {
+            user: {
+              handle,
+            },
+          },
+        });
+
+        await this.firebaseAdmin.auth().deleteUser(user.firebaseId);
+
+        await transaction.user.delete({
+          where: {
+            handle,
+          },
+        });
       });
       return;
     } catch (error) {
