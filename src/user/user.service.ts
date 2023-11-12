@@ -225,14 +225,15 @@ export class UserService {
           },
         });
 
-        await this.firebaseAdmin.auth().deleteUser(user.firebaseId);
-
         await transaction.user.delete({
           where: {
             handle,
           },
         });
+
+        await this.firebaseAdmin.auth().deleteUser(user.firebaseId);
       });
+
       return;
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
