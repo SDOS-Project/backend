@@ -6,11 +6,16 @@ import { ValidationPipe } from '@nestjs/common';
 import * as fs from 'fs';
 
 async function bootstrap() {
-  // const httpsOptions = {
-  //   key: fs.readFileSync('./private-key.pem'),
-  //   cert: fs.readFileSync('./public-cert.pem'),
-  // };
-  const app = await NestFactory.create(AppModule, { cors: true });
+  let httpsOptions = {};
+  const isLocal = process.env.NODE_ENV !== 'production';
+
+  if (!isLocal) {
+    httpsOptions = {
+      key: fs.readFileSync('./private-key.pem'),
+      cert: fs.readFileSync('./public-cert.pem'),
+    };
+  }
+  const app = await NestFactory.create(AppModule, { httpsOptions, cors: true });
   app.useGlobalPipes(new ValidationPipe());
   app.use(helmet());
   const config = new DocumentBuilder()
