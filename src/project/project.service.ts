@@ -121,6 +121,7 @@ export class ProjectService {
             email: true,
             handle: true,
             role: true,
+            imgUrl: true,
           },
         },
         organisations: {
