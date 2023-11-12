@@ -18,8 +18,8 @@ model User {
   password        String
   role            UserRole
   areasOfInterest String[]
-  organisationId  String
-  organisation    Organisation @relation(fields: [organisationId], references: [id])
+  organisationId  String?
+  organisation    Organisation? @relation(fields: [organisationId], references: [id])
   createdAt       DateTime     @default(now())
   updatedAt       DateTime     @updatedAt
   projects        Project[]    @relation("ProjectUsers")
