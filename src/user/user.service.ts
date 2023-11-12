@@ -178,12 +178,12 @@ export class UserService {
           },
           select: {
             id: true,
+            handle: true,
             firebaseId: true,
-            organisation: {
-              select: {
-                firebaseId: true,
-              },
-            },
+            projects: true,
+            updates: true,
+            organisation: true,
+            organisationId: true,
           },
         });
 
@@ -195,23 +195,22 @@ export class UserService {
           throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
         }
 
-        const id = user.id;
+        await transaction.update.deleteMany({
+          where: {
+            userId: user.id,
+          },
+        });
+
         await transaction.organisation.update({
           where: {
-            firebaseId,
+            id: user.organisationId,
           },
           data: {
             users: {
               disconnect: {
-                id,
+                id: user.id,
               },
             },
-          },
-        });
-
-        await transaction.update.deleteMany({
-          where: {
-            userId: id,
           },
         });
 
@@ -219,8 +218,7 @@ export class UserService {
           where: {
             users: {
               some: {
-                handle,
-                id,
+                handle: user.handle,
               },
             },
           },
@@ -228,7 +226,7 @@ export class UserService {
 
         await transaction.user.delete({
           where: {
-            handle,
+            id: user.id,
           },
         });
 
