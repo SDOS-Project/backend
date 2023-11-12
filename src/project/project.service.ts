@@ -153,6 +153,7 @@ export class ProjectService {
                 firstName: true,
                 lastName: true,
                 handle: true,
+                imgUrl: true,
               },
             },
           },
