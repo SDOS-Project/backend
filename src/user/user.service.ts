@@ -177,6 +177,7 @@ export class UserService {
             handle,
           },
           select: {
+            id: true,
             firebaseId: true,
             organisation: {
               select: {
@@ -194,6 +195,7 @@ export class UserService {
           throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
         }
 
+        const id = user.id;
         await transaction.organisation.update({
           where: {
             firebaseId,
@@ -201,7 +203,7 @@ export class UserService {
           data: {
             users: {
               delete: {
-                handle,
+                id,
               },
             },
           },
@@ -209,6 +211,7 @@ export class UserService {
 
         await transaction.update.deleteMany({
           where: {
+            userId: id,
             user: {
               handle,
             },
@@ -220,6 +223,7 @@ export class UserService {
             users: {
               some: {
                 handle,
+                id,
               },
             },
           },
