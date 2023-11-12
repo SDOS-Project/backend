@@ -202,7 +202,7 @@ export class UserService {
           },
           data: {
             users: {
-              delete: {
+              disconnect: {
                 id,
               },
             },
@@ -212,9 +212,6 @@ export class UserService {
         await transaction.update.deleteMany({
           where: {
             userId: id,
-            user: {
-              handle,
-            },
           },
         });
 
