@@ -120,8 +120,8 @@ export class ProjectService {
             lastName: true,
             email: true,
             handle: true,
-            role: true,
             imgUrl: true,
+            role: true,
           },
         },
         organisations: {
@@ -152,8 +152,8 @@ export class ProjectService {
               select: {
                 firstName: true,
                 lastName: true,
-                handle: true,
                 imgUrl: true,
+                handle: true,
               },
             },
           },
