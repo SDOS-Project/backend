@@ -219,21 +219,6 @@ export class UserService {
           },
         });
 
-        // await transaction.organisation.update({
-        //   where: {
-        //     id: user.organisation.id,
-        //   },
-        //   data: {
-        //     users: {
-        //       disconnect: {
-        //         handle: user.handle,
-        //       },
-        //     },
-        //   },
-        // });
-
-        console.log('4');
-
         await this.firebaseAdmin.auth().deleteUser(user.firebaseId);
       });
 
