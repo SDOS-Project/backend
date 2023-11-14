@@ -9,7 +9,7 @@ import {
   signupDto,
   sub,
 } from './mock';
-import { mockOrganisationArray } from 'src/organisation/mock';
+import { mockOrganisationArray } from '../organisation/mock';
 
 describe('AuthController', () => {
   let controller: AuthController;

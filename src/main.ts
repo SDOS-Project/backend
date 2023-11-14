@@ -9,8 +9,8 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   app.use(helmet());
   const config = new DocumentBuilder()
-    .setTitle('SDOS APIs')
-    .setDescription('The SDOS API description')
+    .setTitle('EduCorp APIs')
+    .setDescription('APIs for EducCorp application.')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);
