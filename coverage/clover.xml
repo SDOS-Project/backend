@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1699966607415" clover="3.2.0">
-  <project timestamp="1699966607415" name="All files">
-    <metrics statements="420" coveredstatements="285" conditionals="44" coveredconditionals="18" methods="76" coveredmethods="58" elements="540" coveredelements="361" complexity="0" loc="420" ncloc="420" packages="23" files="42" classes="42"/>
+<coverage generated="1699974078968" clover="3.2.0">
+  <project timestamp="1699974078969" name="All files">
+    <metrics statements="420" coveredstatements="288" conditionals="44" coveredconditionals="18" methods="76" coveredmethods="61" elements="540" coveredelements="367" complexity="0" loc="420" ncloc="420" packages="23" files="42" classes="42"/>
     <package name="src">
       <metrics statements="42" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="3"/>
       <file name="app.controller.ts" path="/Users/aryanteng/Desktop/SDOS/backend/src/app.controller.ts">
@@ -63,9 +63,9 @@
       </file>
     </package>
     <package name="src.auth">
-      <metrics statements="50" coveredstatements="36" conditionals="13" coveredconditionals="7" methods="8" coveredmethods="5"/>
+      <metrics statements="50" coveredstatements="39" conditionals="13" coveredconditionals="7" methods="8" coveredmethods="8"/>
       <file name="auth.controller.ts" path="/Users/aryanteng/Desktop/SDOS/backend/src/auth/auth.controller.ts">
-        <metrics statements="15" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="1"/>
+        <metrics statements="15" coveredstatements="15" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -76,11 +76,11 @@
         <line num="11" count="1" type="stmt"/>
         <line num="12" count="4" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
         <line num="20" count="1" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
         <line num="25" count="1" type="stmt"/>
-        <line num="28" count="0" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
       </file>
       <file name="auth.module.ts" path="/Users/aryanteng/Desktop/SDOS/backend/src/auth/auth.module.ts">
         <metrics statements="5" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
