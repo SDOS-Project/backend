@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Location } from '@prisma/client';
-import { IsDate, IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import { IsDateString, IsEnum, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateProjectDto {
   @ApiProperty()
@@ -25,13 +25,13 @@ export class CreateProjectDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsDate()
-  startDate: Date;
+  @IsDateString()
+  startDate: string;
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsDate()
-  endDate: Date;
+  @IsDateString()
+  endDate: string;
 
   @ApiProperty({ enum: Location })
   @IsNotEmpty()

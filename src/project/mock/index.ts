@@ -35,8 +35,8 @@ export const mockCreateProjectDto: CreateProjectDto = {
   description: 'Test Description',
   creatorHandle: 'test-creator',
   partnerHandle: 'test-partner',
-  startDate: new Date(),
-  endDate: new Date(),
+  startDate: new Date().toISOString(),
+  endDate: new Date().toISOString(),
   location: Location.ONSITE,
 };
 
