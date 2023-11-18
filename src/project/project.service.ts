@@ -44,6 +44,9 @@ export class ProjectService {
             createProjectDto.name.split(' ').join('-').toLowerCase() +
             '-' +
             generateRandomAlphanumericWithLength(5),
+          startDate: createProjectDto.startDate,
+          endDate: createProjectDto.endDate,
+          location: createProjectDto.location,
           users: {
             connect: [
               {
