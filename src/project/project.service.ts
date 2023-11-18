@@ -192,14 +192,15 @@ export class ProjectService {
         where: {
           handle,
         },
-        data: {
-          ...updateProjectDto,
-        },
+        data: updateProjectDto,
         select: {
           name: true,
           description: true,
           handle: true,
           status: true,
+          startDate: true,
+          endDate: true,
+          location: true,
           users: {
             select: {
               firstName: true,
