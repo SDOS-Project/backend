@@ -1,4 +1,4 @@
-import { ProjectStatus } from '@prisma/client';
+import { Location, ProjectStatus } from '@prisma/client';
 import { CreateProjectDto } from '../dto/create-project.dto';
 import { mockOrganisationArray, mockUserArray } from '../../organisation/mock';
 import { mockUser } from '../../auth/mock';
@@ -35,6 +35,9 @@ export const mockCreateProjectDto: CreateProjectDto = {
   description: 'Test Description',
   creatorHandle: 'test-creator',
   partnerHandle: 'test-partner',
+  startDate: new Date(),
+  endDate: new Date(),
+  location: Location.ONSITE,
 };
 
 export const createUpdateDto: AddUpdateDto = {
