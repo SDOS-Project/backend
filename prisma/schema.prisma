@@ -85,3 +85,9 @@ enum ProjectStatus {
   COMPLETED
   CANCELLED
 }
+
+enum Location{
+  ONSITE
+  REMOTE
+  HYBRID
+}
