@@ -56,4 +56,9 @@ export class SignUpDto {
   @ApiProperty()
   @IsString()
   imgUrl: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  socialUrl: string;
 }

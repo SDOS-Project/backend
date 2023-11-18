@@ -24,6 +24,7 @@ export class AuthService {
         role: true,
         areasOfInterest: true,
         imgUrl: true,
+        socialUrl: true,
         organisation: {
           select: {
             name: true,
@@ -84,6 +85,7 @@ export class AuthService {
           email: signUpDto.email,
           password: hash,
           role: signUpDto.role,
+          socialUrl: signUpDto.socialUrl,
           organisation: {
             connect: {
               handle: signUpDto.organisationHandle,
@@ -106,6 +108,7 @@ export class AuthService {
           role: true,
           handle: true,
           imgUrl: true,
+          socialUrl: true,
           organisation: {
             select: {
               name: true,

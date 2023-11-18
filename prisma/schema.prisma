@@ -27,6 +27,7 @@ model User {
   handle          String       @unique
   firebaseId      String       @unique
   imgUrl          String
+  socialUrl       String?
 }
 
 model Organisation {
