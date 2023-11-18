@@ -43,6 +43,7 @@ export const signupDto: SignUpDto = {
   areasOfInterest: ['area1', 'area2'],
   firebaseId: 'firebase-id-1',
   imgUrl: 'user1.jpg',
+  socialUrl: 'social-url',
 };
 
 export const organisationSignUpDto: OrganisationSignUpDto = {
