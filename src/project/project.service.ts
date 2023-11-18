@@ -117,6 +117,9 @@ export class ProjectService {
         description: true,
         handle: true,
         status: true,
+        startDate: true,
+        endDate: true,
+        location: true,
         users: {
           select: {
             firstName: true,
