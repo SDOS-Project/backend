@@ -7,11 +7,16 @@ import generateRandomAlphanumericWithLength from './utils';
 import * as bcrypt from 'bcrypt';
 import { StudentSignupDto } from './dto/student.signup.dto';
 import { UserRole } from '@prisma/client';
+import { HttpService } from '@nestjs/axios';
+import { firstValueFrom } from 'rxjs';
 
 const saltRounds = 12;
 @Injectable()
 export class AuthService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private httpService: HttpService,
+  ) {}
   async login(sub: string, loginDto: LoginDto) {
     const user = await this.prisma.user.findUnique({
       where: {
@@ -177,6 +182,9 @@ export class AuthService {
   async studentSignup(studentSignupDto: StudentSignupDto) {
     try {
       const hash = await bcrypt.hash(studentSignupDto.password, saltRounds);
+      const organisationName = await this.findOrganisation(
+        studentSignupDto.email.split('@')[1],
+      );
       return await this.prisma.user.create({
         data: {
           firstName: studentSignupDto.firstName,
@@ -186,6 +194,7 @@ export class AuthService {
           role: UserRole.STUDENT,
           imgUrl: studentSignupDto.imgUrl,
           firebaseId: studentSignupDto.firebaseId,
+          organisationName: organisationName,
           handle:
             studentSignupDto.firstName.toLowerCase() +
             '-' +
@@ -207,6 +216,29 @@ export class AuthService {
         throw new HttpException('User already exists', HttpStatus.CONFLICT);
       }
       throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+  async findOrganisation(domain: string): Promise<string> {
+    const url = `https://company.clearbit.com/v2/companies/find?domain=${domain}`;
+    try {
+      const response = await firstValueFrom(
+        this.httpService.get(url, {
+          headers: { Authorization: `Bearer ${process.env.CLEARBIT_API_KEY}` },
+        }),
+      );
+      if (response.status === 200 && response.data) {
+        return response.data.name;
+      } else {
+        throw new HttpException(
+          'Unable to retrieve organization name.',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+    } catch (error) {
+      throw new HttpException(
+        error.response.data.message || 'Error occurred while fetching data.',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 }
