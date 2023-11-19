@@ -235,7 +235,8 @@ export class ProjectService {
     addUpdateDto: AddUpdateDto,
   ) {
     const isAdmin = await this.checkIfUserIsAdmin(firebaseId, handle);
-    if (!isAdmin)
+    const isStudent = await this.checkIfUserIsStudent(firebaseId, handle);
+    if (!isAdmin && !isStudent)
       throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
     try {
       return await this.prisma.update.create({
@@ -270,7 +271,10 @@ export class ProjectService {
     }
   }
 
-  async checkIfUserIsAdmin(firebaseId: string, handle: string) {
+  async checkIfUserIsAdmin(
+    firebaseId: string,
+    handle: string,
+  ): Promise<boolean> {
     const project = await this.prisma.project.findUnique({
       where: {
         handle,
