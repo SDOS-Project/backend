@@ -5,6 +5,8 @@ import { SignUpDto } from './dto/signup.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import generateRandomAlphanumericWithLength from './utils';
 import * as bcrypt from 'bcrypt';
+import { StudentSignupDto } from './dto/student.signup.dto';
+import { UserRole } from '@prisma/client';
 
 const saltRounds = 12;
 @Injectable()
@@ -170,5 +172,35 @@ export class AuthService {
       }
       throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+  }
+
+  async studentSignup(studentSignupDto: StudentSignupDto) {
+    try {
+      const hash = await bcrypt.hash(studentSignupDto.password, saltRounds);
+      return await this.prisma.user.create({
+        data: {
+          firstName: studentSignupDto.firstName,
+          lastName: studentSignupDto.lastName,
+          email: studentSignupDto.email,
+          password: hash,
+          role: UserRole.STUDENT,
+          firebaseId: studentSignupDto.firebaseId,
+          handle:
+            studentSignupDto.firstName.toLowerCase() +
+            '-' +
+            studentSignupDto.lastName.toLowerCase() +
+            '-' +
+            generateRandomAlphanumericWithLength(5),
+        },
+        select: {
+          firstName: true,
+          lastName: true,
+          email: true,
+          role: true,
+          handle: true,
+          imgUrl: true,
+        },
+      });
+    } catch (error) {}
   }
 }

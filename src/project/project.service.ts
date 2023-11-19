@@ -312,7 +312,7 @@ export class ProjectService {
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
 
-    const student = await this.prisma.student.findUnique({
+    const student = await this.prisma.user.findUnique({
       where: { firebaseId },
       select: { email: true },
     });

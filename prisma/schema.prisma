@@ -11,23 +11,24 @@ datasource db {
 }
 
 model User {
-  id              String       @id @default(uuid())
-  firstName       String       @db.VarChar(255)
-  lastName        String       @db.VarChar(255)
-  email           String       @unique
-  password        String
-  role            UserRole
-  areasOfInterest String[]
-  organisationId  String
-  organisation    Organisation @relation(fields: [organisationId], references: [id])
-  createdAt       DateTime     @default(now())
-  updatedAt       DateTime     @updatedAt
-  projects        Project[]    @relation("ProjectUsers")
-  updates         Update[]
-  handle          String       @unique
-  firebaseId      String       @unique
-  imgUrl          String
-  socialUrl       String?
+  id               String        @id @default(uuid())
+  firstName        String        @db.VarChar(255)
+  lastName         String        @db.VarChar(255)
+  email            String        @unique
+  password         String
+  role             UserRole
+  areasOfInterest  String[]      @default([])
+  organisationId   String?
+  organisation     Organisation? @relation(fields: [organisationId], references: [id])
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  projects         Project[]     @relation("ProjectUsers")
+  updates          Update[]
+  handle           String        @unique
+  firebaseId       String        @unique
+  imgUrl           String?
+  socialUrl        String?
+  organisationName String?
 }
 
 model Organisation {
@@ -75,21 +76,10 @@ model Update {
   updatedAt DateTime @updatedAt
 }
 
-model Student {
-  id               String   @id @default(uuid())
-  firstName        String
-  lastName         String
-  email            String   @unique
-  password         String
-  organisationName String
-  firebaseId       String   @unique
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-}
-
 enum UserRole {
   FACULTY
   EMPLOYEE
+  STUDENT
 }
 
 enum OrganisationType {

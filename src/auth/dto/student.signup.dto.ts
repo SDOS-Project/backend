@@ -26,4 +26,8 @@ export class StudentSignupDto {
   @IsNotEmpty()
   @IsString()
   firebaseId: string;
+
+  @ApiProperty()
+  @IsString()
+  imgUrl: string;
 }
