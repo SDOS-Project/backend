@@ -313,8 +313,7 @@ export class ProjectService {
       select: { email: true },
     });
 
-    if (!student)
-      throw new HttpException('Student not found', HttpStatus.NOT_FOUND);
+    if (!student) return false;
 
     return students.some(
       (projectStudent: any) => projectStudent.email === student.email,
