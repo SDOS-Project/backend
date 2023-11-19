@@ -4,6 +4,7 @@ import { UpdateProjectDto } from './dto/update-project.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import generateRandomAlphanumericWithLength from '../auth/utils';
 import { AddUpdateDto } from './dto/add-update.dto';
+import { JsonObject } from '@prisma/client/runtime/library';
 
 @Injectable()
 export class ProjectService {
@@ -283,8 +284,39 @@ export class ProjectService {
     });
     if (!project)
       throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
-    return project.users.some((user) => user.firebaseId === firebaseId)
-      ? true
-      : false;
+    return project.users.some((user) => user.firebaseId === firebaseId);
+  }
+
+  async checkIfUserIsStudent(
+    firebaseId: string,
+    handle: string,
+  ): Promise<boolean> {
+    const project = await this.prisma.project.findUnique({
+      where: { handle },
+      select: { students: true },
+    });
+
+    if (!project)
+      throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
+
+    const students = project.students as JsonObject | null;
+
+    if (!students || !Array.isArray(students))
+      throw new HttpException(
+        'Invalid students data',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+
+    const student = await this.prisma.student.findUnique({
+      where: { firebaseId },
+      select: { email: true },
+    });
+
+    if (!student)
+      throw new HttpException('Student not found', HttpStatus.NOT_FOUND);
+
+    return students.some(
+      (projectStudent: any) => projectStudent.email === student.email,
+    );
   }
 }
