@@ -42,6 +42,7 @@ export class UserService {
         areasOfInterest: true,
         imgUrl: true,
         socialUrl: true,
+        organisationName: true,
         organisation: {
           select: {
             name: true,
@@ -94,6 +95,7 @@ export class UserService {
         areasOfInterest: true,
         imgUrl: true,
         socialUrl: true,
+        organisationName: true,
         organisation: {
           select: {
             name: true,
