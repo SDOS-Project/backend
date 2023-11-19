@@ -306,11 +306,7 @@ export class ProjectService {
 
     const students = project.students as JsonObject | null;
 
-    if (!students || !Array.isArray(students))
-      throw new HttpException(
-        'Invalid students data',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+    if (!students || !Array.isArray(students)) return false;
 
     const student = await this.prisma.user.findUnique({
       where: { firebaseId },
