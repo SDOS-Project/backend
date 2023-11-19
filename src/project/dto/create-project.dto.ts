@@ -1,6 +1,27 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Location } from '@prisma/client';
-import { IsDateString, IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+import {
+  IsArray,
+  IsDateString,
+  IsEmail,
+  IsEnum,
+  IsNotEmpty,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
+
+class StudentDto {
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  name: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
+}
 
 export class CreateProjectDto {
   @ApiProperty()
@@ -37,4 +58,10 @@ export class CreateProjectDto {
   @IsNotEmpty()
   @IsEnum(Location)
   location: Location;
+
+  @ApiProperty({ type: [StudentDto] })
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => StudentDto)
+  students: StudentDto[];
 }

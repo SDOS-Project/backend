@@ -28,6 +28,7 @@ export const mockProject = {
   ],
   users: mockUserArray,
   organisations: mockOrganisationArray,
+  students: [],
 };
 
 export const mockCreateProjectDto: CreateProjectDto = {
@@ -38,6 +39,7 @@ export const mockCreateProjectDto: CreateProjectDto = {
   startDate: new Date().toISOString(),
   endDate: new Date().toISOString(),
   location: Location.ONSITE,
+  students: [],
 };
 
 export const createUpdateDto: AddUpdateDto = {
