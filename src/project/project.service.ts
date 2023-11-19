@@ -47,7 +47,7 @@ export class ProjectService {
           startDate: createProjectDto.startDate,
           endDate: createProjectDto.endDate,
           location: createProjectDto.location,
-          students: JSON.stringify(createProjectDto.students),
+          students: createProjectDto.students as any,
           users: {
             connect: [
               {
