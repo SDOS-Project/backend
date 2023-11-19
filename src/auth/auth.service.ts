@@ -184,6 +184,7 @@ export class AuthService {
           email: studentSignupDto.email,
           password: hash,
           role: UserRole.STUDENT,
+          imgUrl: studentSignupDto.imgUrl,
           firebaseId: studentSignupDto.firebaseId,
           handle:
             studentSignupDto.firstName.toLowerCase() +
@@ -201,6 +202,11 @@ export class AuthService {
           imgUrl: true,
         },
       });
-    } catch (error) {}
+    } catch (error) {
+      if (error.code === 'P2002') {
+        throw new HttpException('User already exists', HttpStatus.CONFLICT);
+      }
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 }
