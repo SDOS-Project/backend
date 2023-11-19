@@ -185,23 +185,34 @@ export class AuthService {
       const organisationName = await this.findOrganisation(
         studentSignupDto.email.split('@')[1],
       );
+      let userData: any = {
+        firstName: studentSignupDto.firstName,
+        lastName: studentSignupDto.lastName,
+        email: studentSignupDto.email,
+        password: hash,
+        role: UserRole.STUDENT,
+        imgUrl: studentSignupDto.imgUrl,
+        firebaseId: studentSignupDto.firebaseId,
+        organisationName: organisationName,
+        handle:
+          studentSignupDto.firstName.toLowerCase() +
+          '-' +
+          studentSignupDto.lastName.toLowerCase() +
+          '-' +
+          generateRandomAlphanumericWithLength(5),
+      };
+      if (studentSignupDto.organisationHandle) {
+        userData = {
+          ...userData,
+          organisation: {
+            connect: {
+              handle: studentSignupDto.organisationHandle,
+            },
+          },
+        };
+      }
       return await this.prisma.user.create({
-        data: {
-          firstName: studentSignupDto.firstName,
-          lastName: studentSignupDto.lastName,
-          email: studentSignupDto.email,
-          password: hash,
-          role: UserRole.STUDENT,
-          imgUrl: studentSignupDto.imgUrl,
-          firebaseId: studentSignupDto.firebaseId,
-          organisationName: organisationName,
-          handle:
-            studentSignupDto.firstName.toLowerCase() +
-            '-' +
-            studentSignupDto.lastName.toLowerCase() +
-            '-' +
-            generateRandomAlphanumericWithLength(5),
-        },
+        data: userData,
         select: {
           firstName: true,
           lastName: true,
@@ -218,6 +229,7 @@ export class AuthService {
       throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
+
   async findOrganisation(domain: string): Promise<string> {
     const url = `https://company.clearbit.com/v2/companies/find?domain=${domain}`;
     try {
