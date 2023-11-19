@@ -63,6 +63,9 @@ export class AuthService {
   }
 
   async signup(signUpDto: SignUpDto) {
+    if (signUpDto.role === UserRole.STUDENT) {
+      throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
+    }
     if (signUpDto.organisationHandle) {
       const organisation = await this.prisma.organisation.findUnique({
         where: {
