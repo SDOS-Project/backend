@@ -16,6 +16,7 @@ export const mockUserArray = [
     firebaseId: 'firebase-id-1',
     imgUrl: 'user1.jpg',
     socialUrl: 'social-url',
+    organisationName: 'Org 1',
   },
   {
     id: '2',
@@ -32,6 +33,7 @@ export const mockUserArray = [
     firebaseId: 'firebase-id-2',
     imgUrl: 'user2.jpg',
     socialUrl: 'social-url',
+    organisationName: 'Org 1',
   },
 ];
 
