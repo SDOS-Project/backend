@@ -179,7 +179,8 @@ export class ProjectService {
 
   async findConfig(firebaseId: string, handle: string) {
     const isAdmin = await this.checkIfUserIsAdmin(firebaseId, handle);
-    return { isAdmin };
+    const isStudent = await this.checkIfUserIsStudent(firebaseId, handle);
+    return { isAdmin, isStudent };
   }
 
   async update(
