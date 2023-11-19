@@ -63,51 +63,63 @@ export class AuthService {
   }
 
   async signup(signUpDto: SignUpDto) {
-    const organisation = await this.prisma.organisation.findUnique({
-      where: {
-        handle: signUpDto.organisationHandle,
-      },
-      select: {
-        type: true,
-      },
-    });
-    if (signUpDto.role === 'FACULTY' && organisation.type !== 'ACADEMIC') {
-      throw new HttpException(
-        'Faculty can only be associated with academic organisations',
-        HttpStatus.BAD_REQUEST,
-      );
-    }
-    if (signUpDto.role === 'EMPLOYEE' && organisation.type !== 'CORPORATE') {
-      throw new HttpException(
-        'Employee can only be associated with corporate organisations',
-        HttpStatus.BAD_REQUEST,
-      );
+    if (signUpDto.organisationHandle) {
+      const organisation = await this.prisma.organisation.findUnique({
+        where: {
+          handle: signUpDto.organisationHandle,
+        },
+        select: {
+          type: true,
+        },
+      });
+      if (signUpDto.role === 'FACULTY' && organisation.type !== 'ACADEMIC') {
+        throw new HttpException(
+          'Faculty can only be associated with academic organisations',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+      if (signUpDto.role === 'EMPLOYEE' && organisation.type !== 'CORPORATE') {
+        throw new HttpException(
+          'Employee can only be associated with corporate organisations',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
     }
     try {
       const hash = await bcrypt.hash(signUpDto.password, saltRounds);
-      return await this.prisma.user.create({
-        data: {
-          firstName: signUpDto.firstName,
-          lastName: signUpDto.lastName,
-          email: signUpDto.email,
-          password: hash,
-          role: signUpDto.role,
-          socialUrl: signUpDto.socialUrl,
+      const organisationName = await this.findOrganisation(
+        signUpDto.email.split('@')[1],
+      );
+      let userData: any = {
+        firstName: signUpDto.firstName,
+        lastName: signUpDto.lastName,
+        email: signUpDto.email,
+        password: hash,
+        role: signUpDto.role,
+        socialUrl: signUpDto.socialUrl,
+        areasOfInterest: signUpDto.areasOfInterest,
+        handle:
+          signUpDto.firstName.toLowerCase() +
+          '-' +
+          signUpDto.lastName.toLowerCase() +
+          '-' +
+          generateRandomAlphanumericWithLength(5),
+        firebaseId: signUpDto.firebaseId,
+        imgUrl: signUpDto.imgUrl,
+        organisationName: organisationName,
+      };
+      if (signUpDto.organisationHandle) {
+        userData = {
+          ...userData,
           organisation: {
             connect: {
               handle: signUpDto.organisationHandle,
             },
           },
-          areasOfInterest: signUpDto.areasOfInterest,
-          handle:
-            signUpDto.firstName.toLowerCase() +
-            '-' +
-            signUpDto.lastName.toLowerCase() +
-            '-' +
-            generateRandomAlphanumericWithLength(5),
-          firebaseId: signUpDto.firebaseId,
-          imgUrl: signUpDto.imgUrl,
-        },
+        };
+      }
+      return await this.prisma.user.create({
+        data: userData,
         select: {
           firstName: true,
           lastName: true,
