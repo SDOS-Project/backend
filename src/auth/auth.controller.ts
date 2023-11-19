@@ -5,6 +5,7 @@ import { SignUpDto } from './dto/signup.dto';
 import { User } from '../common/decorators/user.decorator';
 import { OrganisationSignUpDto } from './dto/organisation.signup.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { StudentSignupDto } from './dto/student.signup.dto';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -26,5 +27,10 @@ export class AuthController {
     @Body() organisationSignUpDto: OrganisationSignUpDto,
   ) {
     return await this.authService.organisationSignup(organisationSignUpDto);
+  }
+
+  @Post('/signup/student')
+  async studentSignup(@Body() studentSignUpDto: StudentSignupDto) {
+    return await this.authService.studentSignup(studentSignUpDto);
   }
 }
