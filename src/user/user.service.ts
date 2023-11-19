@@ -118,6 +118,8 @@ export class UserService {
         handle,
       },
       select: {
+        email: true,
+        role: true,
         projects: {
           select: {
             name: true,
@@ -148,6 +150,28 @@ export class UserService {
     });
     if (!user) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
+    if (user.role === UserRole.STUDENT) {
+      const allProjects = await this.prisma.project.findMany({
+        select: {
+          name: true,
+          description: true,
+          handle: true,
+          status: true,
+          students: true,
+        },
+      });
+      const projects = allProjects.filter((project) => {
+        if (!project.students || typeof project.students !== 'object') {
+          return false;
+        }
+        const studentsArray = project.students as Array<{ email: string }>;
+        return (
+          Array.isArray(studentsArray) &&
+          studentsArray.some((student) => student.email === user.email)
+        );
+      });
+      return projects;
     }
     return user.projects;
   }
