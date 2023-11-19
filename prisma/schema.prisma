@@ -59,6 +59,7 @@ model Project {
   startDate     DateTime
   endDate       DateTime
   location      Location
+  students      Json?
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
 }
@@ -72,6 +73,14 @@ model Update {
   user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Student {
+  id               String @id @default(uuid())
+  name             String
+  email            String @unique
+  password         String
+  organisationName String
 }
 
 enum UserRole {
