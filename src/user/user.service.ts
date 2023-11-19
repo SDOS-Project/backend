@@ -159,6 +159,14 @@ export class UserService {
           handle: true,
           status: true,
           students: true,
+          organisations: {
+            select: {
+              name: true,
+              handle: true,
+              type: true,
+              imgUrl: true,
+            },
+          },
         },
       });
       const projects = allProjects.filter((project) => {
