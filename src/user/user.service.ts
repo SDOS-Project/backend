@@ -19,6 +19,7 @@ export class UserService {
       select: {
         id: true,
         areasOfInterest: true,
+        role: true,
       },
     });
     if (!user) {
@@ -27,6 +28,7 @@ export class UserService {
     return await this.prisma.user.findMany({
       where: {
         id: { not: user.id },
+        role: { not: user.role },
         areasOfInterest: {
           hasSome: user.areasOfInterest,
         },
@@ -39,6 +41,7 @@ export class UserService {
         role: true,
         areasOfInterest: true,
         imgUrl: true,
+        socialUrl: true,
         organisation: {
           select: {
             name: true,
@@ -90,6 +93,7 @@ export class UserService {
         role: true,
         areasOfInterest: true,
         imgUrl: true,
+        socialUrl: true,
         organisation: {
           select: {
             name: true,

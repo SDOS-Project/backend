@@ -24,6 +24,7 @@ export const mockUser = {
     imgUrl: 'org1.jpg',
     handle: 'org-1',
   },
+  socialUrl: 'social-url',
 };
 
 export const sub = 'firebaseId';
