@@ -10,6 +10,7 @@ export const mockUser = {
   email: 'user1@example.com',
   password: 'password',
   role: UserRole.FACULTY,
+  discipline: Discipline.AerospaceEngineering,
   areasOfInterest: ['area1', 'area2'],
   organisationId: '1',
   createdAt: new Date(),
