@@ -92,6 +92,7 @@ export class UserService {
         email: true,
         handle: true,
         role: true,
+        discipline: true,
         areasOfInterest: true,
         imgUrl: true,
         socialUrl: true,
@@ -201,6 +202,7 @@ export class UserService {
       select: {
         firstName: true,
         lastName: true,
+        discipline: true,
         areasOfInterest: true,
         handle: true,
       },
