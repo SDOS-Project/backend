@@ -6,6 +6,7 @@ import {
   IsEmail,
   IsEnum,
   IsNotEmpty,
+  IsOptional,
   IsString,
 } from 'class-validator';
 
@@ -37,8 +38,8 @@ export class SignUpDto {
   role: UserRole;
 
   @ApiProperty()
-  @IsNotEmpty()
   @IsString()
+  @IsOptional()
   organisationHandle: string;
 
   @ApiProperty()
