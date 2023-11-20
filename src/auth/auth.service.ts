@@ -100,6 +100,7 @@ export class AuthService {
         password: hash,
         role: signUpDto.role,
         socialUrl: signUpDto.socialUrl,
+        discipline: signUpDto.discipline,
         areasOfInterest: signUpDto.areasOfInterest,
         handle:
           signUpDto.firstName.toLowerCase() +
@@ -196,6 +197,7 @@ export class AuthService {
 
   async studentSignup(studentSignupDto: StudentSignupDto) {
     try {
+      console.log(studentSignupDto);
       const hash = await bcrypt.hash(studentSignupDto.password, saltRounds);
       const organisationName = await this.findOrganisation(
         studentSignupDto.email.split('@')[1],
@@ -226,6 +228,7 @@ export class AuthService {
           },
         };
       }
+      console.log(userData);
       return await this.prisma.user.create({
         data: userData,
         select: {
@@ -241,6 +244,7 @@ export class AuthService {
       if (error.code === 'P2002') {
         throw new HttpException('User already exists', HttpStatus.CONFLICT);
       }
+      console.log(error);
       throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }

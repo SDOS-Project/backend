@@ -17,7 +17,7 @@ model User {
   email            String        @unique
   password         String
   role             UserRole
-  discipline       Discipline
+  discipline       Discipline?
   areasOfInterest  String[]      @default([])
   organisationId   String?
   organisation     Organisation? @relation(fields: [organisationId], references: [id])
