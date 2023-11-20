@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { UserRole } from '@prisma/client';
+import { Discipline, UserRole } from '@prisma/client';
 import {
   ArrayMinSize,
   IsArray,
@@ -41,6 +41,11 @@ export class SignUpDto {
   @IsString()
   @IsOptional()
   organisationHandle: string;
+
+  @ApiProperty({ enum: Discipline })
+  @IsNotEmpty()
+  @IsEnum(Discipline)
+  discipline: Discipline;
 
   @ApiProperty()
   @IsNotEmpty()

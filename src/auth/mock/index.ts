@@ -1,4 +1,4 @@
-import { OrganisationType, UserRole } from '@prisma/client';
+import { Discipline, OrganisationType, UserRole } from '@prisma/client';
 import { LoginDto } from '../dto/login.dto';
 import { SignUpDto } from '../dto/signup.dto';
 import { OrganisationSignUpDto } from '../dto/organisation.signup.dto';
@@ -42,6 +42,7 @@ export const signupDto: SignUpDto = {
   password: 'password',
   role: UserRole.FACULTY,
   organisationHandle: 'org-1',
+  discipline: Discipline.AerospaceEngineering,
   areasOfInterest: ['area1', 'area2'],
   firebaseId: 'firebase-id-1',
   imgUrl: 'user1.jpg',
