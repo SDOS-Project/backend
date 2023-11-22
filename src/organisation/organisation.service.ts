@@ -59,7 +59,7 @@ export class OrganisationService {
       select: {
         users: {
           where: {
-            role: UserRole.EMPLOYEE || UserRole.FACULTY,
+            OR: [{ role: UserRole.EMPLOYEE }, { role: UserRole.FACULTY }],
           },
           select: {
             handle: true,
