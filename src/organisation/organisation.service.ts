@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UpdateOrganisationDto } from './dto/update-organisation.dto';
 import { PrismaService } from '../prisma/prisma.service';
+import { UserRole } from '@prisma/client';
 
 @Injectable()
 export class OrganisationService {
@@ -57,6 +58,35 @@ export class OrganisationService {
       },
       select: {
         users: {
+          where: {
+            role: UserRole.EMPLOYEE || UserRole.FACULTY,
+          },
+          select: {
+            handle: true,
+            firstName: true,
+            lastName: true,
+            email: true,
+            imgUrl: true,
+          },
+        },
+      },
+    });
+    if (!organisation) {
+      throw new HttpException('Organisation not found', HttpStatus.NOT_FOUND);
+    }
+    return organisation.users;
+  }
+
+  async findStudents(handle: string) {
+    const organisation = await this.prisma.organisation.findUnique({
+      where: {
+        handle,
+      },
+      select: {
+        users: {
+          where: {
+            role: UserRole.STUDENT,
+          },
           select: {
             handle: true,
             firstName: true,

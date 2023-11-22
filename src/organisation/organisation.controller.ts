@@ -29,6 +29,11 @@ export class OrganisationController {
     return this.organisationService.findUsers(handle);
   }
 
+  @Get(':handle/students')
+  findStudents(@Param('handle') handle: string) {
+    return this.organisationService.findStudents(handle);
+  }
+
   @Get(':handle/projects')
   findProjects(@Param('handle') handle: string) {
     return this.organisationService.findProjects(handle);
