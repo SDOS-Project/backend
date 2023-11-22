@@ -90,9 +90,6 @@ export class AuthService {
     }
     try {
       const hash = await bcrypt.hash(signUpDto.password, saltRounds);
-      const organisationName = await this.findOrganisation(
-        signUpDto.email.split('@')[1],
-      );
       let userData: any = {
         firstName: signUpDto.firstName,
         lastName: signUpDto.lastName,
@@ -110,8 +107,16 @@ export class AuthService {
           generateRandomAlphanumericWithLength(5),
         firebaseId: signUpDto.firebaseId,
         imgUrl: signUpDto.imgUrl,
-        organisationName: organisationName,
       };
+      if (!signUpDto.organisationHandle) {
+        const organisationName = await this.findOrganisation(
+          signUpDto.email.split('@')[1],
+        );
+        userData = {
+          ...userData,
+          organisationName: organisationName,
+        };
+      }
       if (signUpDto.organisationHandle) {
         userData = {
           ...userData,
@@ -197,11 +202,7 @@ export class AuthService {
 
   async studentSignup(studentSignupDto: StudentSignupDto) {
     try {
-      console.log(studentSignupDto);
       const hash = await bcrypt.hash(studentSignupDto.password, saltRounds);
-      const organisationName = await this.findOrganisation(
-        studentSignupDto.email.split('@')[1],
-      );
       let userData: any = {
         firstName: studentSignupDto.firstName,
         lastName: studentSignupDto.lastName,
@@ -210,7 +211,6 @@ export class AuthService {
         role: UserRole.STUDENT,
         imgUrl: studentSignupDto.imgUrl,
         firebaseId: studentSignupDto.firebaseId,
-        organisationName: organisationName,
         handle:
           studentSignupDto.firstName.toLowerCase() +
           '-' +
@@ -218,6 +218,15 @@ export class AuthService {
           '-' +
           generateRandomAlphanumericWithLength(5),
       };
+      if (!studentSignupDto.organisationHandle) {
+        const organisationName = await this.findOrganisation(
+          studentSignupDto.email.split('@')[1],
+        );
+        userData = {
+          ...userData,
+          organisationName: organisationName,
+        };
+      }
       if (studentSignupDto.organisationHandle) {
         userData = {
           ...userData,
@@ -228,7 +237,6 @@ export class AuthService {
           },
         };
       }
-      console.log(userData);
       return await this.prisma.user.create({
         data: userData,
         select: {
@@ -244,7 +252,6 @@ export class AuthService {
       if (error.code === 'P2002') {
         throw new HttpException('User already exists', HttpStatus.CONFLICT);
       }
-      console.log(error);
       throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
@@ -267,7 +274,7 @@ export class AuthService {
       }
     } catch (error) {
       throw new HttpException(
-        error.response.data.message || 'Error occurred while fetching data.',
+        error.response.data.message || 'Unable to retrieve organization name.',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
