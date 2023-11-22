@@ -39,6 +39,7 @@ export class UserService {
         email: true,
         handle: true,
         role: true,
+        discipline: true,
         areasOfInterest: true,
         imgUrl: true,
         socialUrl: true,
