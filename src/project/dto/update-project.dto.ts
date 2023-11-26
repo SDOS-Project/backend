@@ -4,6 +4,7 @@ import {
   IsArray,
   IsDateString,
   IsEnum,
+  IsOptional,
   IsString,
   ValidateNested,
 } from 'class-validator';
@@ -26,14 +27,18 @@ export class UpdateProjectDto {
 
   @ApiProperty()
   @IsDateString()
+  @IsOptional()
   startDate: string;
 
   @ApiProperty()
   @IsDateString()
+  @IsOptional()
   endDate: string;
 
   @ApiProperty({ enum: Location })
+  @IsOptional()
   @IsEnum(Location)
+  @IsOptional()
   location: Location;
 
   @ApiProperty({ type: [StudentDto] })
