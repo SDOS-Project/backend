@@ -28,6 +28,9 @@ export const mockProject = {
   ],
   users: mockUserArray,
   organisations: mockOrganisationArray,
+  startDate: new Date(),
+  endDate: new Date(),
+  location: Location.ONSITE,
   students: [],
 };
 

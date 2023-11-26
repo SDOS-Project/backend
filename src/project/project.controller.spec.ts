@@ -62,7 +62,7 @@ describe('ProjectController', () => {
 
   describe('findConfig', () => {
     it('should return a config', async () => {
-      const result = { isAdmin: true };
+      const result = { isAdmin: true, isStudent: false };
       jest.spyOn(service, 'findConfig').mockResolvedValue(result);
 
       expect(
