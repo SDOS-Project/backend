@@ -46,6 +46,11 @@ describe('AuthService', () => {
     service = module.get<AuthService>(AuthService);
   });
 
+  afterEach(async () => {
+    await prismaService.$disconnect();
+    jest.resetAllMocks();
+  });
+
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
