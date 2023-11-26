@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ProjectService } from './project.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { HttpException, HttpStatus } from '@nestjs/common';
-import { mockProjectArray, mockUserArray } from '../organisation/mock';
+import { mockUserArray } from '../organisation/mock';
 import { mockUser } from '../auth/mock';
 import { createUpdateDto, mockCreateProjectDto, mockProject } from './mock';
 
