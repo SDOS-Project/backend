@@ -196,7 +196,10 @@ export class ProjectService {
         where: {
           handle,
         },
-        data: updateProjectDto,
+        data: {
+          ...updateProjectDto,
+          students: updateProjectDto.students as any,
+        },
         select: {
           name: true,
           description: true,
