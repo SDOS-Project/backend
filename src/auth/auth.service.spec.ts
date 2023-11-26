@@ -10,14 +10,36 @@ import {
   signupDto,
   sub,
 } from './mock';
+import { HttpService } from '@nestjs/axios';
 
 describe('AuthService', () => {
   let service: AuthService;
   let prismaService: PrismaService;
+  const mockHttpService = {
+    get: jest.fn((url) => {
+      if (
+        url.startsWith('https://company.clearbit.com/v2/companies/find?domain=')
+      ) {
+        return Promise.resolve({
+          status: 200,
+          data: { name: 'Mocked Company Name' },
+        });
+      }
+
+      return Promise.resolve({ status: 200, data: {} });
+    }),
+  };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [AuthService, PrismaService],
+      providers: [
+        AuthService,
+        PrismaService,
+        {
+          provide: HttpService,
+          useValue: mockHttpService,
+        },
+      ],
     }).compile();
 
     prismaService = module.get<PrismaService>(PrismaService);
