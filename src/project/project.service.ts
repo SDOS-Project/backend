@@ -205,6 +205,7 @@ export class ProjectService {
           startDate: true,
           endDate: true,
           location: true,
+          students: true,
           users: {
             select: {
               firstName: true,

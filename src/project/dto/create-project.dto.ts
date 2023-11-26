@@ -4,24 +4,12 @@ import { Type } from 'class-transformer';
 import {
   IsArray,
   IsDateString,
-  IsEmail,
   IsEnum,
   IsNotEmpty,
   IsString,
   ValidateNested,
 } from 'class-validator';
-
-class StudentDto {
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  name: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsEmail()
-  email: string;
-}
+import { StudentDto } from './student.dto';
 
 export class CreateProjectDto {
   @ApiProperty()
