@@ -10,15 +10,30 @@ import {
   sub,
 } from './mock';
 import { mockOrganisationArray } from '../organisation/mock';
+import { HttpService } from '@nestjs/axios';
 
 describe('AuthController', () => {
   let controller: AuthController;
   let service: AuthService;
+  const mockHttpService = {
+    get: jest.fn().mockImplementation(() => {
+      return {
+        toPromise: jest.fn().mockResolvedValue({ data: {} }),
+      };
+    }),
+  };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [AuthController],
-      providers: [AuthService, PrismaService],
+      providers: [
+        AuthService,
+        PrismaService,
+        {
+          provide: HttpService,
+          useValue: mockHttpService,
+        },
+      ],
     }).compile();
 
     controller = module.get<AuthController>(AuthController);
