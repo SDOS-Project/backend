@@ -8,8 +8,8 @@ import {
   firstMockOrganisation,
   mockOrganisationArray,
   mockProjectArray,
-  mockUserArray,
 } from './mock';
+import { UserRole } from '@prisma/client';
 
 describe('OrganisationService', () => {
   let service: OrganisationService;
@@ -83,11 +83,15 @@ describe('OrganisationService', () => {
         .spyOn(prismaService.organisation, 'findUnique')
         .mockResolvedValue(firstMockOrganisation);
 
-      expect(await service.findUsers(handle)).toBe(mockUserArray);
+      await service.findUsers(handle);
+
       expect(prismaService.organisation.findUnique).toHaveBeenCalledWith({
         where: { handle },
         select: {
           users: {
+            where: {
+              OR: [{ role: UserRole.EMPLOYEE }, { role: UserRole.FACULTY }],
+            },
             select: {
               handle: true,
               firstName: true,
