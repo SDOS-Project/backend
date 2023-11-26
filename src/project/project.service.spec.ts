@@ -19,8 +19,9 @@ describe('ProjectService', () => {
     prismaService = module.get<PrismaService>(PrismaService);
   });
 
-  afterAll(async () => {
+  afterEach(async () => {
     await prismaService.$disconnect();
+    jest.resetAllMocks();
   });
 
   it('should be defined', () => {
