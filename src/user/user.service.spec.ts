@@ -140,13 +140,13 @@ describe('UserService', () => {
   });
 
   describe('remove', () => {
-    it('should remove the user with the given firebaseId and handle', async () => {
-      jest.spyOn(prismaService.user, 'delete').mockResolvedValue(null);
+    it('should delete the user with the given firebaseId and return the deleted user object', async () => {
+      jest.spyOn(prismaService.user, 'delete').mockResolvedValue(mockUser);
 
       try {
         expect(
           await service.remove(mockUser.firebaseId, mockUser.handle),
-        ).toBeNull();
+        ).toEqual(mockUser);
       } catch (error) {
         expect(error).toBeInstanceOf(HttpException);
       }
