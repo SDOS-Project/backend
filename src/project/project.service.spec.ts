@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ProjectService } from './project.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { HttpException, HttpStatus } from '@nestjs/common';
-import { mockUserArray } from '../organisation/mock';
+import { mockProjectArray, mockUserArray } from '../organisation/mock';
 import { mockUser } from '../auth/mock';
 import { createUpdateDto, mockCreateProjectDto, mockProject } from './mock';
 
@@ -29,32 +29,60 @@ describe('ProjectService', () => {
   });
 
   describe('create', () => {
-    it('should return a project', async () => {
-      const result = mockProject;
-      jest.spyOn(prismaService.project, 'create').mockResolvedValue(result);
-      try {
-        expect(await service.create(mockCreateProjectDto)).toBe(result);
-      } catch (error) {
-        expect(error).toBeInstanceOf(HttpException);
-      }
+    it('should create and return a project', async () => {
+      jest
+        .spyOn(prismaService.user, 'findUnique')
+        .mockResolvedValueOnce(mockUserArray[0]);
+      jest
+        .spyOn(prismaService.user, 'findUnique')
+        .mockResolvedValueOnce(mockUserArray[1]);
+      jest
+        .spyOn(prismaService.project, 'create')
+        .mockResolvedValueOnce(mockProject);
+
+      const result = await service.create(mockCreateProjectDto);
+      expect(result).toEqual({ handle: mockProject.handle });
+      expect(prismaService.project.create).toHaveBeenCalledWith(
+        expect.anything(),
+      );
+    });
+
+    it('should throw an error if creator not found', async () => {
+      jest.spyOn(prismaService.user, 'findUnique').mockResolvedValueOnce(null);
+
+      await expect(service.create(mockCreateProjectDto)).rejects.toThrow(
+        HttpException,
+      );
     });
   });
 
   describe('findAll', () => {
     it('should return an array of projects', async () => {
-      const result = [mockProject];
-      jest.spyOn(prismaService.project, 'findMany').mockResolvedValue(result);
+      jest
+        .spyOn(prismaService.project, 'findMany')
+        .mockResolvedValue([mockProject]);
 
-      expect(await service.findAll()).toBe(result);
+      const result = await service.findAll();
+      expect(result).toEqual([mockProject]);
     });
   });
 
   describe('findOne', () => {
     it('should return a project', async () => {
-      const result = mockProject;
-      jest.spyOn(prismaService.project, 'findUnique').mockResolvedValue(result);
+      jest
+        .spyOn(prismaService.project, 'findUnique')
+        .mockResolvedValue(mockProject);
 
-      expect(await service.findOne('test-project')).toBe(result);
+      const result = await service.findOne(mockProject.handle);
+      expect(result).toEqual(mockProject);
+    });
+
+    it('should throw an error if project not found', async () => {
+      jest.spyOn(prismaService.project, 'findUnique').mockResolvedValue(null);
+
+      await expect(service.findOne(mockProject.handle)).rejects.toThrow(
+        HttpException,
+      );
     });
   });
 
