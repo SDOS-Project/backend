@@ -26,7 +26,8 @@ describe('UserService', () => {
     prismaService = module.get<PrismaService>(PrismaService);
   });
 
-  afterEach(() => {
+  afterEach(async () => {
+    await prismaService.$disconnect();
     jest.resetAllMocks();
   });
 

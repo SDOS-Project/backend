@@ -1,4 +1,9 @@
-import { OrganisationType, ProjectStatus, UserRole } from '@prisma/client';
+import {
+  Discipline,
+  OrganisationType,
+  ProjectStatus,
+  UserRole,
+} from '@prisma/client';
 
 export const mockUserArray = [
   {
@@ -8,6 +13,7 @@ export const mockUserArray = [
     email: 'user1@example.com',
     password: 'password',
     role: UserRole.FACULTY,
+    discipline: Discipline.AerospaceEngineering,
     areasOfInterest: ['area1', 'area2'],
     organisationId: '1',
     createdAt: new Date(),
@@ -25,6 +31,7 @@ export const mockUserArray = [
     email: 'user2@example.com',
     password: 'password',
     role: UserRole.EMPLOYEE,
+    discipline: Discipline.AutomobileEngineering,
     areasOfInterest: ['area3', 'area4'],
     organisationId: '2',
     createdAt: new Date(),
