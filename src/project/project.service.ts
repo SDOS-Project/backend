@@ -31,11 +31,13 @@ export class ProjectService {
           HttpStatus.BAD_REQUEST,
         );
       }
-      if (creator.organisationId === partner.organisationId) {
-        throw new HttpException(
-          'Creator and partner cannot be from the same organisation',
-          HttpStatus.BAD_REQUEST,
-        );
+      if (creator.organisationId && partner.organisationId) {
+        if (creator.organisationId === partner.organisationId) {
+          throw new HttpException(
+            'Creator and partner cannot be from the same organisation',
+            HttpStatus.BAD_REQUEST,
+          );
+        }
       }
       const project = await this.prisma.project.create({
         data: {
@@ -61,12 +63,12 @@ export class ProjectService {
           },
           organisations: {
             connect: [
-              {
-                id: creator.organisationId,
-              },
-              {
-                id: partner.organisationId,
-              },
+              ...(creator.organisationId
+                ? [{ id: creator.organisationId }]
+                : []),
+              ...(partner.organisationId
+                ? [{ id: partner.organisationId }]
+                : []),
             ],
           },
         },
