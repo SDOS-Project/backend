@@ -5,10 +5,14 @@ import { PrismaService } from '../prisma/prisma.service';
 import generateRandomAlphanumericWithLength from '../auth/utils';
 import { AddUpdateDto } from './dto/add-update.dto';
 import { JsonObject } from '@prisma/client/runtime/library';
+import { EmailService } from 'src/emai.service';
 
 @Injectable()
 export class ProjectService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private emailService: EmailService,
+  ) {}
   async create(createProjectDto: CreateProjectDto) {
     try {
       const creator = await this.prisma.user.findUnique({
@@ -73,6 +77,15 @@ export class ProjectService {
           },
         },
       });
+      for (const student of createProjectDto.students) {
+        const emailBody = `Hi ${student.name}, you have been added to the project titled ${createProjectDto.name} by ${creator.firstName} ${creator.lastName}. Please login/signup to add updates to the project.`;
+        await this.emailService.sendMail(
+          student.email,
+          'Project Assignment',
+          emailBody,
+        );
+      }
+
       return { handle: project.handle };
     } catch (error) {
       throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
